@@ -1,13 +1,10 @@
 package cn.intersteller.darkintersteller.innerfragment.firstinnerfragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.lidroid.xutils.ViewUtils;
 
 import cn.intersteller.darkintersteller.R;
 
@@ -17,14 +14,8 @@ import cn.intersteller.darkintersteller.R;
 public class ListFragment extends Fragment {
     private View v;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (v != null) {
-            ViewUtils.inject(this, v);
-            return v;
-        }
-
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.listfragment, container, false);
         return v;
     }

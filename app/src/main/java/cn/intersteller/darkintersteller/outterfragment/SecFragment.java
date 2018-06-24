@@ -1,7 +1,6 @@
 package cn.intersteller.darkintersteller.outterfragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,15 +17,12 @@ import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.NewsFr
 import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.StockFragment;
 import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerAdapter;
 
-/**
- * Created by Limuyang on 2016/7/7.
- */
 public class SecFragment extends Fragment {
     private String TAG = "SecFragment";
     ViewPager mMusic_viewPager;
     TabLayout mMusic_tab;
-    private List<String> mTitleList = new ArrayList<>(8);
-    private List<Fragment> fragments = new ArrayList<>(8);
+    private List<String> mTitleList = new ArrayList<>(2);
+    private List<Fragment> fragments = new ArrayList<>(2);
     private View v;
     private static SecFragment secFragment;
     private InnerFragmentPagerAdapter innerFragmentPagerAdapter;
@@ -41,9 +37,8 @@ public class SecFragment extends Fragment {
     }
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.secondfragment, container, false);
         mMusic_viewPager = v.findViewById(R.id.music_viewPager);
         mMusic_tab = v.findViewById(R.id.music_tab);
@@ -51,7 +46,6 @@ public class SecFragment extends Fragment {
         innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getFragmentManager(), fragments, mTitleList);
         innerFragmentPagerAdapter.notifyDataSetChanged();
         mMusic_viewPager.setAdapter(innerFragmentPagerAdapter);
-        mMusic_viewPager.setOffscreenPageLimit(2);
         mMusic_tab.setTabMode(TabLayout.MODE_FIXED);
         mMusic_tab.setupWithViewPager(mMusic_viewPager);
         Log.i(TAG, "onCreateView执行");

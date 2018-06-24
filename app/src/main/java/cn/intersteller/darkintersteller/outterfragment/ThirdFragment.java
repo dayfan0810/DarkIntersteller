@@ -31,8 +31,8 @@ public class ThirdFragment extends BaseFragment {
     private static ThirdFragment thirdFragment;
     private View v;
     private InnerFragmentPagerAdapter innerFragmentPagerAdapter;
-    private List<String> mTitleList = new ArrayList<>(4);
-    private List<Fragment> fragments = new ArrayList<>(4);
+    private List<String> mTitleList = new ArrayList<>(7);
+    private List<Fragment> fragments = new ArrayList<>(7);
     private QuickSortFragment quickSortFragment;
     private BubbleSortFragment bubbleSortFragment;
     private HeapSortFragment heapSortFragment;
