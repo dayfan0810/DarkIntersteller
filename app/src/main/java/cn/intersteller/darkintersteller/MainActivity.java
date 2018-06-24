@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
+import cn.intersteller.darkintersteller.outterfragment.SecFragment;
+import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
 import cn.intersteller.darkintersteller.outterfragmentadapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
@@ -76,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void addFragmet() {
         mFragmntList.add(FirstFragment.newInstance());
-//        mFragmntList.add(SecFragment.newInstance());
-//        mFragmntList.add(ThirdFragment.newInstance());
+        mFragmntList.add(SecFragment.newInstance());
+        mFragmntList.add(ThirdFragment.newInstance());
 
     }
 
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startIntroAnimation() {
+        Log.i("delay", "delay");
         fab.setTranslationY(2 * getResources().getDimensionPixelOffset(R.dimen.btn_fab_size));
         int actionBarSzie = ScreenUtils.dpToPx(56);
         toolbar.setTranslationY(-actionBarSzie);

@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lidroid.xutils.ViewUtils;
-
 import cn.intersteller.darkintersteller.R;
 
 /**
@@ -24,7 +22,6 @@ public class AnchorFragment extends Fragment {
             return v;
         }
         View v = inflater.inflate(R.layout.anchorfragment, container, false);
-        ViewUtils.inject(this, v);
         return v;
     }
 }

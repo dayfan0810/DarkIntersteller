@@ -26,7 +26,6 @@ public class ListFragment extends Fragment {
         }
 
         View v = inflater.inflate(R.layout.listfragment, container, false);
-        ViewUtils.inject(this, v);
         return v;
     }
 }

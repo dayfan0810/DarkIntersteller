@@ -7,17 +7,17 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/disco_tab"
+        android:id="@+id/music_tab"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/colorPrimary"
         app:tabIndicatorColor="#FFFFFF"
         app:tabSelectedTextColor="#FFFFFF"
-        app:tabTextColor="#000000">
+        app:tabTextColor="#666666">
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/disco_viewPager"
+        android:id="@+id/music_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

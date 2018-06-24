@@ -10,9 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +20,12 @@ import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.Ranking
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.RecommendFragment;
 import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerAdapter;
 
-/**
- * Created by Limuyang on 2016/7/7.
- */
 public class FirstFragment extends Fragment {
     private String TAG = "FirstFragment";
 
 
-    @ViewInject(R.id.disco_viewPager)
-    private ViewPager disco_viewPager;
-    @ViewInject(R.id.disco_tab)
-    private TabLayout disco_tab;
+    private ViewPager mDisco_viewPager;
+    private TabLayout mDisco_tab;
 
 
     private List<String> mTitleList = new ArrayList<>(4);
@@ -55,22 +47,18 @@ public class FirstFragment extends Fragment {
     }
 
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (v != null) {
-            ViewUtils.inject(this, v);
-            return v;
-        }
         v = inflater.inflate(R.layout.firstfragment, container, false);
-        ViewUtils.inject(this, v);
+        mDisco_tab =  v.findViewById(R.id.disco_tab);
+        mDisco_viewPager = v.findViewById(R.id.disco_viewPager);
         addView();
         innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getFragmentManager(), fragments, mTitleList);
         innerFragmentPagerAdapter.notifyDataSetChanged();
-        disco_viewPager.setAdapter(innerFragmentPagerAdapter);
-        disco_viewPager.setOffscreenPageLimit(2);
-        disco_tab.setTabMode(TabLayout.MODE_FIXED);
-        disco_tab.setupWithViewPager(disco_viewPager);
+        mDisco_viewPager.setAdapter(innerFragmentPagerAdapter);
+        mDisco_viewPager.setOffscreenPageLimit(2);
+        mDisco_tab.setTabMode(TabLayout.MODE_FIXED);
+        mDisco_tab.setupWithViewPager(mDisco_viewPager);
         Log.i(TAG,"onCreateView执行");
         return v;
     }
@@ -80,10 +68,6 @@ public class FirstFragment extends Fragment {
         mTitleList.add("歌单");
         mTitleList.add("主播电台");
         mTitleList.add("排行榜");
-//        disco_tab.addTab(disco_tab.newTab().setText("个性推荐"));
-//        disco_tab.addTab(disco_tab.newTab().setText("歌单"));
-//        disco_tab.addTab(disco_tab.newTab().setText("主播电台"));
-//        disco_tab.addTab(disco_tab.newTab().setText("排行榜"));
         if (recommendFragment == null) {
             recommendFragment = new RecommendFragment();
             fragments.add(recommendFragment);
