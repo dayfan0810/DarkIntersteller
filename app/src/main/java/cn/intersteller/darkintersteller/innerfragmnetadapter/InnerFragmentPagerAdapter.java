@@ -3,7 +3,8 @@ package cn.intersteller.darkintersteller.innerfragmnetadapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
+import android.util.Log;
+import android.view.View;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class InnerFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Log.i("deng","InnerFragmentPagerAdapter mFragmentList.get(position) == null ? "+(fragments.get(position)==null));
         return fragments.get(position);
     }
 
@@ -32,12 +34,11 @@ public class InnerFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
+    }
+    @Override
     public CharSequence getPageTitle(int position) {
         return tiles.get(position);
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
     }
 }

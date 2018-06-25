@@ -26,7 +26,7 @@ import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerA
  * Created by Day on 2017/1/2.
  */
 
-public class ThirdFragment extends BaseFragment {
+public class ThirdFragment extends Fragment {
     private String TAG = "ThirdFragment";
     private static ThirdFragment thirdFragment;
     private View v;
@@ -43,18 +43,8 @@ public class ThirdFragment extends BaseFragment {
     TabLayout mFrirendsTabLayout;
     ViewPager mFiendsViewPager;
 
-    @Override
-    protected void initView(View view, Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return 0;
-    }
-
     public static ThirdFragment newInstance() {
-        if (thirdFragment != null) {
+        if (thirdFragment == null) {
             thirdFragment = new ThirdFragment();
         }
         return thirdFragment;
@@ -96,7 +86,7 @@ public class ThirdFragment extends BaseFragment {
         }
         if (selectSortFragment == null) {
             selectSortFragment = new SelectSortFragment();
-            fragments.add(shellSortFragment);
+            fragments.add(selectSortFragment);
         }
         if (heapSortFragment == null) {
             heapSortFragment = new HeapSortFragment();

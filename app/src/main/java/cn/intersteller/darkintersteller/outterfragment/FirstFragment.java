@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +20,6 @@ import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.AnchorF
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.ListFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.RankingFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.RecommendFragment;
-import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerAdapter;
 
 public class FirstFragment extends Fragment {
     private String TAG = "FirstFragment";
@@ -36,7 +37,6 @@ public class FirstFragment extends Fragment {
     private RankingFragment rankingFragment;
     private View v;
     private static FirstFragment firstFragment;
-    private InnerFragmentPagerAdapter innerFragmentPagerAdapter;
 
 
     public static FirstFragment newInstance() {
@@ -53,9 +53,9 @@ public class FirstFragment extends Fragment {
         mDisco_tab =  v.findViewById(R.id.disco_tab);
         mDisco_viewPager = v.findViewById(R.id.disco_viewPager);
         addView();
-        innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getFragmentManager(), fragments, mTitleList);
-        innerFragmentPagerAdapter.notifyDataSetChanged();
-        mDisco_viewPager.setAdapter(innerFragmentPagerAdapter);
+        MyAdapter myAdapter = new MyAdapter(getFragmentManager());
+        myAdapter.notifyDataSetChanged();
+        mDisco_viewPager.setAdapter(myAdapter);
         mDisco_viewPager.setOffscreenPageLimit(2);
         mDisco_tab.setTabMode(TabLayout.MODE_FIXED);
         mDisco_tab.setupWithViewPager(mDisco_viewPager);
@@ -83,6 +83,34 @@ public class FirstFragment extends Fragment {
         if (rankingFragment == null) {
             rankingFragment = new RankingFragment();
             fragments.add(rankingFragment);
+        }
+    }
+
+    class MyAdapter extends FragmentPagerAdapter {
+
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTitleList.get(position);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
         }
     }
 

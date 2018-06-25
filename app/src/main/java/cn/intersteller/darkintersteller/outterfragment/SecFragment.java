@@ -38,7 +38,7 @@ public class SecFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.secondfragment, container, false);
         mMusic_viewPager = v.findViewById(R.id.music_viewPager);
         mMusic_tab = v.findViewById(R.id.music_tab);
@@ -64,7 +64,4 @@ public class SecFragment extends Fragment {
             fragments.add(stockFragment);
         }
     }
-
-
-
 }
