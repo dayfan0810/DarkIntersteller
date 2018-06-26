@@ -74,7 +74,7 @@ public class BubbleSortFragment extends Fragment {
         if(mViews.size() <= 0){
             for (int i = 0; i < mArray.length; i++) {
                 View view = new View(getContext());
-                ll_bubble_sort.addView(view);
+                ll_bubble_sort.addView(view); 
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
                 columnWidth = (screenWidth - ScreenUtils.dp2px(getContext(), paddingLR * 2)) / mArray.length
                         -ScreenUtils.dp2px(getContext(), intervalColumn);
