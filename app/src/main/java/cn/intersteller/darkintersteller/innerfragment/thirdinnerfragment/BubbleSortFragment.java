@@ -64,17 +64,17 @@ public class BubbleSortFragment extends Fragment {
             mArray[i] = random.nextInt(200) + 10;//10-200
             count++;
         }
-//        Toast.makeText(getContext(),"已生成 "+count+" 个数组",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"已生成 "+count+" 个数组",Toast.LENGTH_LONG).show();
 //        arrayToString("arraybefore");//输出原始数组
 
     }
 
     public void addCharView() {
-        Toast.makeText(getContext(),"11111",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(),"11111",Toast.LENGTH_SHORT).show();
         if(mViews.size() <= 0){
             for (int i = 0; i < mArray.length; i++) {
                 View view = new View(getContext());
-                ll_bubble_sort.addView(view); 
+                ll_bubble_sort.addView(view);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
                 columnWidth = (screenWidth - ScreenUtils.dp2px(getContext(), paddingLR * 2)) / mArray.length
                         -ScreenUtils.dp2px(getContext(), intervalColumn);
