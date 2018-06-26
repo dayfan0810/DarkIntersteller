@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -44,5 +45,24 @@ public class ScreenUtils {
 
     public static boolean isAndroid5() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    public static int dp2px(Context context,int dpVal)
+    {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * sp 2 px
+     *
+     * @param spVal
+     * @return
+     */
+    public static int sp2px(Context context,int spVal)
+    {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+                spVal, context.getResources().getDisplayMetrics());
+
     }
 }

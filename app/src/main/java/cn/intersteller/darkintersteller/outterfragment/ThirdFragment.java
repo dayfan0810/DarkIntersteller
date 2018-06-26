@@ -69,13 +69,17 @@ public class ThirdFragment extends Fragment {
     }
 
     private void addView() {
+        mTitleList.add("冒泡排序");
         mTitleList.add("快速排序");
         mTitleList.add("并归排序");
         mTitleList.add("希尔排序");
         mTitleList.add("堆排序");
-        mTitleList.add("冒泡排序");
         mTitleList.add("选择排序");
         mTitleList.add("插入排序");
+        if (bubbleSortFragment == null) {
+            bubbleSortFragment = new BubbleSortFragment();
+            fragments.add(bubbleSortFragment);
+        }
         if (quickSortFragment == null) {
             quickSortFragment = new QuickSortFragment();
             fragments.add(quickSortFragment);
@@ -92,10 +96,7 @@ public class ThirdFragment extends Fragment {
             heapSortFragment = new HeapSortFragment();
             fragments.add(heapSortFragment);
         }
-        if (bubbleSortFragment == null) {
-            bubbleSortFragment = new BubbleSortFragment();
-            fragments.add(bubbleSortFragment);
-        }
+
         if (meargeSortFragment == null) {
             meargeSortFragment = new MeargeSortFragment();
             fragments.add(meargeSortFragment);

@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#171903</color>
     <color name="colorAccent">#FF4081</color>
     <color name="themeColor">#ffce3d3a</color>
+    <color name="chartColor">#34bf2a</color>
 
 </resources>

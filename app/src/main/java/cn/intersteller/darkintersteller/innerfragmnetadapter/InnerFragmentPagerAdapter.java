@@ -34,10 +34,6 @@ public class InnerFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view == object;
-    }
-    @Override
     public CharSequence getPageTitle(int position) {
         return tiles.get(position);
     }
