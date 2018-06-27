@@ -22,7 +22,6 @@ public class OutterFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.i("deng","OutterFragmentAdapter mFragmentList.get(position) == null ? "+(mFragmentList.get(position)==null));
         return mFragmentList.get(position);
     }
 

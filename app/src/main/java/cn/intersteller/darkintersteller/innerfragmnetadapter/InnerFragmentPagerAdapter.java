@@ -24,7 +24,6 @@ public class InnerFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.i("deng","InnerFragmentPagerAdapter mFragmentList.get(position) == null ? "+(fragments.get(position)==null));
         return fragments.get(position);
     }
 
