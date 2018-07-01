@@ -27,12 +27,12 @@
 
 
     <View
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="29dp"
         android:layout_alignBottom="@id/bt_bubble_get_arr3"
         style="@style/Divider"
         />
     <RelativeLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="34dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

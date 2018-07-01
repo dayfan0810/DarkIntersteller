@@ -92,6 +92,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             public int getItemLayoutId() {
                 return R.layout.item_drag_flow;
             }
+
             @Override
             public void onBindData(View itemView, int dragState, ArrayBean data) {
                 itemView.setTag(data);
@@ -100,9 +101,10 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
                 tv.setText(data.text);
                 //iv_close是关闭按钮。只有再非拖拽空闲的情况吓才显示
                 itemView.findViewById(R.id.iv_close).setVisibility(
-                        dragState!= DragFlowLayout.DRAG_STATE_IDLE
+                        dragState != DragFlowLayout.DRAG_STATE_IDLE
                                 && data.draggable ? View.VISIBLE : View.INVISIBLE);
             }
+
             @NonNull
             @Override
             public ArrayBean getData(View itemView) {
@@ -118,13 +120,12 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         }
         List arrayList1 = new ArrayList();
         for (int i = 0; i < SIEZ_ARRAY; i++) {
-            Log.i("deng", String.valueOf(mArray[i]));
-            final ArrayBean bean = new ArrayBean( ""+mArray[i]);
+            final ArrayBean bean = new ArrayBean("" + mArray[i]);
             arrayList1.add(bean);
         }
         DragFlowLayout.DragItemManager dragItemManager = mDragflowLayout.getDragItemManager();
         int itemCount = dragItemManager.getItemCount();
-        dragItemManager.addItems(0,arrayList1);
+        dragItemManager.addItems(0, arrayList1);
     }
 
     @Override
@@ -136,16 +137,33 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             case R.id.bt_bubble_get_arr2:
                 break;
             case R.id.bt_bubble_get_arr3:
+                resetView();
                 break;
         }
     }
 
-    private static class  ArrayBean  implements IDraggable{
+    private void resetView() {
+        DragFlowLayout.DragItemManager dragItemManager = mDragflowLayout.getDragItemManager();
+        int itemCount = dragItemManager.getItemCount();
+        if (itemCount == 0) {
+            return;
+        }
+        if (itemCount <= 2) {
+            dragItemManager.removeItem(itemCount - 1);
+        } else {
+            dragItemManager.removeItem(itemCount - 2);
+        }
+
+    }
+
+    private static class ArrayBean implements IDraggable {
         String text;
         boolean draggable = true;
+
         public ArrayBean(String text) {
             this.text = text;
         }
+
         @Override
         public boolean isDraggable() {
             return draggable;

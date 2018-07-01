@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/edit_text_delete_normal"
+        android:src="@mipmap/edit_text_delete_normal"
         android:layout_gravity="top|right"
         />
 
