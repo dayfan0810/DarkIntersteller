@@ -15,7 +15,7 @@
         android:id="@+id/bt_bubble_get_arr2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="获取随机数组"
+        android:text="开始排序"
         android:textSize="15sp" />
     <Button
         android:layout_toRightOf="@id/bt_bubble_get_arr2"
