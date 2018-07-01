@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.BubbleSortFragment;
+import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.BubbleSortBeautyFragment;
+import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.BubbleSortSimpleFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.HeapSortFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.InsertSortFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.MeargeSortFragment;
@@ -34,7 +35,8 @@ public class ThirdFragment extends Fragment {
     private List<String> mTitleList = new ArrayList<>(7);
     private List<Fragment> fragments = new ArrayList<>(7);
     private QuickSortFragment quickSortFragment;
-    private BubbleSortFragment bubbleSortFragment;
+    private BubbleSortSimpleFragment bubbleSortSimpleFragment;
+    private BubbleSortBeautyFragment bubbleSortBeautyFragment;
     private HeapSortFragment heapSortFragment;
     private MeargeSortFragment meargeSortFragment;
     private InsertSortFragment insertSortFragment;
@@ -69,16 +71,21 @@ public class ThirdFragment extends Fragment {
     }
 
     private void addView() {
-        mTitleList.add("冒泡排序");
+        mTitleList.add("冒泡排序(1)");
+        mTitleList.add("冒泡排序(2)");
         mTitleList.add("快速排序");
         mTitleList.add("并归排序");
         mTitleList.add("希尔排序");
         mTitleList.add("堆排序");
         mTitleList.add("选择排序");
         mTitleList.add("插入排序");
-        if (bubbleSortFragment == null) {
-            bubbleSortFragment = new BubbleSortFragment();
-            fragments.add(bubbleSortFragment);
+        if (bubbleSortSimpleFragment == null) {
+            bubbleSortSimpleFragment = new BubbleSortSimpleFragment();
+            fragments.add(bubbleSortSimpleFragment);
+        }
+        if (bubbleSortBeautyFragment == null) {
+            bubbleSortBeautyFragment = new BubbleSortBeautyFragment();
+            fragments.add(bubbleSortBeautyFragment);
         }
         if (quickSortFragment == null) {
             quickSortFragment = new QuickSortFragment();

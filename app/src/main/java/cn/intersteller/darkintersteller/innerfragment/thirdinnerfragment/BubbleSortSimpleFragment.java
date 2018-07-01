@@ -2,6 +2,7 @@ package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -22,20 +23,19 @@ import java.util.Random;
 
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
-import cn.intersteller.darkintersteller.utils.SortUtils;
 
-public class BubbleSortFragment extends Fragment implements View.OnClickListener {
+public class BubbleSortSimpleFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
-    private static final int SIEZ_ARRAY = 200;
+    private static final int SIEZ_ARRAY = 10;
 
     private Button bt_bubble_get_arr1;
     private Button bt_bubble_get_arr2;
     private Button bt_bubble_get_arr3;
     //柱状图维护数据
     int screenWidth = 0, screenHeight = 0;          //单位：px，屏幕的宽、高
-    int columnWidth = 15;             //单位：px，柱状View的宽度,计算一次用全局变量存储下次就不需要再计算了
+    int columnWidth = 30;             //单位：px，柱状View的宽度,计算一次用全局变量存储下次就不需要再计算了
     List<View> mViews = new ArrayList<View>();
     int[] mArray = new int[SIEZ_ARRAY];
     private LinearLayout ll_bubble_sort;
@@ -45,6 +45,7 @@ public class BubbleSortFragment extends Fragment implements View.OnClickListener
 
     double columnPixPerNum = 0.0;                //单位：px/1  这个是高度上单位数字所表示的像素。
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,6 @@ public class BubbleSortFragment extends Fragment implements View.OnClickListener
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
-        Log.i("haha","screenWidth = "+screenWidth+"  ,screenHeight = "+screenHeight);
     }
 
     @Override
@@ -85,19 +85,33 @@ public class BubbleSortFragment extends Fragment implements View.OnClickListener
     public void addCharView() {
         if (mViews.size() <= 0) {
             for (int i = 0; i < mArray.length; i++) {
-                View view = new View(getContext());
-                ll_bubble_sort.addView(view);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
-//                columnWidth = (screenWidth - ScreenUtils.dp2px(getContext(), paddingLR * 2)) / mArray.length
-//                        - ScreenUtils.dp2px(getContext(), intervalColumn);
-                layoutParams.setMargins(ScreenUtils.dp2px(getContext(), intervalColumn), 4, 0, 4);
-                layoutParams.height = columnWidth;//纵向宽度
-                layoutParams.width = (int) (mArray[i] * pixPerNum());//横向长度
-                view.setLayoutParams(layoutParams);
-                view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.chartColor));
-                mViews.add(view);
+                View rightView = new View(getContext());//条状图
+                addViewDelayd(ll_bubble_sort, rightView, i);
             }
         }
+    }
+
+    private void addViewDelayd(final ViewGroup root, final View rightView, final int i) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    TextView leftTextView = new TextView(getContext());//左边数字
+                    leftTextView.setText(String.valueOf(mArray[i]));
+                    ll_bubble_sort.addView(leftTextView);
+                    ll_bubble_sort.addView(rightView);
+                    LinearLayout.LayoutParams ll_bubble_sort_layoutParams = (LinearLayout.LayoutParams) rightView.getLayoutParams();
+                    ll_bubble_sort_layoutParams.setMargins(ScreenUtils.dp2px(getContext(), intervalColumn), 4, 0, 4);
+                    ll_bubble_sort_layoutParams.height = columnWidth;//纵向宽度
+                    ll_bubble_sort_layoutParams.width = (int) (mArray[i] * pixPerNum());//横向长度
+                    rightView.setLayoutParams(ll_bubble_sort_layoutParams);
+                    rightView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.chartColor));
+                    mViews.add(rightView);
+                } catch (Exception e) {
+                    Log.e(TAG,"haha"+e.toString());
+                }
+            }
+        }, 100);
     }
 
     //获得在高度上，单位数字所代表的像素，由于屏幕高度是像素，而我们的排序为int数字，要想形象化绘制成柱状图
@@ -135,16 +149,19 @@ public class BubbleSortFragment extends Fragment implements View.OnClickListener
     }
 
     private void startSort() {
-        
+
     }
 
     private void resetView() {
         //后期加上如果正在排序，则不允许清空
-        if (mViews != null){
+        int childCount = ll_bubble_sort.getChildCount();
+        Toast.makeText(getContext(), "childCount = "+childCount, Toast.LENGTH_SHORT).show();
+        if (childCount != 0){
             ll_bubble_sort.removeAllViews();
             mViews.clear();
         }
     }
+
 
 
 }

@@ -15,4 +15,28 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ContentTextView">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/text_color_grey</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">15.0dip</item>
+        <item name="android:layout_marginRight">15.0dip</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/divider_height</item>
+    </style>
+
+    <style name="CommonButton">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/common_btn_selector</item>
+        <item name="android:paddingTop">8.0dip</item>
+        <item name="android:paddingBottom">15.0dip</item>
+    </style>
 </resources>
