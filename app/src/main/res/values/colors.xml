@@ -6,7 +6,9 @@
     <color name="themeColor">#ffce3d3a</color>
     <color name="chartColor">#34bf2a</color>
     <color name="common_background">#FFFFFF</color>
+    <color name="dark_blue">#ff028fea</color>
     <color name="text_color_grey">#f2efef</color>
     <color name="text_color_white">#FFFFFF</color>
+    <color name="app_common_color">#ff3cb3ff</color>
 
 </resources>

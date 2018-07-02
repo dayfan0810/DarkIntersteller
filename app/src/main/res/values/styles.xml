@@ -39,4 +39,13 @@
         <item name="android:paddingTop">8.0dip</item>
         <item name="android:paddingBottom">15.0dip</item>
     </style>
+
+    <style name="BubbleSortChildTextView">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/dark_blue_stroke_blue_solid_radius_1</item>
+        <item name="android:layout_width">@dimen/bubble_sort_view_child_width</item>
+        <item name="android:layout_height">@dimen/bubble_sort_view_child_height</item>
+    </style>
 </resources>

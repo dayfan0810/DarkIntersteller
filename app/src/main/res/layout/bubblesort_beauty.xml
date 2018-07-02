@@ -51,22 +51,29 @@
                 <!--<include layout="@layout/include_sort_input_layout" />-->
 
 
-                <!--<cn.intersteller.darkintersteller.custview.BubbleSortView-->
-                <!--android:id="@+id/sort"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_marginTop="15.0dip" />-->
+
                 <com.heaven7.android.dragflowlayout.DragFlowLayout
+                    android:layout_marginTop="10dp"
                     android:id="@+id/sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15.0dip" />
+                    />
 
+                <View
+                    android:id="@+id/down_divider"
+                    android:layout_alignBottom="@id/bt_bubble_get_arr3"
+                    style="@style/Divider"
+                    />
+                <cn.intersteller.darkintersteller.custview.BubbleSortView
+                android:id="@+id/anim_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15.0dip" />
                 <LinearLayout
                     android:id="@+id/ll_sort_result"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20.0dip"

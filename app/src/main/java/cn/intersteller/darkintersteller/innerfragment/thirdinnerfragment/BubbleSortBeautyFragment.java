@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Random;
 
 import cn.intersteller.darkintersteller.R;
+import cn.intersteller.darkintersteller.custview.BubbleSortView;
 
 public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener {
 
@@ -44,6 +45,9 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     List<View> mViews = new ArrayList<View>();
     int[] mArray = new int[SIEZ_ARRAY];
     private DragFlowLayout mDragflowLayout;
+    private LinearLayout ll_sort_result;
+    private BubbleSortView anim_sort;
+    private View down_divider;
 
 
     @Override
@@ -60,12 +64,16 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bubblesort_beauty, container, false);
         mDragflowLayout = (DragFlowLayout) v.findViewById(R.id.sort);
+        ll_sort_result = (LinearLayout) v.findViewById(R.id.ll_sort_result);
+        anim_sort = (BubbleSortView) v.findViewById(R.id.anim_sort);
+        down_divider = (View) v.findViewById(R.id.down_divider);
         bt_bubble_get_arr1 = (Button) v.findViewById(R.id.bt_bubble_get_arr1);
         bt_bubble_get_arr2 = (Button) v.findViewById(R.id.bt_bubble_get_arr2);
         bt_bubble_get_arr3 = (Button) v.findViewById(R.id.bt_bubble_get_arr3);
         bt_bubble_get_arr1.setOnClickListener(this);
         bt_bubble_get_arr2.setOnClickListener(this);
         bt_bubble_get_arr3.setOnClickListener(this);
+        down_divider.setVisibility(View.GONE);
         initView();
         return v;
     }
@@ -126,6 +134,8 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         DragFlowLayout.DragItemManager dragItemManager = mDragflowLayout.getDragItemManager();
         int itemCount = dragItemManager.getItemCount();
         dragItemManager.addItems(0, arrayList1);
+        down_divider.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -135,6 +145,9 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
                 generateRandomArry();
                 break;
             case R.id.bt_bubble_get_arr2:
+                // 开始排序,先清空结果view
+                ll_sort_result.removeAllViews();
+
                 break;
             case R.id.bt_bubble_get_arr3:
                 resetView();
@@ -148,12 +161,8 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         if (itemCount == 0) {
             return;
         }
-        if (itemCount <= 2) {
-            dragItemManager.removeItem(itemCount - 1);
-        } else {
-            dragItemManager.removeItem(itemCount - 2);
-        }
-
+        mDragflowLayout.removeAllViews();
+        down_divider.setVisibility(View.GONE);
     }
 
     private static class ArrayBean implements IDraggable {
