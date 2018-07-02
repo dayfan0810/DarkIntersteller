@@ -54,6 +54,8 @@ public class BubbleSortView extends ViewGroup {
     }
 
 
+
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int childCount = getChildCount();

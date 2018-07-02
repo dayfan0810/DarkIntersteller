@@ -30,7 +30,14 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/divider_height</item>
     </style>
-
+    <style name="SortResultChildTextView">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/grey_soild_radius_1</item>
+        <item name="android:layout_width">@dimen/bubble_sort_view_child_width</item>
+        <item name="android:layout_height">@dimen/bubble_sort_view_child_height</item>
+    </style>
     <style name="CommonButton">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@color/text_color_white</item>
