@@ -35,7 +35,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
-    private static final int SIEZ_ARRAY = 100;
+    private static final int SIEZ_ARRAY = 90;
 
     private Button bt_bubble_get_arr1;
     private Button bt_bubble_get_arr2;
@@ -120,6 +120,19 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             @Override
             public ArrayBean getData(View itemView) {
                 return (ArrayBean) itemView.getTag();
+            }
+        });
+        scroll_view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_MOVE:
+                        Log.i("deng", "move");
+                        scroll_view.setNestedScrollingEnabled(true);
+                        return true;
+
+                }
+                return true;
             }
         });
     }
