@@ -20,6 +20,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5.0dip"
         android:orientation="horizontal"
-        app:common_child_bg="@drawable/grey_soild_radius_1"
-        app:high_light_child_bg="@drawable/home_nav_list_bg" />
+        />
 </RelativeLayout>

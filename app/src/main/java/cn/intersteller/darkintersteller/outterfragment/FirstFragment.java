@@ -53,7 +53,7 @@ public class FirstFragment extends Fragment {
         mDisco_tab =  v.findViewById(R.id.disco_tab);
         mDisco_viewPager = v.findViewById(R.id.disco_viewPager);
         addView();
-        MyAdapter myAdapter = new MyAdapter(getFragmentManager());
+        MyAdapter myAdapter = new MyAdapter(getChildFragmentManager());
         myAdapter.notifyDataSetChanged();
         mDisco_viewPager.setAdapter(myAdapter);
         mDisco_viewPager.setOffscreenPageLimit(2);

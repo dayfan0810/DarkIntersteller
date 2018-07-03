@@ -5,10 +5,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import cn.intersteller.darkintersteller.R;
 
@@ -18,6 +22,8 @@ public class BubbleSortView extends ViewGroup {
     private int bubble_sort_view_child_height;
     private int bubble_sort_view_child_margin;
     private int bubble_sort_view_arrow_height;
+    private int h;
+    private int i;
 
     public BubbleSortView(Context context) {
         this(context, null);
@@ -30,6 +36,8 @@ public class BubbleSortView extends ViewGroup {
 
     public BubbleSortView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        h = -1;
+        i = -1;
         init1();
     }
 
@@ -46,7 +54,20 @@ public class BubbleSortView extends ViewGroup {
 
     }
 
+    public void startBond(int[] array) {
+        removeAllViews();
+        bundTextViewWhitNum(array);
+    }
+
+    private void bundTextViewWhitNum(int[] array) {
+        Log.i("deng", "array[] = " + Arrays.toString(array));
+        for (int i = 0; i < array.length; i++) {
+            createBubbleTextView(array[i]);
+        }
+    }
+
     public void createBubbleTextView(int num) {
+//        Log.i("deng","num = "+num);
         TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.include_bubble_sort_child, null);
         textView.setText(String.valueOf(num));
         textView.setLayoutParams(new LayoutParams(bubble_sort_view_child_width, bubble_sort_view_child_height));
@@ -54,15 +75,15 @@ public class BubbleSortView extends ViewGroup {
     }
 
 
-
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int childCount = getChildCount();
         if (childCount == 0) {
+            Log.i("deng", "childcount =  0");
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
+        Log.i("deng", "childcount =  " + childCount);
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(((childCount - 1) *
                         bubble_sort_view_child_margin) + (bubble_sort_view_child_width * childCount),
@@ -77,24 +98,22 @@ public class BubbleSortView extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
-        int i5 = 0;
-        int i6 = bubble_sort_view_arrow_height;
+        int conuted = 0;
+//        int i6 = bubble_sort_view_arrow_height;
         int i7 = 0;
-//        while (i5 < childCount) {
-//            View childAt = getChildAt(i5);
-//            int i8 = (int) (((float) (( l - this.h) * (this.a + this.c))) * this.g);
-//            if (i5 == this.h) {
-//                childAt.layout(i7 + i8, i6, (i8 + i7) + this.a, this.b + i6);
-//            } else if (i5 == this.i) {
-//                childAt.layout(i7 - i8, i6, (this.a + i7) - i8, this.b + i6);
-//            } else {
-//                childAt.layout(i7, i6, this.a + i7, this.b + i6);
-//            }
-//            i7 += this.a + this.c;
-//            i5++;
-//        }
-//
-//    }
+        while (conuted < childCount) {
+            View childAt = getChildAt(conuted);
+            int i8 = (int) (((float) ((l - this.h) * (bubble_sort_view_child_width + bubble_sort_view_child_margin))) * 1);
+            if (conuted == this.h) {
+                childAt.layout(i7 + i8, bubble_sort_view_arrow_height, (i8 + i7) + bubble_sort_view_child_width, bubble_sort_view_child_height + bubble_sort_view_arrow_height);
+            } else if (conuted == this.i) {
+                childAt.layout(i7 - i8, bubble_sort_view_arrow_height, (this.bubble_sort_view_child_width + i7) - i8, this.bubble_sort_view_child_height + bubble_sort_view_arrow_height);
+            } else {
+                childAt.layout(i7, bubble_sort_view_arrow_height, this.bubble_sort_view_child_width + i7, this.bubble_sort_view_child_height + bubble_sort_view_arrow_height);
+            }
+            i7 += this.bubble_sort_view_child_width + this.bubble_sort_view_child_margin;
+            conuted++;
+        }
     }
 
     class MyBSViewAnimUpdateListener implements ValueAnimator.AnimatorUpdateListener {

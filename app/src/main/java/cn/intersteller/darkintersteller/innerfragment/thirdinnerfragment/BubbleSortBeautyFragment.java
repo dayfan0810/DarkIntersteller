@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
-    private static final int SIEZ_ARRAY = 6;
+    private static final int SIEZ_ARRAY = 100;
 
     private Button bt_bubble_get_arr1;
     private Button bt_bubble_get_arr2;
@@ -48,6 +49,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     private LinearLayout ll_sort_result;
     private BubbleSortView anim_sort;
     private View down_divider;
+    private ScrollView scroll_view;
 
 
     @Override
@@ -65,6 +67,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         View v = inflater.inflate(R.layout.bubblesort_beauty, container, false);
         mDragflowLayout = (DragFlowLayout) v.findViewById(R.id.sort);
         ll_sort_result = (LinearLayout) v.findViewById(R.id.ll_sort_result);
+        scroll_view = (ScrollView) v.findViewById(R.id.scroll_view);
         anim_sort = (BubbleSortView) v.findViewById(R.id.anim_sort);
         down_divider = (View) v.findViewById(R.id.down_divider);
         bt_bubble_get_arr1 = (Button) v.findViewById(R.id.bt_bubble_get_arr1);
@@ -121,22 +124,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         });
     }
 
-    private void generateRandomArry() {
-        Random random = new Random();
-        for (int i = 0; i < SIEZ_ARRAY; i++) {
-            mArray[i] = random.nextInt(99) + 10;//10-200
-        }
-        List arrayList1 = new ArrayList();
-        for (int i = 0; i < SIEZ_ARRAY; i++) {
-            final ArrayBean bean = new ArrayBean("" + mArray[i]);
-            arrayList1.add(bean);
-        }
-        DragFlowLayout.DragItemManager dragItemManager = mDragflowLayout.getDragItemManager();
-        int itemCount = dragItemManager.getItemCount();
-        dragItemManager.addItems(0, arrayList1);
-        down_divider.setVisibility(View.VISIBLE);
 
-    }
 
     @Override
     public void onClick(View v) {
@@ -147,7 +135,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             case R.id.bt_bubble_get_arr2:
                 // 开始排序,先清空结果view
                 ll_sort_result.removeAllViews();
-
+                anim_sort.startBond(mArray);
                 break;
             case R.id.bt_bubble_get_arr3:
                 resetView();
@@ -155,12 +143,35 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    private void generateRandomArry() {
+        DragFlowLayout.DragItemManager dragItemManager = mDragflowLayout.getDragItemManager();
+        int itemCount = dragItemManager.getItemCount();
+        if (itemCount > 0){
+            Toast.makeText(getContext(),"请先重置view",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Random random = new Random();
+        for (int i = 0; i < SIEZ_ARRAY; i++) {
+            mArray[i] = random.nextInt(98) + 1;
+        }
+        List arrayList1 = new ArrayList();
+        for (int i = 0; i < SIEZ_ARRAY; i++) {
+            final ArrayBean bean = new ArrayBean("" + mArray[i]);
+            arrayList1.add(bean);
+        }
+        dragItemManager.addItems(0, arrayList1);
+        down_divider.setVisibility(View.VISIBLE);
+
+    }
+
     private void resetView() {
         DragFlowLayout.DragItemManager dragItemManager = mDragflowLayout.getDragItemManager();
         int itemCount = dragItemManager.getItemCount();
-        if (itemCount == 0) {
+        int childCount = anim_sort.getChildCount();
+        if (itemCount == 0 && childCount == 0) {
             return;
         }
+        anim_sort.removeAllViews();
         mDragflowLayout.removeAllViews();
         down_divider.setVisibility(View.GONE);
     }

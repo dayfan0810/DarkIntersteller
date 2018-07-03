@@ -58,7 +58,7 @@ public class ThirdFragment extends Fragment {
         mFrirendsTabLayout = v.findViewById(R.id.friends_tab);
         mFiendsViewPager = v.findViewById(R.id.firends_viewPager);
         addView();
-        innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getFragmentManager(), fragments, mTitleList);
+        innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getChildFragmentManager(), fragments, mTitleList);
         innerFragmentPagerAdapter.notifyDataSetChanged();
         mFrirendsTabLayout = v.findViewById(R.id.friends_tab);
         mFiendsViewPager.setAdapter(innerFragmentPagerAdapter);

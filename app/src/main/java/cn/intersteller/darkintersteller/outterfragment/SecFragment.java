@@ -43,7 +43,7 @@ public class SecFragment extends Fragment {
         mMusic_viewPager = v.findViewById(R.id.music_viewPager);
         mMusic_tab = v.findViewById(R.id.music_tab);
         addView();
-        innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getFragmentManager(), fragments, mTitleList);
+        innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getChildFragmentManager(), fragments, mTitleList);
         innerFragmentPagerAdapter.notifyDataSetChanged();
         mMusic_viewPager.setAdapter(innerFragmentPagerAdapter);
         mMusic_tab.setTabMode(TabLayout.MODE_FIXED);
