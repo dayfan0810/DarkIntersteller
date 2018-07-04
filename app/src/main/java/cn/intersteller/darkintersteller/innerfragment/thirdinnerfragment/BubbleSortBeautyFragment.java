@@ -122,17 +122,20 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
                 return (ArrayBean) itemView.getTag();
             }
         });
-        scroll_view.setOnTouchListener(new View.OnTouchListener() {
+        mDragflowLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_MOVE:
-                        Log.i("deng", "move");
-                        scroll_view.setNestedScrollingEnabled(true);
-                        return true;
-
+                if (event.getAction() == MotionEvent.ACTION_MOVE){
+                    scroll_view.requestDisallowInterceptTouchEvent(false);
+                }else {
+                    scroll_view.requestDisallowInterceptTouchEvent(true);
                 }
-                return true;
+//                switch (event.getAction()){
+//                    case MotionEvent.ACTION_MOVE:
+//                        Log.i("deng", "move");
+//                        scroll_view.requestDisallowInterceptTouchEvent(true);
+//                }
+                return false;
             }
         });
     }
