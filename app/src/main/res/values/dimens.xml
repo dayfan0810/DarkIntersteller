@@ -6,9 +6,9 @@
     <dimen name="btn_fab_size">56dp</dimen>
     <dimen name="scroll_view_margin_bottom">10dp</dimen>
     <dimen name="divider_height">2.0dip</dimen>
-    <dimen name="bubble_sort_view_child_height">16.0dip</dimen>
+    <dimen name="bubble_sort_view_child_height">30.0dip</dimen>
     <dimen name="bubble_sort_view_child_margin">5.0dip</dimen>
-    <dimen name="bubble_sort_view_child_width">25.0dip</dimen>
+    <dimen name="bubble_sort_view_child_width">45.0dip</dimen>
     <dimen name="bubble_sort_view_arrow_height">18.0sp</dimen>
     <dimen name="sort_result_view_child_height">16.0dip</dimen>
     <dimen name="sort_result_view_child_margin">5.0dip</dimen>

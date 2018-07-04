@@ -35,7 +35,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
-    private static final int SIEZ_ARRAY = 90;
+    private static final int SIEZ_ARRAY = 6;
 
     private Button bt_bubble_get_arr1;
     private Button bt_bubble_get_arr2;
@@ -130,11 +130,6 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
                 }else {
                     scroll_view.requestDisallowInterceptTouchEvent(true);
                 }
-//                switch (event.getAction()){
-//                    case MotionEvent.ACTION_MOVE:
-//                        Log.i("deng", "move");
-//                        scroll_view.requestDisallowInterceptTouchEvent(true);
-//                }
                 return false;
             }
         });
@@ -168,7 +163,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         }
         Random random = new Random();
         for (int i = 0; i < SIEZ_ARRAY; i++) {
-            mArray[i] = random.nextInt(98) + 1;
+            mArray[i] = random.nextInt(88) + 10;
         }
         List arrayList1 = new ArrayList();
         for (int i = 0; i < SIEZ_ARRAY; i++) {
