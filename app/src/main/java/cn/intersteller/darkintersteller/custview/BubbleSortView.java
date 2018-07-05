@@ -24,6 +24,8 @@ public class BubbleSortView extends ViewGroup {
     private int bubble_sort_view_arrow_height;
     private int h;
     private int i;
+    private Integer[] e;
+
 
     public BubbleSortView(Context context) {
         this(context, null);
@@ -115,6 +117,19 @@ public class BubbleSortView extends ViewGroup {
             conuted++;
         }
     }
+
+    public void newInteger(int i1, int i2) {
+        this.e = new Integer[2];
+        this.e[0] = Integer.valueOf(i1);
+        this.e[1] = Integer.valueOf(i2);
+        invalidate();
+    }
+
+    public void setDuring(int i) {
+        valueAnimator.setDuration((long) i);
+    }
+
+
 
     class MyBSViewAnimUpdateListener implements ValueAnimator.AnimatorUpdateListener {
         final BubbleSortView bubbleSortView;

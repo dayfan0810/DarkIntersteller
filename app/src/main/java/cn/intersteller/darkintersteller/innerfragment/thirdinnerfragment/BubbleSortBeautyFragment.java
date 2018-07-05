@@ -2,6 +2,8 @@ package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,8 +32,9 @@ import java.util.Random;
 
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.custview.BubbleSortView;
+import cn.intersteller.darkintersteller.sort.BubbleSort;
 
-public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener {
+public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener, BubbleSort.a {
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
@@ -50,6 +53,9 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     private BubbleSortView anim_sort;
     private View down_divider;
     private ScrollView scroll_view;
+
+    private BubbleSort bubbleSortThread;
+    private Handler t = new b(this);
 
 
     @Override
@@ -187,6 +193,8 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         down_divider.setVisibility(View.GONE);
     }
 
+
+
     private static class ArrayBean implements IDraggable {
         String text;
         boolean draggable = true;
@@ -201,7 +209,57 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         }
 
     }
+    @Override
+    public void a(int[] iArr, int i) {
+        //他也没写具体实现
+    }
 
+    @Override
+    public void b(int i, int i2) {
+        anim_sort.newInteger(i, i2);
+        this.t.sendEmptyMessageDelayed(1, 400);
+
+    }
+
+    @Override
+    public void c(int i, int i2) {
+
+    }
+
+    @Override
+    public void g() {
+
+    }
+
+    private void j() {
+        synchronized (bubbleSortThread) {
+            bubbleSortThread.notify();
+        }
+    }
+
+
+    class b extends Handler {
+        final  BubbleSortBeautyFragment bubbleSortBeautyFragment;
+
+        b(BubbleSortBeautyFragment bubbleSortBeautyFragment) {
+            this.bubbleSortBeautyFragment = bubbleSortBeautyFragment;
+        }
+
+        public void handleMessage(Message message) {
+            super.handleMessage(message);
+            switch (message.what) {
+                case 1:
+                    this.bubbleSortBeautyFragment.j();
+                    return;
+                default:
+                    return;
+            }
+        }
+    }
+
+    public void animEnd(View view) {
+        this.t.sendEmptyMessage(1);
+    }
 
 
 }
