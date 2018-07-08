@@ -2,13 +2,10 @@ package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,17 +21,16 @@ import com.heaven7.android.dragflowlayout.DragAdapter;
 import com.heaven7.android.dragflowlayout.DragFlowLayout;
 import com.heaven7.android.dragflowlayout.IDraggable;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.custview.BubbleSortView;
-import cn.intersteller.darkintersteller.sort.BubbleSort;
+import cn.intersteller.darkintersteller.custview.BubbleSortViewOld;
+import cn.intersteller.darkintersteller.sort.BubbleSortThread;
+import cn.intersteller.darkintersteller.sort.SortAlgorithmThread;
 
-public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener, BubbleSort.a {
+public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener  {
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
@@ -50,12 +46,11 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     int[] mArray = new int[SIEZ_ARRAY];
     private DragFlowLayout mDragflowLayout;
     private LinearLayout ll_sort_result;
-    private BubbleSortView anim_sort;
+    private BubbleSortViewOld anim_sort;
     private View down_divider;
     private ScrollView scroll_view;
+    protected SortAlgorithmThread thread;
 
-    private BubbleSort bubbleSortThread;
-    private Handler t = new b(this);
 
 
     @Override
@@ -74,7 +69,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         mDragflowLayout = (DragFlowLayout) v.findViewById(R.id.sort);
         ll_sort_result = (LinearLayout) v.findViewById(R.id.ll_sort_result);
         scroll_view = (ScrollView) v.findViewById(R.id.scroll_view);
-        anim_sort = (BubbleSortView) v.findViewById(R.id.anim_sort);
+        anim_sort = (BubbleSortViewOld) v.findViewById(R.id.anim_sort);
         down_divider = (View) v.findViewById(R.id.down_divider);
         bt_bubble_get_arr1 = (Button) v.findViewById(R.id.bt_bubble_get_arr1);
         bt_bubble_get_arr2 = (Button) v.findViewById(R.id.bt_bubble_get_arr2);
@@ -153,6 +148,8 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
                 // 开始排序,先清空结果view
                 ll_sort_result.removeAllViews();
                 anim_sort.startBond(mArray);
+                this.thread = new BubbleSortThread(this.anim_sort, getActivity());
+
                 break;
             case R.id.bt_bubble_get_arr3:
                 resetView();
@@ -208,57 +205,6 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             return draggable;
         }
 
-    }
-    @Override
-    public void a(int[] iArr, int i) {
-        //他也没写具体实现
-    }
-
-    @Override
-    public void b(int i, int i2) {
-        anim_sort.newInteger(i, i2);
-        this.t.sendEmptyMessageDelayed(1, 400);
-
-    }
-
-    @Override
-    public void c(int i, int i2) {
-
-    }
-
-    @Override
-    public void g() {
-
-    }
-
-    private void j() {
-        synchronized (bubbleSortThread) {
-            bubbleSortThread.notify();
-        }
-    }
-
-
-    class b extends Handler {
-        final  BubbleSortBeautyFragment bubbleSortBeautyFragment;
-
-        b(BubbleSortBeautyFragment bubbleSortBeautyFragment) {
-            this.bubbleSortBeautyFragment = bubbleSortBeautyFragment;
-        }
-
-        public void handleMessage(Message message) {
-            super.handleMessage(message);
-            switch (message.what) {
-                case 1:
-                    this.bubbleSortBeautyFragment.j();
-                    return;
-                default:
-                    return;
-            }
-        }
-    }
-
-    public void animEnd(View view) {
-        this.t.sendEmptyMessage(1);
     }
 
 

@@ -1,175 +1,275 @@
 package cn.intersteller.darkintersteller.custview;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.os.Handler;
+import android.support.annotation.UiThread;
+import android.support.v4.internal.view.SupportMenu;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 
 import cn.intersteller.darkintersteller.R;
 
-public class BubbleSortView extends ViewGroup {
-    private ValueAnimator valueAnimator;
-    private int bubble_sort_view_child_width;
-    private int bubble_sort_view_child_height;
-    private int bubble_sort_view_child_margin;
-    private int bubble_sort_view_arrow_height;
-    private int h;
-    private int i;
-    private Integer[] e;
+public class BubbleSortView extends View {
 
+    private int targetColor = -16711936;
+    private int traceColor = -16776961;
+    private int quadColor = -16711936;
+    private int completeColor = -16711936;
+    private int textInfoColor = SupportMenu.CATEGORY_MASK;
+    private int swapAColor = SupportMenu.CATEGORY_MASK;
+    private int swapBColor = -65281;
+
+
+    private static final String NO_DATA = "No Data!";
+    public static final String TAG = "SortView";
+    private int[] array;
+    private int barColor = -1;
+    private int completePosition = -1;
+    private Context context;
+    private int delta = 0;
+    private Handler handler = new Handler();
+    private boolean isDrawing = false;
+    private Paint mPaint;
+    private long mTime = 0;
+    private String name = "";
+    private int swapAPosition = -1;
+    private int swapBPosition = -1;
+    private int targetPosition = -1;
+    private float[][] tmp = ((float[][]) Array.newInstance(Float.TYPE, new int[]{2, 2}));
+    private int tracePosition = -1;
+    public float xA = 0.0f;
+    public float xB = 0.0f;
+    private float yA = 0.0f;
+    private float yB = 0.0f;
 
     public BubbleSortView(Context context) {
-        this(context, null);
+        super(context);
+        setup(context, null, -1);
     }
 
     public BubbleSortView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-
+        super(context, attrs);
+        setup(context, attrs, -1);
     }
 
     public BubbleSortView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        h = -1;
-        i = -1;
-        init1();
+        setup(context, attrs, defStyleAttr);
     }
 
-    private void init1() {
-        setWillNotDraw(false);
-        bubble_sort_view_child_width = getResources().getDimensionPixelSize(R.dimen.bubble_sort_view_child_width);
-        bubble_sort_view_child_height = getResources().getDimensionPixelOffset(R.dimen.bubble_sort_view_child_height);
-        bubble_sort_view_child_margin = getResources().getDimensionPixelOffset(R.dimen.bubble_sort_view_child_margin);
-        bubble_sort_view_arrow_height = getResources().getDimensionPixelOffset(R.dimen.bubble_sort_view_arrow_height);
-        valueAnimator = ValueAnimator.ofFloat(new float[]{0.0f, 1.0f});
-        valueAnimator.setDuration(1000);
-        valueAnimator.addUpdateListener(new MyBSViewAnimUpdateListener(this));
-        valueAnimator.addListener(new MyBSAnimatorListener(this));
-
+    public int getCompletePosition() {
+        return this.completePosition;
     }
 
-    public void startBond(int[] array) {
-        removeAllViews();
-        bundTextViewWhitNum(array);
+    public void setCompletePosition(int completePosition) {
+        this.completePosition = completePosition;
     }
 
-    private void bundTextViewWhitNum(int[] array) {
-        Log.i("deng", "array[] = " + Arrays.toString(array));
-        for (int i = 0; i < array.length; i++) {
-            createBubbleTextView(array[i]);
+    private int getMax(int[] arr) {
+        int N = arr.length;
+        int max = arr[0];
+        for (int i = 1; i < N; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
         }
+        return max;
     }
 
-    public void createBubbleTextView(int num) {
-//        Log.i("deng","num = "+num);
-        TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.include_bubble_sort_child, null);
-        textView.setText(String.valueOf(num));
-        textView.setLayoutParams(new LayoutParams(bubble_sort_view_child_width, bubble_sort_view_child_height));
-        addView(textView);
+    public void setup(Context context, AttributeSet attrs, int defStyleAttr) {
+        this.context = context;
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SortViewAttrs);
+        this.barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, this.barColor);
+        this.barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, this.barColor);
+
+        this.targetColor = a.getInteger(R.styleable.SortViewAttrs_targetColor, this.targetColor);
+        this.traceColor = a.getInteger(R.styleable.SortViewAttrs_traceColor, this.traceColor);
+        this.quadColor = a.getInteger(R.styleable.SortViewAttrs_quadColor, this.quadColor);
+        this.completeColor = a.getInteger(R.styleable.SortViewAttrs_completeColor, this.completeColor);
+        this.textInfoColor = a.getInteger(R.styleable.SortViewAttrs_textInfoColor, this.textInfoColor);
+        this.swapAColor = a.getInteger(R.styleable.SortViewAttrs_swapAColor, this.swapAColor);
+        this.swapBColor = a.getInteger(R.styleable.SortViewAttrs_swapBColor, this.swapBColor);
+        a.recycle();
+        this.mPaint = new Paint();
+        this.mPaint.setStyle(Paint.Style.STROKE);
+        this.mPaint.setColor(this.barColor);
+        this.mPaint.setAntiAlias(true);
+        setTextSize(20.0f);
+        this.array = null;
     }
 
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int childCount = getChildCount();
-        if (childCount == 0) {
-            Log.i("deng", "childcount =  0");
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            return;
-        }
-        Log.i("deng", "childcount =  " + childCount);
-        measureChildren(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(((childCount - 1) *
-                        bubble_sort_view_child_margin) + (bubble_sort_view_child_width * childCount),
-                bubble_sort_view_arrow_height + bubble_sort_view_child_height);
+    private void setTextSize(float GESTURE_THRESHOLD_DIP) {
+        this.mPaint.setTextSize((float) ((int) ((GESTURE_THRESHOLD_DIP * getContext().getResources().getDisplayMetrics().density) + 0.5f)));
     }
 
-    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (this.array == null || this.array.length <= 0) {
+            drawNoData(canvas);
+        } else {
+            drawArray(canvas);
+        }
+        drawInfo(canvas);
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int childCount = getChildCount();
-        int conuted = 0;
-//        int i6 = bubble_sort_view_arrow_height;
-        int i7 = 0;
-        while (conuted < childCount) {
-            View childAt = getChildAt(conuted);
-            int i8 = (int) (((float) ((l - this.h) * (bubble_sort_view_child_width + bubble_sort_view_child_margin))) * 1);
-            if (conuted == this.h) {
-                childAt.layout(i7 + i8, bubble_sort_view_arrow_height, (i8 + i7) + bubble_sort_view_child_width, bubble_sort_view_child_height + bubble_sort_view_arrow_height);
-            } else if (conuted == this.i) {
-                childAt.layout(i7 - i8, bubble_sort_view_arrow_height, (this.bubble_sort_view_child_width + i7) - i8, this.bubble_sort_view_child_height + bubble_sort_view_arrow_height);
+    private void drawInfo(Canvas canvas) {
+        this.mPaint.setStyle(Paint.Style.FILL);
+        this.mPaint.setStrokeWidth(1.0f);
+        this.mPaint.setColor(this.textInfoColor);
+        setTextSize(10.0f);
+        Rect rect = new Rect();
+        this.mPaint.getTextBounds("A", 0, 1, rect);
+        int x = rect.width();
+        int y = rect.height() + (rect.height() / 2);
+        canvas.drawText(this.name, (float) x, (float) y, this.mPaint);
+        canvas.drawText("Complexity: " + this.mTime, (float) x, (float) (y + (rect.height() + (rect.height() / 2))), this.mPaint);
+    }
+
+    private void drawArray(Canvas canvas) {
+        int width = getWidth();
+        int height = getHeight();
+        float barWidth = (float) (width / (this.array.length + 1));
+        this.mPaint.setStrokeWidth(0.8f * barWidth);
+        int max = getMax(this.array);
+        float per = (float) (height / (max + 1));
+        float x = 0.0f;
+        float y = (float) height;
+        int index = 0;
+        for (int a : this.array) {
+            x += barWidth;
+            if (index <= this.completePosition) {
+                this.mPaint.setColor(this.completeColor);
+                canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
             } else {
-                childAt.layout(i7, bubble_sort_view_arrow_height, this.bubble_sort_view_child_width + i7, this.bubble_sort_view_child_height + bubble_sort_view_arrow_height);
+                if (index == this.swapAPosition) {
+                    this.mPaint.setColor(this.swapAColor);
+                    canvas.drawLine(this.xA, this.yA, this.xA, this.yA + (((float) a) * per), this.mPaint);
+                } else if (index == this.swapBPosition) {
+                    this.mPaint.setColor(this.swapBColor);
+                    canvas.drawLine(this.xB, this.yB, this.xB, this.yB + (((float) a) * per), this.mPaint);
+                } else if (index == this.tracePosition) {
+                    this.mPaint.setColor(this.traceColor);
+                    canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+                } else {
+                    this.mPaint.setColor(this.barColor);
+                    canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+                }
+                if (index == this.targetPosition) {
+                    this.mPaint.setColor(this.targetColor);
+                    canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+                }
             }
-            i7 += this.bubble_sort_view_child_width + this.bubble_sort_view_child_margin;
-            conuted++;
+            index++;
+        }
+        if (this.swapAPosition != this.swapBPosition) {
+            this.mPaint.setStyle(Paint.Style.STROKE);
+            this.mPaint.setStrokeWidth(2.0f);
+            this.mPaint.setColor(this.quadColor);
+            Path path = new Path();
+            path.moveTo(this.xA, this.yA);
+            path.quadTo(this.xA + ((Math.abs(this.xB - this.xA) * 2.0f) / 3.0f), y - (((float) max) * per), this.xB, this.yB);
+            canvas.drawPath(path, this.mPaint);
         }
     }
 
-    public void newInteger(int i1, int i2) {
-        this.e = new Integer[2];
-        this.e[0] = Integer.valueOf(i1);
-        this.e[1] = Integer.valueOf(i2);
+    private void drawNoData(Canvas canvas) {
+        this.mPaint.setStyle(Paint.Style.FILL);
+        this.mPaint.setStrokeWidth(1.0f);
+        this.mPaint.setColor(this.textInfoColor);
+        canvas.drawText(NO_DATA, (float) (getWidth() / 2), (float) (getHeight() / 2), this.mPaint);
+    }
+
+    public void setTracePosition(int index) {
+        this.tracePosition = index;
         invalidate();
     }
 
-    public void setDuring(int i) {
-        valueAnimator.setDuration((long) i);
+    public void setArray(int[] arr) {
+        this.array = arr;
     }
 
+    @UiThread
+    public void setSwapPosition(int i1, int i2) {
+        setSwapPosition(i1, i2, true);
+    }
 
-
-    class MyBSViewAnimUpdateListener implements ValueAnimator.AnimatorUpdateListener {
-        final BubbleSortView bubbleSortView;
-
-        MyBSViewAnimUpdateListener(BubbleSortView bubbleSortView) {
-            this.bubbleSortView = bubbleSortView;
+    @UiThread
+    public void setSwapPosition(int i1, int i2, boolean redraw) {
+        if (i1 < 0 || i2 < 0) {
+            this.swapAPosition = i1;
+            this.swapBPosition = i2;
+            if (redraw) {
+                invalidate();
+                return;
+            }
+            return;
         }
-
-        public void onAnimationUpdate(ValueAnimator valueAnimator) {
-            float v = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-            this.bubbleSortView.requestLayout();
+        if (i1 < i2) {
+            this.swapAPosition = i1;
+            this.swapBPosition = i2;
+        } else {
+            this.swapAPosition = i2;
+            this.swapBPosition = i1;
+        }
+        int width = getWidth();
+        int height = getHeight();
+        float barWidth = (float) (width / (this.array.length + 1));
+        float per = (float) (height / (getMax(this.array) + 1));
+        this.xA = ((float) (this.swapAPosition + 1)) * barWidth;
+        this.yA = ((float) height) - (((float) this.array[this.swapAPosition]) * per);
+        this.xB = ((float) (this.swapBPosition + 1)) * barWidth;
+        this.yB = ((float) height) - (((float) this.array[this.swapBPosition]) * per);
+        this.delta = (int) Math.abs(this.xB - this.xA);
+        if (redraw) {
+            invalidate();
         }
     }
 
-    class MyBSAnimatorListener implements Animator.AnimatorListener {
-        final BubbleSortView bubbleSortView;
+    public int getSizeArray() {
+        return this.array.length;
+    }
 
-        MyBSAnimatorListener(BubbleSortView bubbleSortView) {
-            this.bubbleSortView = bubbleSortView;
-        }
+    public String getName() {
+        return this.name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        @Override
-        public void onAnimationStart(Animator animation) {
+    public void setName(int id) {
+        this.name = this.context.getString(id);
+    }
 
-        }
+    @UiThread
+    public void setTargetPosition(int targetPosition) {
+        this.targetPosition = targetPosition;
+        invalidate();
+    }
 
-        @Override
-        public void onAnimationEnd(Animator animation) {
+    public void setTime(long time) {
+        this.mTime = time;
+    }
 
-        }
+    public void addTimeUnit(long time) {
+        this.mTime += time;
+    }
 
-        @Override
-        public void onAnimationCancel(Animator animation) {
+    @UiThread
+    public void incPositionSwap(float v) {
+        this.xA += v;
+        this.xB -= v;
+        invalidate();
+    }
 
-        }
-
-        @Override
-        public void onAnimationRepeat(Animator animation) {
-
-        }
+    public int getDelta() {
+        return this.delta;
     }
 }

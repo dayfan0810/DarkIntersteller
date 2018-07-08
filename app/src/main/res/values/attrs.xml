@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SortViewAttrs">
+
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="barColor" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+
+        <!--<attr name="barColor" format="enum" />-->
+        <!--<attr name="targetColor" format="integer" />-->
+        <!--<attr name="traceColor" format="integer" />-->
+        <!--<attr name="quadColor" format="integer" />-->
+        <!--<attr name="completeColor" format="integer" />-->
+        <!--<attr name="textInfoColor" format="integer" />-->
+        <!--<attr name="swapAColor" format="integer" />-->
+        <!--<attr name="swapBColor" format="integer" />-->
+
+    </declare-styleable>
+</resources>
