@@ -3,6 +3,7 @@ package cn.intersteller.darkintersteller.custview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -10,13 +11,14 @@ import android.os.Handler;
 import android.support.annotation.UiThread;
 import android.support.v4.internal.view.SupportMenu;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Array;
 
 import cn.intersteller.darkintersteller.R;
 
-public class BubbleSortView extends View {
+public class BubbleSortViewByCanvas extends View {
 
     private int targetColor = -16711936;
     private int traceColor = -16776961;
@@ -49,19 +51,17 @@ public class BubbleSortView extends View {
     private float yA = 0.0f;
     private float yB = 0.0f;
 
-    public BubbleSortView(Context context) {
-        super(context);
-        setup(context, null, -1);
+    public BubbleSortViewByCanvas(Context context) {
+        this(context, null);
     }
 
-    public BubbleSortView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setup(context, attrs, -1);
+    public BubbleSortViewByCanvas(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public BubbleSortView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BubbleSortViewByCanvas(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setup(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr);
     }
 
     public int getCompletePosition() {
@@ -83,37 +83,41 @@ public class BubbleSortView extends View {
         return max;
     }
 
-    public void setup(Context context, AttributeSet attrs, int defStyleAttr) {
+    public void init(Context context, AttributeSet attrs, int defStyleAttr) {
+        Log.i("deng","init111");
+        setWillNotDraw(false);
         this.context = context;
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SortViewAttrs);
-        this.barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, this.barColor);
-        this.barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, this.barColor);
-
-        this.targetColor = a.getInteger(R.styleable.SortViewAttrs_targetColor, this.targetColor);
-        this.traceColor = a.getInteger(R.styleable.SortViewAttrs_traceColor, this.traceColor);
-        this.quadColor = a.getInteger(R.styleable.SortViewAttrs_quadColor, this.quadColor);
-        this.completeColor = a.getInteger(R.styleable.SortViewAttrs_completeColor, this.completeColor);
-        this.textInfoColor = a.getInteger(R.styleable.SortViewAttrs_textInfoColor, this.textInfoColor);
-        this.swapAColor = a.getInteger(R.styleable.SortViewAttrs_swapAColor, this.swapAColor);
-        this.swapBColor = a.getInteger(R.styleable.SortViewAttrs_swapBColor, this.swapBColor);
+        this.barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, Color.BLUE);
+        this.targetColor = a.getInteger(R.styleable.SortViewAttrs_targetColor, Color.YELLOW);
+        this.traceColor = a.getInteger(R.styleable.SortViewAttrs_traceColor,  Color.DKGRAY);
+//        this.quadColor = a.getInteger(R.styleable.SortViewAttrs_quadColor,  Color.BLUE);
+//        this.completeColor = a.getInteger(R.styleable.SortViewAttrs_completeColor, Color.BLUE);
+//        this.textInfoColor = a.getInteger(R.styleable.SortViewAttrs_textInfoColor,  Color.BLUE);
+        this.swapAColor = a.getInteger(R.styleable.SortViewAttrs_swapAColor,  Color.RED);
+        this.swapBColor = a.getInteger(R.styleable.SortViewAttrs_swapBColor, Color.GREEN);
         a.recycle();
         this.mPaint = new Paint();
         this.mPaint.setStyle(Paint.Style.STROKE);
-        this.mPaint.setColor(this.barColor);
+        this.mPaint.setColor( Color.BLUE);
         this.mPaint.setAntiAlias(true);
         setTextSize(20.0f);
         this.array = null;
+        invalidate();
     }
 
     private void setTextSize(float GESTURE_THRESHOLD_DIP) {
         this.mPaint.setTextSize((float) ((int) ((GESTURE_THRESHOLD_DIP * getContext().getResources().getDisplayMetrics().density) + 0.5f)));
     }
 
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (this.array == null || this.array.length <= 0) {
+            Log.i("deng","ondraw --- no data");
             drawNoData(canvas);
         } else {
+            Log.i("deng","ondraw --- drwa array");
             drawArray(canvas);
         }
         drawInfo(canvas);
@@ -134,7 +138,9 @@ public class BubbleSortView extends View {
 
     private void drawArray(Canvas canvas) {
         int width = getWidth();
+        Log.i("deng","width = "+width);
         int height = getHeight();
+        Log.i("deng","height = "+height);
         float barWidth = (float) (width / (this.array.length + 1));
         this.mPaint.setStrokeWidth(0.8f * barWidth);
         int max = getMax(this.array);

@@ -14,6 +14,7 @@ import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.BubbleSortBeautyFragment;
+import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.BubbleSortBeautyFragmentLast;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.BubbleSortSimpleFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.HeapSortFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.InsertSortFragment;
@@ -37,6 +38,7 @@ public class ThirdFragment extends Fragment {
     private QuickSortFragment quickSortFragment;
     private BubbleSortSimpleFragment bubbleSortSimpleFragment;
     private BubbleSortBeautyFragment bubbleSortBeautyFragment;
+    private BubbleSortBeautyFragmentLast bubbleSortBeautyFragmentLast;
     private HeapSortFragment heapSortFragment;
     private MeargeSortFragment meargeSortFragment;
     private InsertSortFragment insertSortFragment;
@@ -73,6 +75,7 @@ public class ThirdFragment extends Fragment {
     private void addView() {
         mTitleList.add("冒泡排序(1)");
         mTitleList.add("冒泡排序(2)");
+        mTitleList.add("冒泡排序(3)");
         mTitleList.add("快速排序");
         mTitleList.add("并归排序");
         mTitleList.add("希尔排序");
@@ -86,6 +89,10 @@ public class ThirdFragment extends Fragment {
         if (bubbleSortBeautyFragment == null) {
             bubbleSortBeautyFragment = new BubbleSortBeautyFragment();
             fragments.add(bubbleSortBeautyFragment);
+        }
+        if (bubbleSortBeautyFragmentLast == null) {
+            bubbleSortBeautyFragmentLast = new BubbleSortBeautyFragmentLast();
+            fragments.add(bubbleSortBeautyFragmentLast);
         }
         if (quickSortFragment == null) {
             quickSortFragment = new QuickSortFragment();

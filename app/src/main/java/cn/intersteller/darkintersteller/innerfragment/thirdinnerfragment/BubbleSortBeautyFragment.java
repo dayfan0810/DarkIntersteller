@@ -26,11 +26,9 @@ import java.util.List;
 import java.util.Random;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.custview.BubbleSortViewOld;
-import cn.intersteller.darkintersteller.sort.BubbleSortThread;
-import cn.intersteller.darkintersteller.sort.SortAlgorithmThread;
+import cn.intersteller.darkintersteller.custview.BubbleSortViewByAddView;
 
-public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener  {
+public class BubbleSortBeautyFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "BubbleSortFragment";
     private View v;
@@ -46,11 +44,9 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     int[] mArray = new int[SIEZ_ARRAY];
     private DragFlowLayout mDragflowLayout;
     private LinearLayout ll_sort_result;
-    private BubbleSortViewOld anim_sort;
+    private BubbleSortViewByAddView anim_sort;
     private View down_divider;
     private ScrollView scroll_view;
-    protected SortAlgorithmThread thread;
-
 
 
     @Override
@@ -69,7 +65,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         mDragflowLayout = (DragFlowLayout) v.findViewById(R.id.sort);
         ll_sort_result = (LinearLayout) v.findViewById(R.id.ll_sort_result);
         scroll_view = (ScrollView) v.findViewById(R.id.scroll_view);
-        anim_sort = (BubbleSortViewOld) v.findViewById(R.id.anim_sort);
+        anim_sort = (BubbleSortViewByAddView) v.findViewById(R.id.anim_sort);
         down_divider = (View) v.findViewById(R.id.down_divider);
         bt_bubble_get_arr1 = (Button) v.findViewById(R.id.bt_bubble_get_arr1);
         bt_bubble_get_arr2 = (Button) v.findViewById(R.id.bt_bubble_get_arr2);
@@ -148,8 +144,6 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
                 // 开始排序,先清空结果view
                 ll_sort_result.removeAllViews();
                 anim_sort.startBond(mArray);
-                this.thread = new BubbleSortThread(this.anim_sort, getActivity());
-
                 break;
             case R.id.bt_bubble_get_arr3:
                 resetView();
@@ -190,8 +184,6 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         down_divider.setVisibility(View.GONE);
     }
 
-
-
     private static class ArrayBean implements IDraggable {
         String text;
         boolean draggable = true;
@@ -206,6 +198,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
         }
 
     }
+
 
 
 }

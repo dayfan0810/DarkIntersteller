@@ -1,21 +1,21 @@
 package cn.intersteller.darkintersteller.sort;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 //import com.duy.algorithm.SortCompletionListener;
 //import com.duy.algorithm.customview.LogView;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AlgorithmThread extends HandlerThread {
     public static final String COMMAND_START_ALGORITHM = "start";
     public static final String KEY_ALGORITHM = "KEY_ALGORITHM";
     private static final String TAG = "AlgorithmThread";
-    protected Activity activity;
+    protected Fragment fragment;
 //    private SortCompletionListener completionListener;
     protected long delayTime = 50;
     private Handler mHandler;
@@ -66,9 +66,9 @@ public class AlgorithmThread extends HandlerThread {
         }
     }
 
-    public String getString(int resID) {
-        return this.activity.getString(resID);
-    }
+//    public String getString(int resID) {
+//        return this.activity.getString(resID);
+//    }
 
     public void startExecution() {
         this.started = true;

@@ -1,17 +1,18 @@
 package cn.intersteller.darkintersteller.sort;
 
 
-import android.app.Activity;
 
-import cn.intersteller.darkintersteller.custview.BubbleSortViewOld;
+import android.support.v4.app.Fragment;
+
+import cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas;
 
 
 public class BubbleSortThread extends SortAlgorithmThread {
     int[] array;
 
-    public BubbleSortThread(BubbleSortViewOld sortView, Activity activity) {
+    public BubbleSortThread(BubbleSortViewByCanvas sortView, Fragment fragment) {
         this.mSortView = sortView;
-        this.activity = activity;
+        this.fragment = fragment;
     }
 
     public void sort() {
@@ -33,7 +34,7 @@ public class BubbleSortThread extends SortAlgorithmThread {
                 break;
             }
         }
-        onCompleted();
+//        onCompleted();
     }
 
     public void run() {
