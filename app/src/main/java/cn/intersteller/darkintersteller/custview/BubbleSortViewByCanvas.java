@@ -31,7 +31,7 @@ public class BubbleSortViewByCanvas extends View {
 
     private static final String NO_DATA = "No Data!";
     public static final String TAG = "SortView";
-    private int[] array;
+    private int[] mArray;
     private int barColor = -1;
     private int completePosition = -1;
     private Context context;
@@ -65,11 +65,11 @@ public class BubbleSortViewByCanvas extends View {
     }
 
     public int getCompletePosition() {
-        return this.completePosition;
+        return completePosition;
     }
 
     public void setCompletePosition(int completePosition) {
-        this.completePosition = completePosition;
+        completePosition = completePosition;
     }
 
     private int getMax(int[] arr) {
@@ -84,121 +84,154 @@ public class BubbleSortViewByCanvas extends View {
     }
 
     public void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        Log.i("deng","init111");
+        Log.i("deng", "init111");
         setWillNotDraw(false);
-        this.context = context;
+        context = context;
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SortViewAttrs);
-        this.barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, Color.BLUE);
-        this.targetColor = a.getInteger(R.styleable.SortViewAttrs_targetColor, Color.YELLOW);
-        this.traceColor = a.getInteger(R.styleable.SortViewAttrs_traceColor,  Color.DKGRAY);
-//        this.quadColor = a.getInteger(R.styleable.SortViewAttrs_quadColor,  Color.BLUE);
-//        this.completeColor = a.getInteger(R.styleable.SortViewAttrs_completeColor, Color.BLUE);
-//        this.textInfoColor = a.getInteger(R.styleable.SortViewAttrs_textInfoColor,  Color.BLUE);
-        this.swapAColor = a.getInteger(R.styleable.SortViewAttrs_swapAColor,  Color.RED);
-        this.swapBColor = a.getInteger(R.styleable.SortViewAttrs_swapBColor, Color.GREEN);
+        barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, Color.BLUE);
+        targetColor = a.getInteger(R.styleable.SortViewAttrs_targetColor, Color.YELLOW);
+        traceColor = a.getInteger(R.styleable.SortViewAttrs_traceColor, Color.DKGRAY);
+//        quadColor = a.getInteger(R.styleable.SortViewAttrs_quadColor,  Color.BLUE);
+//        completeColor = a.getInteger(R.styleable.SortViewAttrs_completeColor, Color.BLUE);
+//        textInfoColor = a.getInteger(R.styleable.SortViewAttrs_textInfoColor,  Color.BLUE);
+        swapAColor = a.getInteger(R.styleable.SortViewAttrs_swapAColor, Color.RED);
+        swapBColor = a.getInteger(R.styleable.SortViewAttrs_swapBColor, Color.GREEN);
         a.recycle();
-        this.mPaint = new Paint();
-        this.mPaint.setStyle(Paint.Style.STROKE);
-        this.mPaint.setColor( Color.BLUE);
-        this.mPaint.setAntiAlias(true);
+        mPaint = new Paint();
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setColor(Color.BLUE);
+        mPaint.setAntiAlias(true);
         setTextSize(20.0f);
-        this.array = null;
+        mArray = null;
         invalidate();
     }
 
     private void setTextSize(float GESTURE_THRESHOLD_DIP) {
-        this.mPaint.setTextSize((float) ((int) ((GESTURE_THRESHOLD_DIP * getContext().getResources().getDisplayMetrics().density) + 0.5f)));
+        mPaint.setTextSize((float) ((int) ((GESTURE_THRESHOLD_DIP * getContext().getResources().getDisplayMetrics().density) + 0.5f)));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (this.array == null || this.array.length <= 0) {
-            Log.i("deng","ondraw --- no data");
+        if (mArray == null || mArray.length <= 0) {
+            Log.i("deng", "ondraw --- no data");
             drawNoData(canvas);
         } else {
-            Log.i("deng","ondraw --- drwa array");
-            drawArray(canvas);
+            Log.i("deng", "ondraw --- drwa array");
+            drawArrayByVertical(canvas);
+//            drawArrayByHorizental(canvas);
         }
         drawInfo(canvas);
     }
 
-    private void drawInfo(Canvas canvas) {
-        this.mPaint.setStyle(Paint.Style.FILL);
-        this.mPaint.setStrokeWidth(1.0f);
-        this.mPaint.setColor(this.textInfoColor);
-        setTextSize(10.0f);
-        Rect rect = new Rect();
-        this.mPaint.getTextBounds("A", 0, 1, rect);
-        int x = rect.width();
-        int y = rect.height() + (rect.height() / 2);
-        canvas.drawText(this.name, (float) x, (float) y, this.mPaint);
-        canvas.drawText("Complexity: " + this.mTime, (float) x, (float) (y + (rect.height() + (rect.height() / 2))), this.mPaint);
+    private void drawArrayByVertical(Canvas canvas) {
+        int width = getWidth();
+        Log.i("deng", "width = " + width);
+        int height = getHeight();
+        Log.i("deng", "height = " + height);
+        float barWidth = (float) (width / (mArray.length + 1));
+        mPaint.setStrokeWidth(0.8f * barWidth);
+        int max = getMax(mArray);
+        float per = (float) (width / (max + 2));
+        float x = 0.0f;
+        float y = 0;
+        int index = 0;
+        for (int i = 0; i <1; i++) {
+            y = y + barWidth;
+            mPaint.setColor(barColor);
+            canvas.drawLine(x, y, (((float) mArray[i]) * per), y, mPaint);
+            index++;
+        }
     }
 
-    private void drawArray(Canvas canvas) {
+    private void drawInfo(Canvas canvas) {
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(1.0f);
+        mPaint.setColor(textInfoColor);
+        setTextSize(10.0f);
+        Rect rect = new Rect();
+        mPaint.getTextBounds("A", 0, 1, rect);
+        int x = rect.width();
+        int y = rect.height() + (rect.height() / 2);
+        canvas.drawText(name, (float) x, (float) y, mPaint);
+        canvas.drawText("Complexity: " + mTime, (float) x, (float) (y + (rect.height() + (rect.height() / 2))), mPaint);
+    }
+
+    private void drawArrayByHorizental(Canvas canvas) {
         int width = getWidth();
-        Log.i("deng","width = "+width);
+        Log.i("deng", "width = " + width);
         int height = getHeight();
-        Log.i("deng","height = "+height);
-        float barWidth = (float) (width / (this.array.length + 1));
-        this.mPaint.setStrokeWidth(0.8f * barWidth);
-        int max = getMax(this.array);
+        Log.i("deng", "height = " + height);
+        float barWidth = (float) (width / (mArray.length + 1));
+        mPaint.setStrokeWidth(0.8f * barWidth);
+        int max = getMax(mArray);
         float per = (float) (height / (max + 1));
         float x = 0.0f;
         float y = (float) height;
         int index = 0;
-        for (int a : this.array) {
+        for (int i = 0; i < mArray.length; i++) {
             x += barWidth;
-            if (index <= this.completePosition) {
-                this.mPaint.setColor(this.completeColor);
-                canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+            if (index <= completePosition) {
+                Log.i("deng", "if");
+                mPaint.setColor(completeColor);
+                canvas.drawLine(x, y, x, y - (((float) mArray[i]) * per), mPaint);
             } else {
-                if (index == this.swapAPosition) {
-                    this.mPaint.setColor(this.swapAColor);
-                    canvas.drawLine(this.xA, this.yA, this.xA, this.yA + (((float) a) * per), this.mPaint);
-                } else if (index == this.swapBPosition) {
-                    this.mPaint.setColor(this.swapBColor);
-                    canvas.drawLine(this.xB, this.yB, this.xB, this.yB + (((float) a) * per), this.mPaint);
-                } else if (index == this.tracePosition) {
-                    this.mPaint.setColor(this.traceColor);
-                    canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+                if (index == swapAPosition) {
+                    Log.i("deng", "else 1111");
+                    mPaint.setColor(swapAColor);
+                    canvas.drawLine(xA, yA, xA, yA + (((float) mArray[i]) * per), mPaint);
+                } else if (index == swapBPosition) {
+                    Log.i("deng", "else 2222");
+
+                    mPaint.setColor(swapBColor);
+                    canvas.drawLine(xB, yB, xB, yB + (((float) mArray[i]) * per), mPaint);
+                } else if (index == tracePosition) {
+                    Log.i("deng", "else 3333");
+
+                    mPaint.setColor(traceColor);
+                    canvas.drawLine(x, y, x, y - (((float) mArray[i]) * per), mPaint);
                 } else {
-                    this.mPaint.setColor(this.barColor);
-                    canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+                    Log.i("deng", "else 4444");
+
+                    mPaint.setColor(barColor);
+                    canvas.drawLine(x, y, x, y - (((float) mArray[i]) * per), mPaint);
                 }
-                if (index == this.targetPosition) {
-                    this.mPaint.setColor(this.targetColor);
-                    canvas.drawLine(x, y, x, y - (((float) a) * per), this.mPaint);
+                if (index == targetPosition) {
+                    Log.i("deng", "else 5555");
+
+                    mPaint.setColor(targetColor);
+                    canvas.drawLine(x, y, x, y - (((float) mArray[i]) * per), mPaint);
                 }
             }
             index++;
         }
-        if (this.swapAPosition != this.swapBPosition) {
-            this.mPaint.setStyle(Paint.Style.STROKE);
-            this.mPaint.setStrokeWidth(2.0f);
-            this.mPaint.setColor(this.quadColor);
+        if (swapAPosition != swapBPosition) {
+            Log.i("deng", "if 6666");
+
+            mPaint.setStyle(Paint.Style.STROKE);
+            mPaint.setStrokeWidth(2.0f);
+            mPaint.setColor(quadColor);
             Path path = new Path();
-            path.moveTo(this.xA, this.yA);
-            path.quadTo(this.xA + ((Math.abs(this.xB - this.xA) * 2.0f) / 3.0f), y - (((float) max) * per), this.xB, this.yB);
-            canvas.drawPath(path, this.mPaint);
+            path.moveTo(xA, yA);
+            path.quadTo(xA + ((Math.abs(xB - xA) * 2.0f) / 3.0f), y - (((float) max) * per), xB, yB);
+            canvas.drawPath(path, mPaint);
         }
     }
 
     private void drawNoData(Canvas canvas) {
-        this.mPaint.setStyle(Paint.Style.FILL);
-        this.mPaint.setStrokeWidth(1.0f);
-        this.mPaint.setColor(this.textInfoColor);
-        canvas.drawText(NO_DATA, (float) (getWidth() / 2), (float) (getHeight() / 2), this.mPaint);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(1.0f);
+        mPaint.setColor(textInfoColor);
+        canvas.drawText(NO_DATA, (float) (getWidth() / 2), (float) (getHeight() / 2), mPaint);
     }
 
     public void setTracePosition(int index) {
-        this.tracePosition = index;
+        tracePosition = index;
         invalidate();
     }
 
     public void setArray(int[] arr) {
-        this.array = arr;
+        mArray = arr;
     }
 
     @UiThread
@@ -209,8 +242,8 @@ public class BubbleSortViewByCanvas extends View {
     @UiThread
     public void setSwapPosition(int i1, int i2, boolean redraw) {
         if (i1 < 0 || i2 < 0) {
-            this.swapAPosition = i1;
-            this.swapBPosition = i2;
+            swapAPosition = i1;
+            swapBPosition = i2;
             if (redraw) {
                 invalidate();
                 return;
@@ -218,64 +251,64 @@ public class BubbleSortViewByCanvas extends View {
             return;
         }
         if (i1 < i2) {
-            this.swapAPosition = i1;
-            this.swapBPosition = i2;
+            swapAPosition = i1;
+            swapBPosition = i2;
         } else {
-            this.swapAPosition = i2;
-            this.swapBPosition = i1;
+            swapAPosition = i2;
+            swapBPosition = i1;
         }
         int width = getWidth();
         int height = getHeight();
-        float barWidth = (float) (width / (this.array.length + 1));
-        float per = (float) (height / (getMax(this.array) + 1));
-        this.xA = ((float) (this.swapAPosition + 1)) * barWidth;
-        this.yA = ((float) height) - (((float) this.array[this.swapAPosition]) * per);
-        this.xB = ((float) (this.swapBPosition + 1)) * barWidth;
-        this.yB = ((float) height) - (((float) this.array[this.swapBPosition]) * per);
-        this.delta = (int) Math.abs(this.xB - this.xA);
+        float barWidth = (float) (width / (mArray.length + 1));
+        float per = (float) (height / (getMax(mArray) + 1));
+        xA = ((float) (swapAPosition + 1)) * barWidth;
+        yA = ((float) height) - (((float) mArray[swapAPosition]) * per);
+        xB = ((float) (swapBPosition + 1)) * barWidth;
+        yB = ((float) height) - (((float) mArray[swapBPosition]) * per);
+        delta = (int) Math.abs(xB - xA);
         if (redraw) {
             invalidate();
         }
     }
 
     public int getSizeArray() {
-        return this.array.length;
+        return mArray.length;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        name = name;
     }
 
     public void setName(int id) {
-        this.name = this.context.getString(id);
+        name = context.getString(id);
     }
 
     @UiThread
     public void setTargetPosition(int targetPosition) {
-        this.targetPosition = targetPosition;
+        targetPosition = targetPosition;
         invalidate();
     }
 
     public void setTime(long time) {
-        this.mTime = time;
+        mTime = time;
     }
 
     public void addTimeUnit(long time) {
-        this.mTime += time;
+        mTime += time;
     }
 
     @UiThread
     public void incPositionSwap(float v) {
-        this.xA += v;
-        this.xB -= v;
+        xA += v;
+        xB -= v;
         invalidate();
     }
 
     public int getDelta() {
-        return this.delta;
+        return delta;
     }
 }

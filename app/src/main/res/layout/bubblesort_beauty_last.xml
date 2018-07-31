@@ -16,7 +16,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="fill_parent"
             android:layout_height="0.0dip"
-            android:layout_weight="70.0"
+            android:layout_weight="75.0"
             app:cardUseCompatPadding="true">
 
             <cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas
