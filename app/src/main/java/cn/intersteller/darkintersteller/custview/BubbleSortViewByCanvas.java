@@ -20,19 +20,19 @@ import cn.intersteller.darkintersteller.R;
 
 public class BubbleSortViewByCanvas extends View {
 
-    private int targetColor = -16711936;
-    private int traceColor = -16776961;
-    private int quadColor = -16711936;
-    private int completeColor = -16711936;
-    private int textInfoColor = SupportMenu.CATEGORY_MASK;
-    private int swapAColor = SupportMenu.CATEGORY_MASK;
-    private int swapBColor = -65281;
+    private int targetColor ;
+    private int traceColor ;
+    private int quadColor ;
+    private int completeColor ;
+    private int textInfoColor;
+    private int swapAColor;
+    private int swapBColor;
+    private int barColor ;
 
 
     private static final String NO_DATA = "No Data!";
     public static final String TAG = "SortView";
     private int[] mArray;
-    private int barColor = -1;
     private int completePosition = -1;
     private Context context;
     private int delta = 0;
@@ -88,14 +88,14 @@ public class BubbleSortViewByCanvas extends View {
         setWillNotDraw(false);
         context = context;
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SortViewAttrs);
-        barColor = a.getInteger(R.styleable.SortViewAttrs_barColor, Color.BLUE);
-        targetColor = a.getInteger(R.styleable.SortViewAttrs_targetColor, Color.YELLOW);
-        traceColor = a.getInteger(R.styleable.SortViewAttrs_traceColor, Color.DKGRAY);
+        barColor = a.getColor(R.styleable.SortViewAttrs_barColor, 0xFF00bbff);
+        targetColor = a.getColor(R.styleable.SortViewAttrs_targetColor, Color.YELLOW);
+        traceColor = a.getColor(R.styleable.SortViewAttrs_traceColor, Color.DKGRAY);
 //        quadColor = a.getInteger(R.styleable.SortViewAttrs_quadColor,  Color.BLUE);
 //        completeColor = a.getInteger(R.styleable.SortViewAttrs_completeColor, Color.BLUE);
-//        textInfoColor = a.getInteger(R.styleable.SortViewAttrs_textInfoColor,  Color.BLUE);
-        swapAColor = a.getInteger(R.styleable.SortViewAttrs_swapAColor, Color.RED);
-        swapBColor = a.getInteger(R.styleable.SortViewAttrs_swapBColor, Color.GREEN);
+        textInfoColor = a.getColor(R.styleable.SortViewAttrs_textInfoColor,  Color.BLUE);
+        swapAColor = a.getColor(R.styleable.SortViewAttrs_swapAColor, Color.RED);
+        swapBColor = a.getColor(R.styleable.SortViewAttrs_swapBColor, Color.GREEN);
         a.recycle();
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
@@ -136,7 +136,7 @@ public class BubbleSortViewByCanvas extends View {
         float x = 0.0f;
         float y = 0;
         int index = 0;
-        for (int i = 0; i <1; i++) {
+        for (int i = 0; i <mArray.length; i++) {
             y = y + barWidth;
             mPaint.setColor(barColor);
             canvas.drawLine(x, y, (((float) mArray[i]) * per), y, mPaint);

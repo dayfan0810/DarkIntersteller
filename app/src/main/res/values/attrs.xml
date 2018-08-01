@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SortViewAttrs">
-
-        <attr name="barColor" format="enum" />
-        <attr name="targetColor" format="integer" />
-        <attr name="traceColor" format="integer" />
-        <attr name="quadColor" format="integer" />
-        <attr name="completeColor" format="integer" />
-        <attr name="textInfoColor" format="integer" />
-        <attr name="swapAColor" format="integer" />
-        <attr name="swapBColor" format="integer" />
-
+        <attr name="barColor" format="color" />
+        <attr name="targetColor" format="color" />
+        <attr name="traceColor" format="color" />
+        <attr name="quadColor" format="color" />
+        <attr name="completeColor" format="color" />
+        <attr name="textInfoColor" format="color" />
+        <attr name="swapAColor" format="color" />
+        <attr name="swapBColor" format="color" />
     </declare-styleable>
 </resources>
