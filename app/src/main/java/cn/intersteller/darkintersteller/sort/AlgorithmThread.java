@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-//import com.duy.algorithm.SortCompletionListener;
-//import com.duy.algorithm.customview.LogView;
 
 public class AlgorithmThread extends HandlerThread {
     public static final String COMMAND_START_ALGORITHM = "start";

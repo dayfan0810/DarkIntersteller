@@ -8,24 +8,24 @@ import cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas;
 
 
 public class BubbleSortThread extends SortAlgorithmThread {
-    int[] array;
+    int[] mArray;
 
     public BubbleSortThread(BubbleSortViewByCanvas sortView, Fragment fragment) {
-        this.mSortView = sortView;
+        mSortView = sortView;
         this.fragment = fragment;
     }
 
     public void sort() {
-        for (int i = this.array.length - 1; i >= 0; i--) {
+        for (int i = mArray.length - 1; i >= 0; i--) {
             boolean swapped = false;
             for (int j = 0; j < i; j++) {
                 onTrace(j);
                 sleep();
-                if (this.array[j] > this.array[j + 1]) {
+                if (mArray[j] > mArray[j + 1]) {
                     onSwapping(j, j + 1);
-                    int temp = this.array[j];
-                    this.array[j] = this.array[j + 1];
-                    this.array[j + 1] = temp;
+                    int temp = mArray[j];
+                    mArray[j] = mArray[j + 1];
+                    mArray[j + 1] = temp;
                     onSwapped();
                     swapped = true;
                 }
@@ -43,7 +43,7 @@ public class BubbleSortThread extends SortAlgorithmThread {
 
     public void onDataReceived(Object data) {
         super.onDataReceived(data);
-        this.array = (int[]) data;
+        mArray = (int[]) data;
     }
 
     public void onMessageReceived(String message) {
