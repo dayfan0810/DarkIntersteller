@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startIntroAnimation();
         addFragmet();
         initWidgets();
-        mVpMianActivity.setCurrentItem(2);
+        mVpMianActivity.setCurrentItem(1);
         mBarDisco.setOnClickListener(this);
         mBarMusic.setOnClickListener(this);
         mBarFriends.setOnClickListener(this);
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab.setTranslationY(2 * getResources().getDimensionPixelOffset(R.dimen.btn_fab_size));
         int actionBarSzie = ScreenUtils.dpToPx(56);
         toolbar.setTranslationY(-actionBarSzie);
-        toolbar.animate().translationY(0).setStartDelay(1000);
+        toolbar.animate().translationY(0).setStartDelay(500);
     }
 
     @Override

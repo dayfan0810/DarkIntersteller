@@ -11,5 +11,8 @@
     <color name="text_color_white">#FFFFFF</color>
     <color name="app_common_color">#ff3cb3ff</color>
     <color name="input_num_stroke_color">#ffbababa</color>
-
+    <color name="blue">#00a0e9</color>
+    <color name="black">#000000</color>
+    <color name="red">#C91623</color>
+    <color name="oriange">#ff9a00</color>
 </resources>
