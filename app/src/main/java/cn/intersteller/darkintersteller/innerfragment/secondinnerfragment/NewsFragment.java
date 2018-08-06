@@ -50,9 +50,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                 , R.color.red);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = view.findViewById(R.id.top_news_recyclerView);
-        NewsAdapter newsAdapter = new NewsAdapter(getContext(), mNewsBeanList);
+        NewsAdapter newsAdapter = new NewsAdapter(getActivity(), mNewsBeanList);
         mRecyclerView.setAdapter(newsAdapter);
-
         return view;
     }
 
@@ -72,7 +71,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
-
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
                     String resultCode = (String) jsonObject.optString("reason");

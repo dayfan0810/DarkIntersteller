@@ -3,6 +3,7 @@ package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemViewHolder
     List<NewsBean> mNewsBeans;
 
     public NewsAdapter(Context context, List<NewsBean> list) {
+        Log.i("deng","NewsAdapter ");
         this.mNewsBeans = list;
         this.mContext = context;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -37,12 +40,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        Log.i("deng","onBindViewHolder ");
         NewsBean newsBean = mNewsBeans.get(position);
         if (newsBean == null) {
             return;
         }
-
+        Log.i("deng","newsBean.getNewsTitle() = "+newsBean.getNewsTitle());
         holder.top_news_item_title.setText(newsBean.getNewsTitle());
+
 //        holder.top_news_item_img.setImageBitmap(newsBean.);
     }
 
