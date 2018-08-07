@@ -2,12 +2,10 @@ package cn.intersteller.darkintersteller.controller;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.LruCache;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;

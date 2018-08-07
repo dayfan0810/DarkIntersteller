@@ -3,6 +3,15 @@ package cn.intersteller.darkintersteller.bean;
 public class NewsBean {
     public String newsIconUrl;
     public String newsTitle;
+    public String newsDate;
+
+    public String getNewsDate() {
+        return newsDate;
+    }
+
+    public void setNewsDate(String newsDate) {
+        this.newsDate = newsDate;
+    }
 
     public String getNewsIconUrl() {
         return newsIconUrl;

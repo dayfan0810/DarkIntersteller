@@ -1,8 +1,10 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import okhttp3.Response;
 
 public class NewsFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
+
     private View view;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -50,8 +53,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                 , R.color.red);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = view.findViewById(R.id.top_news_recyclerView);
-        NewsAdapter newsAdapter = new NewsAdapter(getActivity(), mNewsBeanList);
-        mRecyclerView.setAdapter(newsAdapter);
+
         return view;
     }
 
@@ -63,6 +65,19 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
     @Override
     public void onRefresh() {
         requestNews();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                mRecyclerView.setLayoutManager(manager);
+                NewsRecyclerViewAdapter newsAdapter = new NewsRecyclerViewAdapter(getContext(), mNewsBeanList, mRecyclerView, manager);
+                mRecyclerView.setAdapter(newsAdapter);
+            }
+        }, 3000);
+        mSwipeRefreshLayout.setRefreshing(false);
+
+
     }
 
 
@@ -75,21 +90,30 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                     JSONObject jsonObject = new JSONObject(responseText);
                     String resultCode = (String) jsonObject.optString("reason");
                     if (!resultCode.equals("成功的返回")) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getActivity(), "api次数受限!", Toast.LENGTH_SHORT).show();
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        });
                         return;
                     }
                     JSONObject jsonObject_result = jsonObject.getJSONObject("result");
                     JSONArray data = jsonObject_result.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject dataItem = (JSONObject) data.get(i);
+
                         String title = dataItem.optString("title");
-                        String thumbnail_pic_s = dataItem.optString("thumbnail_pic_s");
                         String date = dataItem.optString("date");
+                        String thumbnail_pic_s = dataItem.optString("thumbnail_pic_s");
+
                         NewsBean newsBean = new NewsBean();
                         newsBean.setNewsTitle(title);
                         newsBean.setNewsIconUrl(thumbnail_pic_s);
+                        newsBean.setNewsDate(date);
                         mNewsBeanList.add(newsBean);
                     }
-
                     Log.i("deng", "mNewsBeanList.size = " + mNewsBeanList.size());
                 } catch (JSONException e) {
                     e.printStackTrace();
