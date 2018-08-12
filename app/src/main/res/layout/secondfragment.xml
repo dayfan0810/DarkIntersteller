@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/music_tab"
+        android:id="@+id/second_tablayout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/colorPrimary"
@@ -17,7 +17,7 @@
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/music_viewPager"
+        android:id="@+id/second_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

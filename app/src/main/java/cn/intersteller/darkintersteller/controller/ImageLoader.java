@@ -10,7 +10,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import cn.intersteller.darkintersteller.bean.NewsBean;
@@ -21,6 +23,7 @@ public class ImageLoader {
     private String[] imgPath;
     private List<NewsBean> mBeansList;
     private RecyclerView mRecycleView;
+    private Set<NewsAynsTaskImgView> tasks = new HashSet();
 
     public ImageLoader(Context context, RecyclerView recyclerView, String[] imgPaths) {
         mContext = context;
@@ -34,7 +37,24 @@ public class ImageLoader {
             String newsIconUrl = mBeansList.get(i).getNewsIconUrl();
             imgPaths[i] = newsIconUrl;
         }
+
+
     }
+
+    public void load(int startPos, int endPos) {
+        for (int index = startPos; index <= endPos; index++) {
+            NewsAynsTaskImgView task = new NewsAynsTaskImgView(imgPath[index]);
+            tasks.add(task);
+            task.execute(new String[0]);
+        }
+    }
+
+    public void cancelAllLoadingTask() {
+        for (NewsAynsTaskImgView task : this.tasks) {
+            task.cancel(true);
+        }
+    }
+
 
     class NewsAynsTaskImgView extends AsyncTask<String, Void, Bitmap> {
         String url;
@@ -59,7 +79,7 @@ public class ImageLoader {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             ImageView imgViewWithTag = mRecycleView.findViewWithTag(this.url);
-            if (imgViewWithTag.getTag().equals(url) && bitmap != null){
+            if (imgViewWithTag.getTag().equals(url) && bitmap != null) {
                 imgViewWithTag.setImageBitmap(bitmap);
             }
 

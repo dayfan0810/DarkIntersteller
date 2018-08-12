@@ -19,8 +19,8 @@ import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerA
 
 public class SecFragment extends Fragment {
     private String TAG = "SecFragment";
-    ViewPager mMusic_viewPager;
-    TabLayout mMusic_tab;
+    ViewPager mSecond_viewPager;
+    TabLayout msecond_tablayout;
     private List<String> mTitleList = new ArrayList<>(2);
     private List<Fragment> fragments = new ArrayList<>(2);
     private View v;
@@ -40,14 +40,47 @@ public class SecFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.secondfragment, container, false);
-        mMusic_viewPager = v.findViewById(R.id.music_viewPager);
-        mMusic_tab = v.findViewById(R.id.music_tab);
+        mSecond_viewPager = v.findViewById(R.id.second_viewPager);
+        msecond_tablayout = v.findViewById(R.id.second_tablayout);
         addView();
         innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getChildFragmentManager(), fragments, mTitleList);
         innerFragmentPagerAdapter.notifyDataSetChanged();
-        mMusic_viewPager.setAdapter(innerFragmentPagerAdapter);
-        mMusic_tab.setTabMode(TabLayout.MODE_FIXED);
-        mMusic_tab.setupWithViewPager(mMusic_viewPager);
+        mSecond_viewPager.setAdapter(innerFragmentPagerAdapter);
+        msecond_tablayout.setTabMode(TabLayout.MODE_FIXED);
+        msecond_tablayout.setupWithViewPager(mSecond_viewPager);
+
+//        int childCount = mSecond_tab.getChildCount();
+//        for (int i = 0; i < childCount; i++) {
+//            TabLayout.Tab tab = mSecond_tab.getTabAt(i);
+//            if (tab == null) {
+//                return null;
+//            }
+//            Class c = tab.getClass();
+//            try {
+//                Field field = c.getDeclaredField("mView");
+//                Log.i("deng", "oncloick");
+//
+//                field.setAccessible(true);
+//                final View view = (View) field.get(tab);
+//                if (view == null) {
+//                    return null;
+//                }
+//                view.setTag(i);
+//                view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Log.i("deng", "oncloick");
+//                    }
+//                });
+//
+//            } catch (NoSuchFieldException e) {
+//                e.printStackTrace();
+//
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
         Log.i(TAG, "onCreateView执行");
         return v;
     }

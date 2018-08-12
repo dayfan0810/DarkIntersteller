@@ -1,7 +1,6 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,7 +52,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                 , R.color.red);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = view.findViewById(R.id.top_news_recyclerView);
-
         return view;
     }
 
@@ -64,20 +62,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
 
     @Override
     public void onRefresh() {
+        mNewsBeanList.clear();
         requestNews();
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                LinearLayoutManager manager = new LinearLayoutManager(getContext());
-                mRecyclerView.setLayoutManager(manager);
-                NewsRecyclerViewAdapter newsAdapter = new NewsRecyclerViewAdapter(getContext(), mNewsBeanList, mRecyclerView, manager);
-                mRecyclerView.setAdapter(newsAdapter);
-            }
-        }, 3000);
-        mSwipeRefreshLayout.setRefreshing(false);
-
-
     }
 
 
@@ -114,6 +100,18 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                         newsBean.setNewsDate(date);
                         mNewsBeanList.add(newsBean);
                     }
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                            mRecyclerView.setLayoutManager(manager);
+                            NewsRecyclerViewAdapter newsAdapter = new NewsRecyclerViewAdapter(getContext(), mNewsBeanList, mRecyclerView, manager);
+                            mRecyclerView.setAdapter(newsAdapter);
+                            mSwipeRefreshLayout.setRefreshing(false);
+
+                        }
+                    });
+
                     Log.i("deng", "mNewsBeanList.size = " + mNewsBeanList.size());
                 } catch (JSONException e) {
                     e.printStackTrace();

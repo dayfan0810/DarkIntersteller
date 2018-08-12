@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,37 @@ import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.bean.NewsBean;
+import cn.intersteller.darkintersteller.controller.ImageLoader;
+import cn.intersteller.darkintersteller.utils.ImageLoaderUtils;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.ItemViewHolder> {
     Context mContext;
     List<NewsBean> mNewsBeans;
+    ImageLoader mImageLoader;
 
     public NewsRecyclerViewAdapter(Context context, List<NewsBean> beansList, RecyclerView recyclerView, final LinearLayoutManager manager) {
         this.mNewsBeans = beansList;
         this.mContext = context;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    //停止滚动时加载
+//                    mImageLoader.load(manager.findFirstVisibleItemPosition(),
+//                            manager.findLastVisibleItemPosition());
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     @NonNull
@@ -46,9 +67,8 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         }
         holder.top_news_item_title.setText(newsBean.getNewsTitle());
         holder.top_news_item_date.setText(newsBean.getNewsDate());
-        holder.top_news_item_img.setTag(newsBean.newsIconUrl);
-
-//        holder.top_news_item_img.setImageBitmap(newsBean.);
+//        holder.top_news_item_img.setTag(newsBean.newsIconUrl);
+        ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).top_news_item_img, newsBean.getNewsIconUrl());
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
