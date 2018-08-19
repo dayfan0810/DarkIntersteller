@@ -4,4 +4,5 @@
     <string name="enter_num_tips">请输入5到20个数</string>
     <string name="next_step">下一步</string>
     <string name="start">开始</string>
+    <string name="transition_news_img">transition_news_img</string>
 </resources>

@@ -1,6 +1,8 @@
 package cn.intersteller.darkintersteller.bean;
 
-public class NewsBean {
+import java.io.Serializable;
+
+public class NewsBean implements Serializable {
     public String newsIconUrl;
     public String newsTitle;
     public String newsDate;

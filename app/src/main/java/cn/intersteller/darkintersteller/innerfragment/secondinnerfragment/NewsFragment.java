@@ -1,6 +1,9 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.intersteller.darkintersteller.NewsDetailActivity;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.bean.NewsBean;
 import cn.intersteller.darkintersteller.utils.Constant;
@@ -69,6 +73,9 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
 
     public void requestNews() {
         HttpUtil.sendOkHttpRequest(Constant.URL_TOPNEWS, new Callback() {
+
+            private NewsRecyclerViewAdapter newsAdapter;
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
@@ -105,7 +112,33 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                         public void run() {
                             LinearLayoutManager manager = new LinearLayoutManager(getContext());
                             mRecyclerView.setLayoutManager(manager);
-                            NewsRecyclerViewAdapter newsAdapter = new NewsRecyclerViewAdapter(getContext(), mNewsBeanList, mRecyclerView, manager);
+                            newsAdapter = new NewsRecyclerViewAdapter(getContext(), mNewsBeanList, mRecyclerView, manager);
+                            newsAdapter.setmOnItemClickListener(new NewsRecyclerViewAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    Log.i("deng", "onItemClick ");
+                                    if (mNewsBeanList.size() <= 0) {
+                                        Log.i("deng", "onItemClick no data, return");
+                                        return;
+                                    }
+
+                                    NewsBean item = newsAdapter.getItem(position);
+                                    View transitionView = view.findViewById(R.id.top_news_item_icon);
+                                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                                    intent.putExtra("newsItem", item);
+                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                                            transitionView, getString(R.string.transition_news_img));
+                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+
+                                }
+
+                                @Override
+                                public void onItemLongClick(View view, int position) {
+                                    Log.i("deng", "onItemLongClick ");
+
+
+                                }
+                            });
                             mRecyclerView.setAdapter(newsAdapter);
                             mSwipeRefreshLayout.setRefreshing(false);
 

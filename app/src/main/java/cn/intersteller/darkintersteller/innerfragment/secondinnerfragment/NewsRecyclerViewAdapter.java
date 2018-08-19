@@ -47,6 +47,23 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         });
     }
 
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
+
+        public void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    //供外部fragment去设置回调,回调在onBindViewHolder中触发
+    public void setmOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    public NewsBean getItem(int position) {
+        return mNewsBeans == null ? null : mNewsBeans.get(position);
+    }
+
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,7 +77,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         NewsBean newsBean = mNewsBeans.get(position);
         if (newsBean == null) {
             return;
@@ -68,7 +85,23 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         holder.top_news_item_title.setText(newsBean.getNewsTitle());
         holder.top_news_item_date.setText(newsBean.getNewsDate());
 //        holder.top_news_item_img.setTag(newsBean.newsIconUrl);
-        ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).top_news_item_img, newsBean.getNewsIconUrl());
+        if (mOnItemClickListener != null) {
+            ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).top_news_item_img, newsBean.getNewsIconUrl());
+            ((ItemViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(((ItemViewHolder) holder).itemView, position);
+                }
+            });
+
+            ((ItemViewHolder) holder).itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mOnItemClickListener.onItemLongClick(((ItemViewHolder) holder).itemView, position);
+                    return false;
+                }
+            });
+        }
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
