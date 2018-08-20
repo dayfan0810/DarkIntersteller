@@ -2,6 +2,8 @@ package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -56,12 +58,20 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                 , R.color.red);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = view.findViewById(R.id.top_news_recyclerView);
+        onRefresh();
         return view;
     }
 
     @Override
     public void onClick(View v) {
 
+    }
+
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
