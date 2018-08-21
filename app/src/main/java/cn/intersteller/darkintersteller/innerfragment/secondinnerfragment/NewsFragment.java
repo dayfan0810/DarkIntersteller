@@ -109,12 +109,16 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
 
                         String title = dataItem.optString("title");
                         String date = dataItem.optString("date");
+                        String author_name = dataItem.optString("author_name");
+                        String url = dataItem.optString("url");
                         String thumbnail_pic_s = dataItem.optString("thumbnail_pic_s");
 
                         NewsBean newsBean = new NewsBean();
                         newsBean.setNewsTitle(title);
                         newsBean.setNewsIconUrl(thumbnail_pic_s);
                         newsBean.setNewsDate(date);
+                        newsBean.setAuthor_name(author_name);
+                        newsBean.setUrl(url);
                         mNewsBeanList.add(newsBean);
                     }
                     getActivity().runOnUiThread(new Runnable() {
