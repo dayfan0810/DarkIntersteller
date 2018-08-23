@@ -3,6 +3,7 @@ package cn.intersteller.darkintersteller;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -25,8 +26,6 @@ public class NewsDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
         mNews = (NewsBean) getIntent().getSerializableExtra("newsItem");
-//        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-//        collapsingToolbar.setTitle(mNews.getNewsTitle());
         ImageLoaderUtils.display(getApplicationContext(), (ImageView) findViewById(R.id.ivImage), mNews.getNewsIconUrl());
         String newsUrl = mNews.getUrl();
         wvContent = findViewById(R.id.wv_content);
@@ -48,17 +47,6 @@ public class NewsDetailActivity extends Activity {
         settings.setSupportZoom(true);
         settings.setSavePassword(false);
         wvContent.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                progressbar.setProgress(newProgress);
-                if (newProgress == 100) {
-                    progressbar.setVisibility(View.GONE);
-                } else {
-                    progressbar.setVisibility(View.VISIBLE);
-                }
-            }
-
 
             @Override
             public void onReceivedTitle(WebView view, String title) {

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.youth.banner.Banner;
@@ -31,6 +32,7 @@ import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.bean.NewsBean;
 import cn.intersteller.darkintersteller.utils.Constant;
 import cn.intersteller.darkintersteller.utils.HttpUtil;
+import cn.intersteller.darkintersteller.utils.ImageLoaderUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -96,7 +98,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getActivity(), "api次数受限!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "新闻api次数受限,检查URL", Toast.LENGTH_SHORT).show();
                                 mSwipeRefreshLayout.setRefreshing(false);
                             }
                         });

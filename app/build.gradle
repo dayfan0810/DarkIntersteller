@@ -30,10 +30,11 @@ dependencies {
     implementation 'com.bigkoo:convenientbanner:2.0.5'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
     implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     implementation 'com.youth.banner:banner:1.2.7'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation files('libs/showapi_sdk.jar')
 }
