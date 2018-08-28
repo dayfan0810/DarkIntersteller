@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.intersteller.darkintersteller.NewsDetailActivity;
+import ui.NewsDetailActivity;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.NewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.NewsBean;

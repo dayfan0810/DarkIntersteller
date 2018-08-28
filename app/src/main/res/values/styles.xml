@@ -30,6 +30,10 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/divider_height</item>
     </style>
+    <style name="CollapsingToolbarTitleStyle.About" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
     <style name="SortResultChildTextView">
         <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">@color/text_color_white</item>
@@ -46,6 +50,7 @@
         <item name="android:paddingTop">8.0dip</item>
         <item name="android:paddingBottom">15.0dip</item>
     </style>
+
 
     <style name="BubbleSortChildTextView">
         <item name="android:textSize">12.0sp</item>

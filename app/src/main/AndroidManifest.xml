@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.intersteller.darkintersteller">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:hardwareAccelerated="true"
@@ -18,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewsDetailActivity"/>
+        <activity android:name="ui.NewsDetailActivity"/>
+        <activity android:name="ui.MvDetailActivity"/>
     </application>
 
 </manifest>

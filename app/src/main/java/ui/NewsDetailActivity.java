@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller;
+package ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.bean.NewsBean;
 import cn.intersteller.darkintersteller.utils.ImageLoaderUtils;
 

@@ -1,7 +1,10 @@
 package cn.intersteller.darkintersteller.innerfragment.firstinnerfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +25,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.MvDetailActivity;
+import ui.NewsDetailActivity;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.HotMVRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.HotMVBean;
@@ -121,6 +126,20 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
                             hotMVRecyclerViewAdapter.setmOnItemClickListener(new HotMVRecyclerViewAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, int position) {
+                                    Log.i("deng", "onItemClick ");
+                                    if (mHotMusicBeanList.size() <= 0) {
+                                        Log.i("deng", "onItemClick no data, return");
+                                        return;
+                                    }
+
+                                    HotMVBean.DataBean item = hotMVRecyclerViewAdapter.getItem(position);
+                                    View transitionView = view.findViewById(R.id.item_mv_list_iv_cover);
+                                    Intent intent = new Intent(getActivity(), MvDetailActivity.class);
+                                    intent.putExtra("mvItem", item.getId());
+                                    intent.putExtra("mvItem", item.getCover());
+                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                                            transitionView, getString(R.string.transition_news_img));
+                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
 
                                 }
 

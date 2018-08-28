@@ -13,4 +13,7 @@
     <dimen name="sort_result_view_child_height">16.0dip</dimen>
     <dimen name="sort_result_view_child_margin">5.0dip</dimen>
     <dimen name="sort_result_view_child_width">25.0dip</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+
 </resources>
