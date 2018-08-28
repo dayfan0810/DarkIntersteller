@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
+package cn.intersteller.darkintersteller.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

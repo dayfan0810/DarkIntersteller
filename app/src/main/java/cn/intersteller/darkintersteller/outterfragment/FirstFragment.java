@@ -18,7 +18,7 @@ import java.util.List;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.AnchorFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.ListFragment;
-import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.HotMusicFragment;
+import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.HotMVFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.RecommendFragment;
 
 public class FirstFragment extends Fragment {
@@ -34,7 +34,7 @@ public class FirstFragment extends Fragment {
     private RecommendFragment recommendFragment;
     private ListFragment listFragment;
     private AnchorFragment anchorFragment;
-    private HotMusicFragment hotMusicFragment;
+    private HotMVFragment hotMusicFragment;
     private View v;
     private static FirstFragment firstFragment;
 
@@ -67,7 +67,7 @@ public class FirstFragment extends Fragment {
         mTitleList.add("个性推荐");
         mTitleList.add("歌单");
         mTitleList.add("主播电台");
-        mTitleList.add("QQ热榜");
+        mTitleList.add("MV排行");
         if (recommendFragment == null) {
             recommendFragment = new RecommendFragment();
             fragments.add(recommendFragment);
@@ -81,7 +81,7 @@ public class FirstFragment extends Fragment {
             fragments.add(anchorFragment);
         }
         if (hotMusicFragment == null) {
-            hotMusicFragment = new HotMusicFragment();
+            hotMusicFragment = new HotMVFragment();
             fragments.add(hotMusicFragment);
         }
     }

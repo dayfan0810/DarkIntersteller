@@ -10,5 +10,11 @@ public class Constant {
     public static final  String URL_QQ_MUSIC_HOT = "http://route.showapi.com/213-1";
     public static final  String APPID_QQ_MUSIC_HOT = "73287";
     public static final  String SECRET_QQ_MUSIC_HOT = "5f6f0dc00d664bc7b9eaea5f5fe2c922";
+    //网易云音乐接口
+    public static final  String NETEASEBASE = "https://netease.api.zzsun.cc/";
+
+    //mv 排行
+    public static final  String NETEASE_TOP_MV = NETEASEBASE+"top/mv?limit=99";
+
 
 }

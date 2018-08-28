@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.youth.banner.Banner;
@@ -29,10 +28,10 @@ import java.util.List;
 
 import cn.intersteller.darkintersteller.NewsDetailActivity;
 import cn.intersteller.darkintersteller.R;
+import cn.intersteller.darkintersteller.adapter.NewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.NewsBean;
 import cn.intersteller.darkintersteller.utils.Constant;
 import cn.intersteller.darkintersteller.utils.HttpUtil;
-import cn.intersteller.darkintersteller.utils.ImageLoaderUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -107,6 +106,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                     JSONObject jsonObject_result = jsonObject.getJSONObject("result");
                     JSONArray data = jsonObject_result.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
+
                         JSONObject dataItem = (JSONObject) data.get(i);
 
                         String title = dataItem.optString("title");
