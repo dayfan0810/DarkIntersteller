@@ -1,5 +1,6 @@
 package cn.intersteller.darkintersteller.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class HotMVBean {
@@ -48,7 +49,7 @@ public class HotMVBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * id : 10733097
          * cover : http://p1.music.126.net/5fDhiigtgB0YAnBPmemRLg==/109951163397371723.jpg

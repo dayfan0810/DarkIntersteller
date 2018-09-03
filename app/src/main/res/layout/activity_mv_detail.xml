@@ -19,7 +19,7 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="226dp"
+                android:layout_height="186dp"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:contentScrim="@color/colorPrimary"
@@ -28,7 +28,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="226dp"
+                    android:layout_height="186dp"
                     android:background="@color/white"
                     android:fitsSystemWindows="true"
                     android:gravity="center">
@@ -55,7 +55,8 @@
                     android:layout_height="40dp"
                     android:minHeight="40dp"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    >
 
                     <TextView
                         android:id="@+id/tv_av"
@@ -121,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginEnd="@dimen/dp_16"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="165dp"
         android:src="@drawable/ic_fab_play"
         app:backgroundTint="@color/colorPrimary"
         app:elevation="4dp"

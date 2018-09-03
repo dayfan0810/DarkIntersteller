@@ -51,7 +51,7 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.hotmusicfragment, container, false);
         mSwipeRefreshLayout = view.findViewById(R.id.hotmusic_swipeRefreshLayout);
-        mBanner = view.findViewById(R.id.hotmusic_banner);
+//        mBanner = view.findViewById(R.id.hotmusic_banner);
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.blue
@@ -133,13 +133,11 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
                                     }
 
                                     HotMVBean.DataBean item = hotMVRecyclerViewAdapter.getItem(position);
-                                    View transitionView = view.findViewById(R.id.item_mv_list_iv_cover);
                                     Intent intent = new Intent(getActivity(), MvDetailActivity.class);
-                                    intent.putExtra("mvItem", item.getId());
-                                    intent.putExtra("mvItem", item.getCover());
-                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                            transitionView, getString(R.string.transition_news_img));
-                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+                                    Bundle mBundle = new Bundle();
+                                    mBundle.putSerializable("mvitem",item);
+                                    intent.putExtras(mBundle);
+                                    startActivity(intent);
 
                                 }
 

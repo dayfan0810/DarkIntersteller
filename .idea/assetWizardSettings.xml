@@ -14,11 +14,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="65" />
-                            <entry key="outputName" value="ic_fab_play" />
+                            <entry key="height" value="128" />
+                            <entry key="outputName" value="ic_app_main_icon" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\jerry\Desktop\ic_fab_play.svg" />
-                            <entry key="width" value="65" />
+                            <entry key="sourceFile" value="C:\Users\jerry\Desktop\app_main_icon.svg" />
+                            <entry key="width" value="128" />
                           </map>
                         </option>
                       </PersistentState>
