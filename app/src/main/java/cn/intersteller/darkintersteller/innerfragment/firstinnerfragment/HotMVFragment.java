@@ -76,6 +76,7 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
     }
 
     public void requestHotMusic() {
+        //一次性获取前100名
         HttpUtil.sendOkHttpRequest(Constant.NETEASE_TOP_MV, new Callback() {
 
 
