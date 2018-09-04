@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,8 @@ public class HotMVRecyclerViewAdapter extends RecyclerView.Adapter<HotMVRecycler
         }
         holder.item_mv_list_tv_playCount.setText(mvBean.getPlayCount()+"次");
         holder.item_mv_list_tv_title.setText(mvBean.getName());
-        holder.item_mv_list_tv_num.setText(mvBean.getLastRank()+"");
+        holder.item_mv_list_tv_num.setText(String.valueOf(position + 1));
+        setSortNumTextSize(holder, position);
         if (mOnItemClickListener != null) {
             ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).item_mv_list_iv_cover, mvBean.getCover());
             ((ItemViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +101,27 @@ public class HotMVRecyclerViewAdapter extends RecyclerView.Adapter<HotMVRecycler
             });
         }
     }
+
+    private void setSortNumTextSize(ItemViewHolder itemViewHolder, int position) {
+        if (position == 0) {
+            itemViewHolder.item_mv_list_tv_num.setTextSize(24);
+            itemViewHolder.item_mv_list_tv_num.setTextColor(
+                    mContext.getResources().getColor(R.color.color_top_rank));
+        } else if (position == 1) {
+            itemViewHolder.item_mv_list_tv_num.setTextSize(22);
+            itemViewHolder.item_mv_list_tv_num.setTextColor(
+                    mContext.getResources().getColor(R.color.text_color_white));
+        } else if (position == 2) {
+            itemViewHolder.item_mv_list_tv_num.setTextSize(18);
+            itemViewHolder.item_mv_list_tv_num.setTextColor(
+                    mContext.getResources().getColor(R.color.color_top_rank));
+        } else {
+            itemViewHolder.item_mv_list_tv_num.setTextSize(16);
+            itemViewHolder.item_mv_list_tv_num.setTextColor(
+                    mContext.getResources().getColor(R.color.text_color_white));
+        }
+    }
+
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 

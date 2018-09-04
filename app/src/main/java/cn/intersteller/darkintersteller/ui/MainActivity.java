@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller;
+package cn.intersteller.darkintersteller.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,10 +19,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
 import cn.intersteller.darkintersteller.outterfragment.SecFragment;
 import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
-import cn.intersteller.darkintersteller.outterfragmentadapter.OutterFragmentAdapter;
+import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{

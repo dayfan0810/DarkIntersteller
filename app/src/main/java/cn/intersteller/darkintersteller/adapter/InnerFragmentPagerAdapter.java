@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.innerfragmnetadapter;
+package cn.intersteller.darkintersteller.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -15,7 +15,7 @@ import java.util.List;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.NewsFragment;
 import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.StockFragment;
-import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerAdapter;
+import cn.intersteller.darkintersteller.adapter.InnerFragmentPagerAdapter;
 
 public class SecFragment extends Fragment {
     private String TAG = "SecFragment";

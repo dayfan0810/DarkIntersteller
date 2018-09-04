@@ -12,15 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="cn.intersteller.darkintersteller.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ui.NewsDetailActivity"/>
-        <activity android:name="ui.MvDetailActivity"/>
+        <activity android:name="cn.intersteller.darkintersteller.ui.NewsDetailActivity"/>
+        <activity android:name="cn.intersteller.darkintersteller.ui.MvDetailActivity"/>
     </application>
 
 </manifest>

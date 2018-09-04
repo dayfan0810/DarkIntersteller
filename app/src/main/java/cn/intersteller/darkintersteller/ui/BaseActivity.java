@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller;
+package cn.intersteller.darkintersteller.ui;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import cn.intersteller.darkintersteller.R;
 
 /**
  * Created by Day on 2016/12/25.

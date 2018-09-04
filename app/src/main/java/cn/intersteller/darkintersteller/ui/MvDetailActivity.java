@@ -1,4 +1,4 @@
-package ui;
+package cn.intersteller.darkintersteller.ui;
 
 import android.app.Activity;
 import android.os.Bundle;

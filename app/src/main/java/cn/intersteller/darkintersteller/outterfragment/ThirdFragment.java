@@ -22,7 +22,7 @@ import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.MeargeS
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.QuickSortFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.SelectSortFragment;
 import cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment.ShellSortFragment;
-import cn.intersteller.darkintersteller.innerfragmnetadapter.InnerFragmentPagerAdapter;
+import cn.intersteller.darkintersteller.adapter.InnerFragmentPagerAdapter;
 
 /**
  * Created by Day on 2017/1/2.
