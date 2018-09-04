@@ -104,19 +104,19 @@ public class HotMVRecyclerViewAdapter extends RecyclerView.Adapter<HotMVRecycler
 
     private void setSortNumTextSize(ItemViewHolder itemViewHolder, int position) {
         if (position == 0) {
-            itemViewHolder.item_mv_list_tv_num.setTextSize(24);
+            itemViewHolder.item_mv_list_tv_num.setTextSize(26);
             itemViewHolder.item_mv_list_tv_num.setTextColor(
                     mContext.getResources().getColor(R.color.color_top_rank));
         } else if (position == 1) {
-            itemViewHolder.item_mv_list_tv_num.setTextSize(22);
+            itemViewHolder.item_mv_list_tv_num.setTextSize(24);
             itemViewHolder.item_mv_list_tv_num.setTextColor(
-                    mContext.getResources().getColor(R.color.text_color_white));
+                    mContext.getResources().getColor(R.color.color_top_rank));
         } else if (position == 2) {
-            itemViewHolder.item_mv_list_tv_num.setTextSize(18);
+            itemViewHolder.item_mv_list_tv_num.setTextSize(22);
             itemViewHolder.item_mv_list_tv_num.setTextColor(
                     mContext.getResources().getColor(R.color.color_top_rank));
         } else {
-            itemViewHolder.item_mv_list_tv_num.setTextSize(16);
+            itemViewHolder.item_mv_list_tv_num.setTextSize(20);
             itemViewHolder.item_mv_list_tv_num.setTextColor(
                     mContext.getResources().getColor(R.color.text_color_white));
         }
