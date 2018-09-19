@@ -25,7 +25,7 @@ import cn.intersteller.darkintersteller.outterfragment.SecFragment;
 import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private long time = 0;
     ImageView mBarDisco;
     ImageView mBarMusic;
@@ -49,15 +49,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("onCreate", "onCreate");
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        mBarDisco = (ImageView) findViewById(R.id.bar_disco);
-        mBarMusic = (ImageView) findViewById(R.id.bar_music);
-        mBarFriends = (ImageView) findViewById(R.id.bar_friends);
-        mBarSearch = (ImageView) findViewById(R.id.bar_search);
-        mSearchLayout = (LinearLayout) findViewById(R.id.search_layout);
-        mVpMianActivity = (ViewPager) findViewById(R.id.vp_mian_activity);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
+        mBarDisco = findViewById(R.id.bar_disco);
+        mBarMusic = findViewById(R.id.bar_music);
+        mBarFriends = findViewById(R.id.bar_friends);
+        mBarSearch = findViewById(R.id.bar_search);
+        mSearchLayout = findViewById(R.id.search_layout);
+        mVpMianActivity = findViewById(R.id.vp_mian_activity);
+        toolbar = findViewById(R.id.toolbar);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
