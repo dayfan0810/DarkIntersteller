@@ -17,5 +17,6 @@
     <color name="oriange">#ff9a00</color>
     <color name="white">#ffffff</color>
     <color name="color_top_rank">#fb7299</color>
+    <color name="window_background">#eaeaea</color>
 
 </resources>

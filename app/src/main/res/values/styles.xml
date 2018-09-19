@@ -6,6 +6,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -60,4 +68,10 @@
         <item name="android:layout_width">@dimen/bubble_sort_view_child_width</item>
         <item name="android:layout_height">@dimen/bubble_sort_view_child_height</item>
     </style>
+
+    <style name="ColorTranslucentTheme" parent="@style/BaseAppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>
