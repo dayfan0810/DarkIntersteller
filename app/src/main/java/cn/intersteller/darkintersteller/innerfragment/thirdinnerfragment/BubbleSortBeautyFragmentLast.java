@@ -28,6 +28,7 @@ import java.util.Random;
 
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas;
+import cn.intersteller.darkintersteller.sort.AlgorithmThread;
 import cn.intersteller.darkintersteller.sort.BubbleSortThread;
 
 public class BubbleSortBeautyFragmentLast extends Fragment implements View.OnClickListener {
@@ -78,10 +79,10 @@ public class BubbleSortBeautyFragmentLast extends Fragment implements View.OnCli
                 break;
             case R.id.bt_bubble_start_sort:
                 // 开始排序,先清空结果view
-//                bubbleSortThread = new BubbleSortThread(anim_sort, this);
-//                bubbleSortThread.setStarted(false);
-//                bubbleSortThread.setData(mArray);
-//                getSignature();
+                bubbleSortThread = new BubbleSortThread(anim_sort, this);
+                bubbleSortThread.setStarted(true);
+                bubbleSortThread.setData(mArray);
+                bubbleSortThread.sendMessage(AlgorithmThread.COMMAND_START_ALGORITHM);
                 break;
         }
     }

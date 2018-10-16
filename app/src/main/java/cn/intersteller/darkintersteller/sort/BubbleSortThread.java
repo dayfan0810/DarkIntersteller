@@ -3,6 +3,7 @@ package cn.intersteller.darkintersteller.sort;
 
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas;
 
@@ -48,6 +49,7 @@ public class BubbleSortThread extends SortAlgorithmThread {
 
     public void onMessageReceived(String message) {
         super.onMessageReceived(message);
+        Log.i("deng","onMessageReceived");
         if (message.equals(AlgorithmThread.COMMAND_START_ALGORITHM)) {
             startExecution();
             sort();
