@@ -43,8 +43,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Banner mRecommend_music_banner;
     private List<RecomendBnnerBean.BannersBean> mRecomendBnnerBeans = new ArrayList<>();
-    private ArrayList<String> mTypeTitles;
-    private ArrayList<String> imgs;
+
 
     @Nullable
     @Override
@@ -66,7 +65,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
     }
 
     private void addView() {
-        initBanner();
+//        initBanner();
     }
 
     private void initBanner() {
@@ -83,6 +82,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
     public void onRefresh() {
 //        mRecomendBnnerBeans.clear();
         requestRecomendBnner();
+        initBanner();
 //        requestRecomend();
     }
 
@@ -90,6 +90,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
         //一次性获取前100名
         HttpUtil.sendOkHttpRequest(Constant.NETEASE_BANNER, new Callback() {
 
+            ArrayList<String> mTypeTitles;
+            ArrayList<String> imgs;
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -104,8 +106,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String responseText = response.body().string();
 
+                final String responseText = response.body().string();
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
                     String resultCode = (String) jsonObject.optString("code");
@@ -120,14 +122,15 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
                         return;
                     }
                     final JSONArray bannersData = jsonObject.getJSONArray("banners");
+                    mTypeTitles = new ArrayList<>();
+                    imgs = new ArrayList<>();
                     for (int i = 0; i < bannersData.length(); i++) {
                         JSONObject dataItem = (JSONObject) bannersData.get(i);
                         String cover = dataItem.optString("imageUrl");
                         String typeTitle = dataItem.optString("typeTitle");
-                        mTypeTitles = new ArrayList<>();
-                        imgs = new ArrayList<>();
                         imgs.add(cover);
                         mTypeTitles.add(typeTitle);
+                        Log.i("gang1", " imgs = " + imgs.size());
 //                        RecomendBnnerBean.BannersBean bannersBean = new RecomendBnnerBean.BannersBean();
 //                        bannersBean.setImageUrl(cover);
 //                        bannersBean.setTypeTitle(typeTitle);
@@ -140,14 +143,9 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
                             mRecommend_music_banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);//设置页码与标题
                             mRecommend_music_banner.setDelayTime(3000);//设置轮播时间
                             mRecommend_music_banner.setBannerTitles(mTypeTitles);//设置标题
-                            Log.i("deng", " imgs = " + imgs.size());
+                            Log.i("gang2", " imgs = " + imgs.size());
                             mRecommend_music_banner.setImages(imgs);
-                            mRecommend_music_banner.setImageLoader(new ImageLoader() {
-                                @Override
-                                public void displayImage(Context context, Object path, ImageView imageView) {
-                                    Glide.with(context).load(path).into(imageView);
-                                }
-                            });
+                            mRecommend_music_banner.setImageLoader(new MyLoader());
                             mRecommend_music_banner.start();
                         }
                     });
@@ -162,4 +160,12 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
         });
     }
 
+    private class MyLoader extends ImageLoader {
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            Glide.with(context.getApplicationContext())
+                    .load((String) path)
+                    .into(imageView);
+        }
+    }
 }

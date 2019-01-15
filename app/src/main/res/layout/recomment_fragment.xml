@@ -17,7 +17,7 @@
             <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/recommend_music_banner"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="160dp"
                 android:background="@color/cardview_dark_background"
                 app:indicator_drawable_selected="@mipmap/red"
                 app:indicator_drawable_unselected="@mipmap/grey"
