@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.youth.banner.Banner;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,14 +31,10 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-/**
- * Created by Limuyang on 2016/7/7.
- */
 public class HotMVFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private View view;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private Banner mBanner;
     private List<HotMVBean.DataBean> mHotMusicBeanList = new ArrayList<>();
 
     @Nullable
@@ -48,8 +42,6 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.hotmusicfragment, container, false);
         mSwipeRefreshLayout = view.findViewById(R.id.hotmusic_swipeRefreshLayout);
-//        mBanner = view.findViewById(R.id.hotmusic_banner);
-
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.blue
                 , R.color.oriange
@@ -133,7 +125,7 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
                                     HotMVBean.DataBean item = hotMVRecyclerViewAdapter.getItem(position);
                                     Intent intent = new Intent(getActivity(), MvDetailActivity.class);
                                     Bundle mBundle = new Bundle();
-                                    mBundle.putSerializable("mvitem",item);
+                                    mBundle.putSerializable("mvitem", item);
                                     intent.putExtras(mBundle);
                                     startActivity(intent);
 

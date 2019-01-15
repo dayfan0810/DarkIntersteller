@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startIntroAnimation();
         addFragmet();
         initWidgets();
-        mVpMianActivity.setCurrentItem(2);
+        mVpMianActivity.setCurrentItem(0);
         mBarDisco.setOnClickListener(this);
         mBarMusic.setOnClickListener(this);
         mBarFriends.setOnClickListener(this);

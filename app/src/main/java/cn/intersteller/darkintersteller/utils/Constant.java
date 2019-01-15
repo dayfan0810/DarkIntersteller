@@ -13,7 +13,7 @@ public class Constant {
     //mv 排行
     public static final String NETEASE_TOP_MV = NETEASEBASE + "top/mv?limit=99";
     //banner
-    public static final String NETEASE_BANNER = NETEASEBASE+"/banner";
+    public static final String NETEASE_BANNER = NETEASEBASE+"banner";
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //哔哩哔哩

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Banner mRecommend_music_banner;
     private List<RecomendBnnerBean.BannersBean> mRecomendBnnerBeans = new ArrayList<>();
+    private ArrayList<String> mTypeTitles;
+    private ArrayList<String> imgs;
 
     @Nullable
     @Override
@@ -49,12 +52,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
         view = inflater.inflate(R.layout.recomment_fragment, container, false);
         mSwipeRefreshLayout = view.findViewById(R.id.recommend_music_swipeRefreshLayout);
         mRecommend_music_banner = view.findViewById(R.id.recommend_music_banner);
-        mRecommend_music_banner.setImageLoader(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, Object path, ImageView imageView) {
-                Glide.with(context).load(path).into(imageView);
-            }
-        });
 
 
         mSwipeRefreshLayout.setColorSchemeResources(
@@ -84,7 +81,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onRefresh() {
-        mRecomendBnnerBeans.clear();
+//        mRecomendBnnerBeans.clear();
         requestRecomendBnner();
 //        requestRecomend();
     }
@@ -93,8 +90,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
         //一次性获取前100名
         HttpUtil.sendOkHttpRequest(Constant.NETEASE_BANNER, new Callback() {
 
-            private ArrayList<String> mTypeTitles;
-            private ArrayList<String> imgs;
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -135,6 +130,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
                         mTypeTitles.add(typeTitle);
 //                        RecomendBnnerBean.BannersBean bannersBean = new RecomendBnnerBean.BannersBean();
 //                        bannersBean.setImageUrl(cover);
+//                        bannersBean.setTypeTitle(typeTitle);
 //                        mRecomendBnnerBeans.add(bannersBean);
                     }
                     getActivity().runOnUiThread(new Runnable() {
@@ -144,10 +140,18 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
                             mRecommend_music_banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);//设置页码与标题
                             mRecommend_music_banner.setDelayTime(3000);//设置轮播时间
                             mRecommend_music_banner.setBannerTitles(mTypeTitles);//设置标题
+                            Log.i("deng", " imgs = " + imgs.size());
                             mRecommend_music_banner.setImages(imgs);
+                            mRecommend_music_banner.setImageLoader(new ImageLoader() {
+                                @Override
+                                public void displayImage(Context context, Object path, ImageView imageView) {
+                                    Glide.with(context).load(path).into(imageView);
+                                }
+                            });
                             mRecommend_music_banner.start();
                         }
                     });
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
