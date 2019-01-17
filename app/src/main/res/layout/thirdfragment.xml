@@ -10,7 +10,7 @@
         android:id="@+id/friends_tab"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDarkJianBian"
         app:tabIndicatorColor="#FFFFFF"
         app:tabSelectedTextColor="#FFFFFF"
         app:tabTextColor="#787e82">

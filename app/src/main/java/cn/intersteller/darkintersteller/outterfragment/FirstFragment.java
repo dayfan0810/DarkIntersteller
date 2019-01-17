@@ -64,10 +64,14 @@ public class FirstFragment extends Fragment {
     }
 
     private void addView() {
+        mTitleList.add("音乐");
         mTitleList.add("MV排行");
         mTitleList.add("个性推荐");
-        mTitleList.add("歌单");
         mTitleList.add("主播电台");
+        if (listFragment == null) {
+            listFragment = new ListFragment();
+            fragments.add(listFragment);
+        }
         if (hotMusicFragment == null) {
             hotMusicFragment = new HotMVFragment();
             fragments.add(hotMusicFragment);
@@ -75,10 +79,6 @@ public class FirstFragment extends Fragment {
         if (recommendFragment == null) {
             recommendFragment = new RecommendFragment();
             fragments.add(recommendFragment);
-        }
-        if (listFragment == null) {
-            listFragment = new ListFragment();
-            fragments.add(listFragment);
         }
         if (anchorFragment == null) {
             anchorFragment = new AnchorFragment();
