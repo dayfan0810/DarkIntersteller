@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -51,7 +52,38 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
         view = inflater.inflate(R.layout.recomment_fragment, container, false);
         mSwipeRefreshLayout = view.findViewById(R.id.recommend_music_swipeRefreshLayout);
         mRecommend_music_banner = view.findViewById(R.id.recommend_music_banner);
-
+//        mRecommend_music_banner.setOnTouchListener(new View.OnTouchListener() {
+//
+//            private float startX;
+//            private float startY;
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        // 记录手指按下的位置
+//                        startY = event.getY();
+//                        startX = event.getX();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        // 获取当前手指位置
+//                        float endY = event.getY();
+//                        float endX = event.getX();
+//                        float distanceX = Math.abs(endX - startX);
+//                        float distanceY = Math.abs(endY - startY);
+//                        // 如果X轴位移大于Y轴位移，那么将事件交给viewPager处理。
+//                        if (distanceX > distanceY) {
+//                            mSwipeRefreshLayout.setEnabled(false);
+//                        }
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                    case MotionEvent.ACTION_CANCEL:
+//                        mSwipeRefreshLayout.setEnabled(true);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.blue
