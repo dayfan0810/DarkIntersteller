@@ -15,7 +15,7 @@ public class HeapSortFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i("deng","HeapSortFragment");
-        View v = inflater.inflate(R.layout.listfragment, container, false);
+        View v = inflater.inflate(R.layout.musicfragment, container, false);
         return v;
     }
 }

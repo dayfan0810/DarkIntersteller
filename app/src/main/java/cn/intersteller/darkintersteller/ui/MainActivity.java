@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
-        startIntroAnimation();
         addFragmet();
         initWidgets();
         mVpMianActivity.setCurrentItem(0);
@@ -74,6 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBarFriends.setOnClickListener(this);
         mBarSearch.setOnClickListener(this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startIntroAnimation();
     }
 
     private void addFragmet() {
