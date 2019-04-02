@@ -138,5 +138,6 @@ public class HotMVRecyclerViewAdapter extends RecyclerView.Adapter<HotMVRecycler
             item_mv_list_tv_num = itemView.findViewById(R.id.item_mv_list_tv_num);
             item_mv_list_tv_playCount = itemView.findViewById(R.id.item_mv_list_tv_playCount);
         }
+
     }
 }

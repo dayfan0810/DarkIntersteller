@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
+import cn.intersteller.darkintersteller.WebGrabber.CNBETA.CnbetaNewsGrabber;
+import cn.intersteller.darkintersteller.WebGrabber.USHK.UshkNewsGrabber;
 import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
 import cn.intersteller.darkintersteller.outterfragment.SecFragment;
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Fragment> mFragmntList = new ArrayList<>(3);
 
     private OutterFragmentAdapter outterFragmentAdapter;
-
+    private UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
+    private CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBarMusic.setOnClickListener(this);
         mBarFriends.setOnClickListener(this);
         mBarSearch.setOnClickListener(this);
+        //1.USHKNEWS
+        //        ArrayList ushkNewsBeanByCallable = mUshkNewsGrabber.getUSHKNewsBeanDerectely();
+        //        ArrayList ushkNewsBeanByCallable = mUshkNewsGrabber.getUSHKNewsBeanByCallable();
+        //        Log.i("deng4","ushkNewsBeanByCallable = "+ushkNewsBeanByCallable.size());
 
+        //2.CNBETA
+        mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
     }
 
     @Override
