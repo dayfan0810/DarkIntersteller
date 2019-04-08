@@ -25,7 +25,10 @@ import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
 import cn.intersteller.darkintersteller.outterfragment.SecFragment;
 import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
+import cn.intersteller.darkintersteller.utils.BaseCallback;
+import cn.intersteller.darkintersteller.utils.NetKit;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private long time = 0;
@@ -81,7 +84,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //        Log.i("deng4","ushkNewsBeanByCallable = "+ushkNewsBeanByCallable.size());
 
         //2.CNBETA
-        mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
+//        mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
+
+        NetKit.getNewslistByPage(this, 1, "all", new BaseCallback() {
+
+            @Override
+            public void onSuccess(com.lzy.okgo.model.Response response) {
+                Object body = response.body();
+                Log.i("MainActivity", "onSuccess");
+            }
+
+            @Override
+            protected void onError(int httpCode, Response response, Throwable cause) {
+                Log.i("MainActivity", "onError");
+
+            }
+
+            @Override
+            protected void onResponse(Object o) {
+                Log.i("MainActivity", "onResponse");
+
+            }
+
+            @Override
+            public Object convertResponse(Response response) throws Throwable {
+                return null;
+            }
+        });
     }
 
     @Override

@@ -39,6 +39,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.lzy.net:okgo:3.0.4'
 
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
