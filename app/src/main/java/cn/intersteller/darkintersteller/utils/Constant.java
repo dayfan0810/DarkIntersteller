@@ -7,7 +7,7 @@ public class Constant {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //网易云音乐接口
-    public static final String NETEASEBASE = "https://music.skrcd.com/";
+    public static final String NETEASEBASE = "http://musicapi.leanapp.cn/";
     //MV详情,根据Item的Id
     public static final String NETEASE_MV_ID = "mv?mvid=";
     //mv 排行

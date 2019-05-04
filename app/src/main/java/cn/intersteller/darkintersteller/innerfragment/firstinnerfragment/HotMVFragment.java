@@ -142,7 +142,7 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
                         }
                     });
 
-                    Log.i("deng", "mHotMusicBeanList.size = " + mHotMusicBeanList.size());
+                    Log.i("HotMVFragment", "mHotMusicBeanList.size = " + mHotMusicBeanList.size());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -1,11 +1,8 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.intersteller.darkintersteller.ui.NewsDetailActivity;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.NewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.NewsBean;
@@ -37,7 +33,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
-public class NewsFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class CnBetaFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
 
     private View view;
@@ -48,9 +44,9 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.top_news_fragment, container, false);
-        mSwipeRefreshLayout = view.findViewById(R.id.top_news_swipeRefreshLayout);
-        mBanner = view.findViewById(R.id.top_news_banner);
+        view = inflater.inflate(R.layout.cnbeta_fragment, container, false);
+        mSwipeRefreshLayout = view.findViewById(R.id.cnbeta_fragment_swipeRefreshLayout);
+        mBanner = view.findViewById(R.id.cnbeta_fragment_banner);
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.blue
@@ -58,7 +54,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                 , R.color.black
                 , R.color.red);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mRecyclerView = view.findViewById(R.id.top_news_recyclerView);
+        mRecyclerView = view.findViewById(R.id.cnbeta_fragment_recyclerView);
         onRefresh();
         return view;
     }
@@ -67,7 +63,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
     public void onClick(View v) {
 
     }
-
 
 
     @Override
@@ -139,12 +134,12 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                                     }
 
                                     NewsBean item = newsAdapter.getItem(position);
-                                    View transitionView = view.findViewById(R.id.top_news_item_icon);
-                                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                                    intent.putExtra("newsItem", item);
-                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                            transitionView, getString(R.string.transition_news_img));
-                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+//                                    View transitionView = view.findViewById(R.id.cnbeta_fragment_item_icon);
+//                                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+//                                    intent.putExtra("newsItem", item);
+//                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+//                                            transitionView, getString(R.string.transition_news_img));
+//                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
 
                                 }
 
@@ -172,7 +167,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(), "获取新闻信息失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "获取cnbeta新闻信息失败", Toast.LENGTH_SHORT).show();
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });

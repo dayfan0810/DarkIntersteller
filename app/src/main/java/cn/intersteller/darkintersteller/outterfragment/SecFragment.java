@@ -13,9 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
+import cn.intersteller.darkintersteller.adapter.InnerFragmentPagerAdapter;
+import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.CnBetaFragment;
 import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.NewsFragment;
 import cn.intersteller.darkintersteller.innerfragment.secondinnerfragment.StockFragment;
-import cn.intersteller.darkintersteller.adapter.InnerFragmentPagerAdapter;
 
 public class SecFragment extends Fragment {
     private String TAG = "SecFragment";
@@ -28,6 +29,7 @@ public class SecFragment extends Fragment {
     private InnerFragmentPagerAdapter innerFragmentPagerAdapter;
     NewsFragment newsFragment;
     StockFragment stockFragment;
+    CnBetaFragment cnBetaFragment;
 
     public static SecFragment newInstance() {
         if (secFragment == null) {
@@ -86,8 +88,13 @@ public class SecFragment extends Fragment {
     }
 
     private void addView() {
+        mTitleList.add("cnBeta");
         mTitleList.add("新闻推荐");
         mTitleList.add("股票");
+        if (cnBetaFragment == null) {
+            cnBetaFragment = new CnBetaFragment();
+            fragments.add(cnBetaFragment);
+        }
         if (newsFragment == null) {
             newsFragment = new NewsFragment();
             fragments.add(newsFragment);

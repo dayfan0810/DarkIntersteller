@@ -25,10 +25,7 @@ import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
 import cn.intersteller.darkintersteller.outterfragment.SecFragment;
 import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
-import cn.intersteller.darkintersteller.utils.BaseCallback;
-import cn.intersteller.darkintersteller.utils.NetKit;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private long time = 0;
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         addFragmet();
         initWidgets();
-        mVpMianActivity.setCurrentItem(0);
+        mVpMianActivity.setCurrentItem(1);
         mBarDisco.setOnClickListener(this);
         mBarMusic.setOnClickListener(this);
         mBarFriends.setOnClickListener(this);
@@ -84,34 +81,80 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //        Log.i("deng4","ushkNewsBeanByCallable = "+ushkNewsBeanByCallable.size());
 
         //2.CNBETA
-//        mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
 
-        NetKit.getNewslistByPage(this, 1, "all", new BaseCallback() {
-
-            @Override
-            public void onSuccess(com.lzy.okgo.model.Response response) {
-                Object body = response.body();
-                Log.i("MainActivity", "onSuccess");
-            }
-
-            @Override
-            protected void onError(int httpCode, Response response, Throwable cause) {
-                Log.i("MainActivity", "onError");
-
-            }
-
-            @Override
-            protected void onResponse(Object o) {
-                Log.i("MainActivity", "onResponse");
-
-            }
-
-            @Override
-            public Object convertResponse(Response response) throws Throwable {
-                return null;
-            }
-        });
+//         BaseResponseObjectResponse newsPage = new BaseResponseObjectResponse<NewsListObject>(
+//                new TypeToken<ResponseObject<NewsListObject>>() {
+//                }) {
+//            private int size = 0;
+//            private List<NewsItem> itemList;
+//
+//            @Override
+//            public ResponseObject<NewsListObject> convertResponse(Response response) throws Throwable {
+//                Log.i("deng111", "convertResponse,response = " + response);
+//                Log.i("deng111", "itemList = "+itemList.size());
+//
+//                int offsetFirst = -1;
+//                int offsetSecond = -1;
+//                int offsetThird = -1;
+//                boolean findFirst = false;
+//                boolean findSecond = false;
+//                boolean findThird = false;
+//                ResponseObject<NewsListObject> responseObject = super.convertResponse(response);
+//                boolean calNew = responseObject.getResult().getPage() == 1;
+//                itemList = responseObject.getResult().getList();
+//                Log.i("deng111", "itemList = "+itemList.size());
+//                for (NewsItem item : itemList) {
+//                    Log.i("deng111", "item = "+item.getContent());
+//                    if (item.getCounter() != null && item.getComments() != null) {
+//                        String title = item.getTitle();
+//                        int num = Integer.parseInt(item.getCounter());
+//                        if (num > 9999) {
+//                            item.setCounter("9999+");
+//                        }
+//                        num = Integer.parseInt(item.getComments());
+//                        if (num > 999) {
+//                            item.setComments("999+");
+//                        }
+//                    } else {
+//                        item.setCounter("0");
+//                        item.setComments("0");
+//                    }
+//                    item.setTitle(item.getTitle().replaceAll("<.*?>", ""));
+//                    StringBuilder sb = new StringBuilder(
+//                            Html.fromHtml(item.getHometext().replaceAll("<.*?>|[\\r|\\n]", "")));
+//                    if (sb.length() > 140) {
+//                        item.setSummary(sb.replace(140, sb.length(), "...").toString());
+//                    } else {
+//                        item.setSummary(sb.toString());
+//                    }
+//                    if (item.getThumb().contains("thumb")) {
+//                        item.setLargeImage(
+//                                item.getThumb().replaceAll("(\\.\\w{3,4})?_100x100|thumb/mini/", ""));
+//                    }
+//
+//                }
+//
+//                return responseObject;
+//            }
+//
+//            /**
+//             * @param result
+//             */
+//            @Override
+//            protected void onSuccess(NewsListObject result) {
+//
+//            }
+//
+//
+//
+//            @Override
+//            public void onFinish() {
+//
+//            }
+//        };
+//        NetKit.getNewslistByPage(this, 1, "all", newsPage);
     }
+
 
     @Override
     protected void onResume() {
@@ -226,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             return super.onKeyDown(keyCode, event);
         }
-
     }
+
+
 }
