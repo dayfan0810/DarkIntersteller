@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 
 import com.youth.banner.Banner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,10 +44,21 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
             switch (msg.what) {
                 case 0:
-                    Log.i("deng111", "case 0:");
+                    Log.i("deng111", "onFailure");
                     break;
                 case 1:
-                    Log.i("deng111", "case 1:");
+                    Log.i("deng111", "onResponse");
+                    Object obj = msg.obj;
+                    String responseText = obj.toString();
+                    try {
+                        JSONObject jsonObject = new JSONObject(responseText);
+                        String resultCode = (String) jsonObject.optString("list");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                     break;
             }
         }
@@ -138,7 +152,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                 message.what = 1;
                 message.obj = response.body().string();//string不能调用两次 被调用一次就关闭了，这里调用两次会报异常
                 mHandler.sendMessage(message);
-                Log.i("deng111", "response: " + message.obj.toString());
+                System.out.println("deng111 response: " + message.obj.toString());
             }
         });
 
