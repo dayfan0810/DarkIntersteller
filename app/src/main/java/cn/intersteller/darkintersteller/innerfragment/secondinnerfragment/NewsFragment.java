@@ -90,6 +90,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
+
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
                     String resultCode = (String) jsonObject.optString("reason");
