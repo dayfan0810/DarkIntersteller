@@ -19,7 +19,7 @@ public class NetKit {
         params.put("type", type);
         params.put("page", page);
         params.put("_", System.currentTimeMillis());
-        Log.i(TAG, "getNewslistByPage");
+        Log.i(TAG, "type = "+type+"  ,page = "+page);
         OkGo.get(Configure.NEWS_LIST_URL)
                 .tag(tag)
                 .params(params)

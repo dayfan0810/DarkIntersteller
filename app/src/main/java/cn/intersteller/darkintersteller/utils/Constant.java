@@ -34,7 +34,7 @@ public class Constant {
     * Cnbeta
      */
     public static final String CNBEA_BASE_URL = "https://www.cnbeta.com";
-    public static final String NEWS_LIST_URL = CNBEA_BASE_URL + "/home/more";
+    public static final String CNBETA_NEWS_LIST_URL = CNBEA_BASE_URL + "/home/more";
 
 
 }
