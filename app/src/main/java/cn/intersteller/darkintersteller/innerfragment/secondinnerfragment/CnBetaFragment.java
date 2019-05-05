@@ -5,31 +5,26 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
 import com.youth.banner.Banner;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.adapter.NewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.NewsBean;
-import cn.intersteller.darkintersteller.utils.Constant;
-import cn.intersteller.darkintersteller.utils.HttpUtil;
-import okhttp3.Call;
-import okhttp3.Callback;
+import cn.intersteller.darkintersteller.utils.BaseResponseObjectResponse;
+import cn.intersteller.darkintersteller.utils.NetKit;
+import cn.intersteller.darkintersteller.utils.NewsItem;
+import cn.intersteller.darkintersteller.utils.NewsListObject;
+import cn.intersteller.darkintersteller.utils.ResponseObject;
 import okhttp3.Response;
 
 
@@ -78,102 +73,86 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
 
     public void requestNews() {
-        HttpUtil.sendOkHttpRequest(Constant.URL_TOPNEWS, new Callback() {
-
-            private NewsRecyclerViewAdapter newsAdapter;
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String responseText = response.body().string();
-                try {
-                    JSONObject jsonObject = new JSONObject(responseText);
-                    String resultCode = (String) jsonObject.optString("reason");
-                    if (!resultCode.equals("成功的返回")) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getActivity(), "新闻api次数受限,检查URL", Toast.LENGTH_SHORT).show();
-                                mSwipeRefreshLayout.setRefreshing(false);
-                            }
-                        });
-                        return;
-                    }
-                    JSONObject jsonObject_result = jsonObject.getJSONObject("result");
-                    JSONArray data = jsonObject_result.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++) {
-
-                        JSONObject dataItem = (JSONObject) data.get(i);
-
-                        String title = dataItem.optString("title");
-                        String date = dataItem.optString("date");
-                        String author_name = dataItem.optString("author_name");
-                        String url = dataItem.optString("url");
-                        String thumbnail_pic_s = dataItem.optString("thumbnail_pic_s");
-
-                        NewsBean newsBean = new NewsBean();
-                        newsBean.setNewsTitle(title);
-                        newsBean.setNewsIconUrl(thumbnail_pic_s);
-                        newsBean.setNewsDate(date);
-                        newsBean.setAuthor_name(author_name);
-                        newsBean.setUrl(url);
-                        mNewsBeanList.add(newsBean);
-                    }
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            LinearLayoutManager manager = new LinearLayoutManager(getContext());
-                            mRecyclerView.setLayoutManager(manager);
-                            newsAdapter = new NewsRecyclerViewAdapter(getContext(), mNewsBeanList, mRecyclerView, manager);
-                            newsAdapter.setmOnItemClickListener(new NewsRecyclerViewAdapter.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(View view, int position) {
-                                    Log.i("deng", "onItemClick ");
-                                    if (mNewsBeanList.size() <= 0) {
-                                        Log.i("deng", "onItemClick no data, return");
-                                        return;
-                                    }
-
-                                    NewsBean item = newsAdapter.getItem(position);
-//                                    View transitionView = view.findViewById(R.id.cnbeta_fragment_item_icon);
-//                                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-//                                    intent.putExtra("newsItem", item);
-//                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-//                                            transitionView, getString(R.string.transition_news_img));
-//                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-
-                                }
-
-                                @Override
-                                public void onItemLongClick(View view, int position) {
-                                    Log.i("deng", "onItemLongClick ");
+        //2.CNBETA
 
 
-                                }
-                            });
-                            mRecyclerView.setAdapter(newsAdapter);
-                            mSwipeRefreshLayout.setRefreshing(false);
+        Log.i("deng111", "即将执行getNewslistByPage");
 
-                        }
-                    });
-
-                    Log.i("NesFragment", "mNewsBeanList.size = " + mNewsBeanList.size());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getContext(), "获取cnbeta新闻信息失败", Toast.LENGTH_SHORT).show();
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-            }
-        });
+        NetKit.getNewslistByPage(this, 1, "all", newsPage);
 
     }
+
+    BaseResponseObjectResponse newsPage = new BaseResponseObjectResponse<NewsListObject>(
+            new TypeToken<ResponseObject<NewsListObject>>() {
+            }) {
+        private int size = 0;
+        private List<NewsItem> itemList;
+
+        @Override
+        public ResponseObject<NewsListObject> convertResponse(Response response) throws Throwable {
+            Log.i("deng111", "convertResponse,response = " + response);
+            Log.i("deng111", "itemList = "+itemList.size());
+
+            int offsetFirst = -1;
+            int offsetSecond = -1;
+            int offsetThird = -1;
+            boolean findFirst = false;
+            boolean findSecond = false;
+            boolean findThird = false;
+            ResponseObject<NewsListObject> responseObject = super.convertResponse(response);
+            boolean calNew = responseObject.getResult().getPage() == 1;
+            itemList = responseObject.getResult().getList();
+            Log.i("deng111", "itemList = "+itemList.size());
+            for (NewsItem item : itemList) {
+                Log.i("deng111", "item = "+item.getContent());
+                if (item.getCounter() != null && item.getComments() != null) {
+                    String title = item.getTitle();
+                    int num = Integer.parseInt(item.getCounter());
+                    if (num > 9999) {
+                        item.setCounter("9999+");
+                    }
+                    num = Integer.parseInt(item.getComments());
+                    if (num > 999) {
+                        item.setComments("999+");
+                    }
+                } else {
+                    item.setCounter("0");
+                    item.setComments("0");
+                }
+                item.setTitle(item.getTitle().replaceAll("<.*?>", ""));
+                StringBuilder sb = new StringBuilder(
+                        Html.fromHtml(item.getHometext().replaceAll("<.*?>|[\\r|\\n]", "")));
+                if (sb.length() > 140) {
+                    item.setSummary(sb.replace(140, sb.length(), "...").toString());
+                } else {
+                    item.setSummary(sb.toString());
+                }
+                if (item.getThumb().contains("thumb")) {
+                    item.setLargeImage(
+                            item.getThumb().replaceAll("(\\.\\w{3,4})?_100x100|thumb/mini/", ""));
+                }
+
+            }
+
+            return responseObject;
+        }
+
+        /**
+         * @param result
+         */
+        @Override
+        protected void onSuccess(NewsListObject result) {
+            Log.i("deng111", "onSuccess = ");
+
+        }
+
+
+
+        @Override
+        public void onFinish() {
+
+        }
+    };
+
 
 }

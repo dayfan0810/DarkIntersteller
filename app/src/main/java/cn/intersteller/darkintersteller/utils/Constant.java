@@ -29,4 +29,12 @@ public class Constant {
      */
     public static final String BILIBILI_BANNER = BILIBILI_BASE_URL + "x/banner?plat=4&build=411007&channel=bilih5";
 
+
+    /*
+    * Cnbeta
+     */
+    public static final String CNBEA_BASE_URL = "https://www.cnbeta.com";
+    public static final String NEWS_LIST_URL = CNBEA_BASE_URL + "/home/more";
+
+
 }

@@ -1,6 +1,7 @@
 package cn.intersteller.darkintersteller.utils;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -24,8 +25,10 @@ public abstract class BaseResponseObjectResponse<T> extends BaseGsonCallback<Res
 
     @Override
     protected final void onResponse(ResponseObject<T> object) {
+        Log.i("deng111", "1111111111111111111111");
         if (object != null) {
             if ("success".equals(object.getState())) {
+                Log.i("deng111", "1111111111111111111111");
                 onSuccess(object.getResult());
             } else {
                 onError(200, null, new RuntimeException("empty ResponseObject"));

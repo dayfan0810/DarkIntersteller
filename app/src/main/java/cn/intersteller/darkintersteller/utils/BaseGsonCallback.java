@@ -17,7 +17,7 @@ public abstract class BaseGsonCallback<T> extends BaseCallback<T> {
 
     @Override
     public T convertResponse(okhttp3.Response response) throws Throwable {
-        Log.i("deng1212","response = "+response);
+        Log.i("deng111","response = "+response);
         return Toolkit.getGson().fromJson(beforeConvertSuccess(response.body().string()), type);
     }
 
@@ -29,6 +29,7 @@ public abstract class BaseGsonCallback<T> extends BaseCallback<T> {
      * @return 处理后的内容
      */
     protected String beforeConvertSuccess(String body) throws Exception {
+        Log.i("deng111","body = "+body);
         return body;
     }
 }
