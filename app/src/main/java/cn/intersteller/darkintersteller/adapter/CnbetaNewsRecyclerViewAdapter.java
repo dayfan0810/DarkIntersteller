@@ -85,11 +85,17 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
         }
         holder.cnbeta_news_item_title.setText(newsBean.getTitle());
         holder.cnbeta_news_item_date.setText(newsBean.getInputtime());
+        //下面的预览要用正则
         StringBuilder sb = new StringBuilder(
                 Html.fromHtml(newsBean.getHometext().replaceAll("<.*?>|[\\r|\\n]", "")));
         holder.cnbeta_news_item_summary.setText(sb);
-        String format = String.format(mContext.getResources().getString(R.string.view_nums), newsBean.getMview());
-        holder.cnbeta_news_item_conment_counts.setText(format);
+        //浏览次数要用占位符
+        String format1 = String.format(mContext.getResources().getString(R.string.view_nums), newsBean.getMview());
+        holder.cnbeta_news_item_view_counts.setText(format1);
+        //评论次数要用户占位符
+        String format2 = String.format(mContext.getResources().getString(R.string.conments_nums), newsBean.getComments());
+
+        holder.cnbeta_news_item_conment_counts.setText(format2);
 //        holder.cnbeta_news_item_icon.setTag(newsBean.newsIconUrl);
         if (mOnItemClickListener != null) {
             ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).cnbeta_news_item_icon, newsBean.thumb);
@@ -117,15 +123,15 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
         private final TextView cnbeta_news_item_date;
         private final TextView cnbeta_news_item_conment_counts;
         private final TextView cnbeta_news_item_summary;
-        private final ImageView cnbeta_news_item_conment_drawable;
+        private final TextView cnbeta_news_item_view_counts;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             cnbeta_news_item_icon = itemView.findViewById(R.id.cnbeta_news_item_icon);
             cnbeta_news_item_title = itemView.findViewById(R.id.cnbeta_news_item_title);
             cnbeta_news_item_date = itemView.findViewById(R.id.cnbeta_news_item_date);
-            cnbeta_news_item_conment_drawable = itemView.findViewById(R.id.cnbeta_news_item_conment_drawable);
             cnbeta_news_item_conment_counts = itemView.findViewById(R.id.cnbeta_news_item_conment_counts);
+            cnbeta_news_item_view_counts = itemView.findViewById(R.id.cnbeta_news_item_view_counts);
             cnbeta_news_item_summary = itemView.findViewById(R.id.cnbeta_news_item_summary);
         }
     }

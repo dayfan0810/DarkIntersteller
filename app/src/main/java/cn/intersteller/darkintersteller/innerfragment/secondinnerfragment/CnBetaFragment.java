@@ -142,12 +142,12 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                     for (int i = 0; i < list.length(); i++) {
                         JSONObject dataItem = (JSONObject) list.get(i);
                         String title = dataItem.optString("title");
-
                         String hometext = dataItem.optString("hometext");
                         String mview = dataItem.optString("mview");
                         String inputtime = dataItem.optString("inputtime");
                         String thumb = dataItem.optString("thumb");
                         String url_show = dataItem.optString("url_show");
+                        String comments = dataItem.optString("comments");
                         CnbetaNewsBean newsBean = new CnbetaNewsBean();
                         newsBean.setTitle(title);
                         newsBean.setHometext(hometext);
@@ -155,7 +155,8 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                         newsBean.setInputtime(inputtime);
                         newsBean.setThumb(thumb);
                         newsBean.setUrl_show(url_show);
-                        Log.i("deng1111", "url_show =  " + url_show);
+                        newsBean.setComments(comments);
+                        Log.i("deng1111", "comments =  " + comments);
                         mCnbetaNewsBeanList.add(newsBean);
                     }
 

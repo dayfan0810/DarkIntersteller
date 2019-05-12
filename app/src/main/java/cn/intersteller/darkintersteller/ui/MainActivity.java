@@ -82,11 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        startIntroAnimation();
+//        startIntroAnimation();
     }
 
     private void addFragmet() {

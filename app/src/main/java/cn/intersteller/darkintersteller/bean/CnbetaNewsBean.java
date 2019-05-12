@@ -9,6 +9,15 @@ public class CnbetaNewsBean implements Serializable {
     public String inputtime;
     public String thumb;
     public String url_show;
+    public String comments;
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
     public String getTitle() {
         return title;
