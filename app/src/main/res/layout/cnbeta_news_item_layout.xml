@@ -20,7 +20,8 @@
         android:layout_toEndOf="@id/cnbeta_news_item_icon"
         android:background="#e0e0e0">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
+            android:maxLines="2"
             android:id="@+id/cnbeta_news_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +30,10 @@
             android:textColor="#2484a5"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:typeface="sans" />
+            android:typeface="sans"
+            android:autoSizeMinTextSize="10dp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20dp"/>
 
         <TextView
             android:id="@+id/cnbeta_news_item_date"
@@ -51,12 +55,12 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:src="@drawable/ic_comment_outline_grey"
                 android:id="@+id/cnbeta_news_item_conment_img"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:paddingStart="1dp"
-                android:paddingEnd="0dp" />
+                android:paddingEnd="0dp"
+                android:src="@drawable/ic_comment_outline_grey" />
 
 
             <TextView
@@ -70,15 +74,15 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:textStyle="bold"
-                android:paddingStart="40dp"
-                android:paddingEnd="2dp"
                 android:id="@+id/cnbeta_news_item_view_counts"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="2dp"
                 android:text="@string/view_nums"
                 android:textColor="#A111"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
