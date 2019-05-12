@@ -30,7 +30,7 @@
             android:textColor="#2484a5"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:typeface="sans"
+            android:typeface="serif"
             android:autoSizeMinTextSize="10dp"
             android:autoSizeTextType="uniform"
             android:autoSizeMaxTextSize="20dp"/>
