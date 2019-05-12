@@ -1,11 +1,9 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.youth.banner.Banner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +26,6 @@ import java.util.List;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.CnbetaNewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.CnbetaNewsBean;
-import cn.intersteller.darkintersteller.ui.NewsDetailActivity;
 import cn.intersteller.darkintersteller.utils.Constant;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -44,13 +40,13 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     private View view;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private Banner mBanner;
+//    private Banner mBanner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.cnbeta_fragment, container, false);
         mSwipeRefreshLayout = view.findViewById(R.id.cnbeta_fragment_swipeRefreshLayout);
-        mBanner = view.findViewById(R.id.cnbeta_fragment_banner);
+//        mBanner = view.findViewById(R.id.cnbeta_fragment_banner);
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.blue
@@ -82,8 +78,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
 
     private void requestNews() {
-
-
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> headers = new HashMap<>();
         params.put("type", "all");
@@ -113,21 +107,26 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
             @Override
             public void onFailure(Call call, IOException e) {
-//                Message message = Message.obtain();
-//                message.what = 0;
-//                message.obj = e.getMessage();
-//                mHandler.sendMessage(message);
-//                Log.i("deng111", "onFailure: " + message.obj.toString());
+                Looper.prepare();
+                Toast.makeText(getContext(), "获取Cnbeta新闻信息失败", Toast.LENGTH_SHORT).show();
+                mSwipeRefreshLayout.setRefreshing(false);
+                Looper.loop();
+                /*
+                也可以如下
+                 getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "获取新闻信息失败", Toast.LENGTH_SHORT).show();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+                 */
             }
 
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
-//                Message message = Message.obtain();
-//                message.what = 1;
-//                message.obj = response.body().string();//string不能调用两次 被调用一次就关闭了，这里调用两次会报异常
-//                mHandler.sendMessage(message);
                 String responseText = response.body().string();
-                Log.i("deng111", "responseText =  " + responseText);
+                Log.i("deng11111", "responseText =  " + responseText);
 
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
@@ -143,7 +142,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                     for (int i = 0; i < list.length(); i++) {
                         JSONObject dataItem = (JSONObject) list.get(i);
                         String title = dataItem.optString("title");
-                        Log.i("deng111", "title =  " + title);
 
                         String hometext = dataItem.optString("hometext");
                         String mview = dataItem.optString("mview");
@@ -157,6 +155,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                         newsBean.setInputtime(inputtime);
                         newsBean.setThumb(thumb);
                         newsBean.setUrl_show(url_show);
+                        Log.i("deng1111", "url_show =  " + url_show);
                         mCnbetaNewsBeanList.add(newsBean);
                     }
 
@@ -177,12 +176,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                                         return;
                                     }
                                     CnbetaNewsBean item = newsAdapter.getItem(position);
-                                    View transitionView = view.findViewById(R.id.top_news_item_icon);
-                                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                                    intent.putExtra("newsItem", item);
-                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                            transitionView, getString(R.string.transition_news_img));
-                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
 
                                 }
 
@@ -204,79 +197,5 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                 }
             }
         });
-
-//    BaseResponseObjectResponse newsPage = new BaseResponseObjectResponse<NewsListObject>(
-//            new TypeToken<ResponseObject<NewsListObject>>() {
-//            }) {
-//        private int size = 0;
-//        private List<NewsItem> itemList;
-//
-//        @Override
-//        public ResponseObject<NewsListObject> convertResponse(Response response) throws Throwable {
-//            Log.i("deng111", "convertResponse,response = " + response);
-//            Log.i("deng111", "itemList = "+itemList.size());
-//
-//            int offsetFirst = -1;
-//            int offsetSecond = -1;
-//            int offsetThird = -1;
-//            boolean findFirst = false;
-//            boolean findSecond = false;
-//            boolean findThird = false;
-//            ResponseObject<NewsListObject> responseObject = super.convertResponse(response);
-//            boolean calNew = responseObject.getResult().getPage() == 1;
-//            itemList = responseObject.getResult().getList();
-//            Log.i("deng111", "itemList = "+itemList.size());
-//            for (NewsItem item : itemList) {
-//                Log.i("deng111", "item = "+item.getContent());
-//                if (item.getCounter() != null && item.getComments() != null) {
-//                    String title = item.getTitle();
-//                    int num = Integer.parseInt(item.getCounter());
-//                    if (num > 9999) {
-//                        item.setCounter("9999+");
-//                    }
-//                    num = Integer.parseInt(item.getComments());
-//                    if (num > 999) {
-//                        item.setComments("999+");
-//                    }
-//                } else {
-//                    item.setCounter("0");
-//                    item.setComments("0");
-//                }
-//                item.setTitle(item.getTitle().replaceAll("<.*?>", ""));
-//                StringBuilder sb = new StringBuilder(
-//                        Html.fromHtml(item.getHometext().replaceAll("<.*?>|[\\r|\\n]", "")));
-//                if (sb.length() > 140) {
-//                    item.setSummary(sb.replace(140, sb.length(), "...").toString());
-//                } else {
-//                    item.setSummary(sb.toString());
-//                }
-//                if (item.getThumb().contains("thumb")) {
-//                    item.setLargeImage(
-//                            item.getThumb().replaceAll("(\\.\\w{3,4})?_100x100|thumb/mini/", ""));
-//                }
-//
-//            }
-//
-//            return responseObject;
-//        }
-//
-//        /**
-//         * @param result
-//         */
-//        @Override
-//        protected void onSuccess(NewsListObject result) {
-//            Log.i("deng111", "onSuccess = ");
-//
-//        }
-//
-//
-//
-//        @Override
-//        public void onFinish() {
-//
-//        }
-//    };
-
-
     }
 }

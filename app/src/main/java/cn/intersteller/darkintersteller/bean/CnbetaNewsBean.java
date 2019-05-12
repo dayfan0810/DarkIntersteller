@@ -5,6 +5,10 @@ import java.io.Serializable;
 public class CnbetaNewsBean implements Serializable {
     public String title;
     public String hometext;
+    public String mview;
+    public String inputtime;
+    public String thumb;
+    public String url_show;
 
     public String getTitle() {
         return title;
@@ -54,8 +58,5 @@ public class CnbetaNewsBean implements Serializable {
         this.url_show = url_show;
     }
 
-    public String mview;
-    public String inputtime;
-    public String thumb;
-    public String url_show;
+
 }

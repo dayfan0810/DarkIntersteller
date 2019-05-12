@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.top_news_item_layout, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.cnbeta_news_item_layout, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -82,11 +83,16 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
         if (newsBean == null) {
             return;
         }
-        holder.top_news_item_title.setText(newsBean.getTitle());
-        holder.top_news_item_date.setText(newsBean.getInputtime());
-//        holder.top_news_item_img.setTag(newsBean.newsIconUrl);
+        holder.cnbeta_news_item_title.setText(newsBean.getTitle());
+        holder.cnbeta_news_item_date.setText(newsBean.getInputtime());
+        StringBuilder sb = new StringBuilder(
+                Html.fromHtml(newsBean.getHometext().replaceAll("<.*?>|[\\r|\\n]", "")));
+        holder.cnbeta_news_item_summary.setText(sb);
+        String format = String.format(mContext.getResources().getString(R.string.view_nums), newsBean.getMview());
+        holder.cnbeta_news_item_conment_counts.setText(format);
+//        holder.cnbeta_news_item_icon.setTag(newsBean.newsIconUrl);
         if (mOnItemClickListener != null) {
-            ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).top_news_item_img, newsBean.getUrl_show());
+            ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).cnbeta_news_item_icon, newsBean.thumb);
             ((ItemViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -106,15 +112,21 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView top_news_item_title;
-        private final ImageView top_news_item_img;
-        private final TextView top_news_item_date;
+        private final TextView cnbeta_news_item_title;
+        private final ImageView cnbeta_news_item_icon;
+        private final TextView cnbeta_news_item_date;
+        private final TextView cnbeta_news_item_conment_counts;
+        private final TextView cnbeta_news_item_summary;
+        private final ImageView cnbeta_news_item_conment_drawable;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            top_news_item_img = itemView.findViewById(R.id.top_news_item_icon);
-            top_news_item_title = itemView.findViewById(R.id.top_news_item_title);
-            top_news_item_date = itemView.findViewById(R.id.top_news_item_date);
+            cnbeta_news_item_icon = itemView.findViewById(R.id.cnbeta_news_item_icon);
+            cnbeta_news_item_title = itemView.findViewById(R.id.cnbeta_news_item_title);
+            cnbeta_news_item_date = itemView.findViewById(R.id.cnbeta_news_item_date);
+            cnbeta_news_item_conment_drawable = itemView.findViewById(R.id.cnbeta_news_item_conment_drawable);
+            cnbeta_news_item_conment_counts = itemView.findViewById(R.id.cnbeta_news_item_conment_counts);
+            cnbeta_news_item_summary = itemView.findViewById(R.id.cnbeta_news_item_summary);
         }
     }
 }
