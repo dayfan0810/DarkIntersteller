@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
@@ -27,25 +29,6 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
         this.mNewsBeans = beansList;
         this.mContext = context;
 //        notifyDataSetChanged();
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                    //停止滚动时加载
-//                    mImageLoader.load(manager.findFirstVisibleItemPosition(),
-//                            manager.findLastVisibleItemPosition());
-
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
     }
 
     public interface OnItemClickListener {
@@ -134,5 +117,14 @@ public class CnbetaNewsRecyclerViewAdapter extends RecyclerView.Adapter<CnbetaNe
             cnbeta_news_item_view_counts = itemView.findViewById(R.id.cnbeta_news_item_view_counts);
             cnbeta_news_item_summary = itemView.findViewById(R.id.cnbeta_news_item_summary);
         }
+    }
+
+    private List<CnbetaNewsBean> data = new ArrayList<>();
+    public List<CnbetaNewsBean> getData() {
+        return data;
+    }
+
+    public void setData(List<CnbetaNewsBean> data) {
+        this.data = data;
     }
 }

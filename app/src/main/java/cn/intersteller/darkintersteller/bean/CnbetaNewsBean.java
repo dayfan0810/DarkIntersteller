@@ -5,17 +5,25 @@ import java.io.Serializable;
 public class CnbetaNewsBean implements Serializable {
     public String title;
     public String hometext;
-    public String mview;
+    public int mview;
     public String inputtime;
     public String thumb;
     public String url_show;
-    public String comments;
+    public int comments;
 
-    public String getComments() {
+    public int getMview() {
+        return mview;
+    }
+
+    public void setMview(int mview) {
+        this.mview = mview;
+    }
+
+    public int getComments() {
         return comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(int comments) {
         this.comments = comments;
     }
 
@@ -35,13 +43,6 @@ public class CnbetaNewsBean implements Serializable {
         this.hometext = hometext;
     }
 
-    public String getMview() {
-        return mview;
-    }
-
-    public void setMview(String mview) {
-        this.mview = mview;
-    }
 
     public String getInputtime() {
         return inputtime;
