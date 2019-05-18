@@ -1,5 +1,6 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -23,8 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
+import cn.intersteller.darkintersteller.WebGrabber.CNBETA.CnbetaNewsGrabber;
 import cn.intersteller.darkintersteller.adapter.CnbetaNewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.CnbetaNewsBean;
+import cn.intersteller.darkintersteller.ui.CnbetaNewsDetailActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -130,7 +133,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                             newsBean.setThumb(thumb);
                             newsBean.setUrl_show(url_show);
                             newsBean.setComments(comments);
-                            Log.i("deng1111", "comments =  " + comments);
+//                            Log.i("deng1111", "comments =  " + comments);
                             mCnbetaNewsBeanList.add(newsBean);
                         }
 
@@ -148,22 +151,28 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 //                                newsAdapter.addAll(mCnbetaNewsBeanList);
 //                                newsAdapter.notifyItemRangeInserted(positionStart, mCnbetaNewsBeanList.size());
                                 newsAdapter.notifyDataSetChanged();
-                                newsAdapter.setmOnItemClickListener(new CnbetaNewsRecyclerViewAdapter.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(View view, int position) {
-                                        if (mCnbetaNewsBeanList.size() <= 0) {
-                                            return;
-                                        }
-                                        CnbetaNewsBean item = newsAdapter.getItem(position);
-
-                                    }
-
-                                    @Override
-                                    public void onItemLongClick(View view, int position) {
-
-
-                                    }
-                                });
+//                                newsAdapter.setmOnItemClickListener(new CnbetaNewsRecyclerViewAdapter.OnItemClickListener() {
+//                                    @Override
+//                                    public void onItemClick(View view, int position) {
+//                                        if (mCnbetaNewsBeanList.size() <= 0) {
+//                                            return;
+//                                        }
+//                                        Log.i("deng2222", "onItemClick =  ");
+//                                        CnbetaNewsBean item = newsAdapter.getItem(position);
+//                                        View transitionView = view.findViewById(R.id.cnbeta_news_item_icon);
+//                                        Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+//                                        intent.putExtra("newsItem", item);
+//                                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+//                                                transitionView, getString(R.string.transition_news_img));
+//                                        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+//                                    }
+//
+//                                    @Override
+//                                    public void onItemLongClick(View view, int position) {
+//
+//
+//                                    }
+//                                });
 //                                mRecyclerView.setAdapter(newsAdapter);
                                 mSwipeRefreshLayout.setRefreshing(false);
 
@@ -222,6 +231,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 String responseText = response.body().string();
+                Log.i("deng111", "responseText =  " + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
                     String state = jsonObject.optString("state");
@@ -251,7 +261,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                         newsBean.setThumb(thumb);
                         newsBean.setUrl_show(url_show);
                         newsBean.setComments(comments);
-                        Log.i("deng1111", "comments =  " + comments);
+//                        Log.i("deng1111", "comments =  " + comments);
                         mCnbetaNewsBeanList.add(newsBean);
                     }
 
@@ -272,7 +282,12 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                                         return;
                                     }
                                     CnbetaNewsBean item = newsAdapter.getItem(position);
+                                    CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
+                                    ArrayList cnbetaNewsBeanByCallable = mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
 
+                                    Intent intent = new Intent(getActivity(), CnbetaNewsDetailActivity.class);
+                                    intent.putExtra("newsItem", item);
+                                    startActivity(intent);
 
                                 }
 

@@ -15,7 +15,7 @@
     <string name="retry">重试</string>
     <string name="publish_time">发布时间：%1$s</string>
     <string name="play_immediately">立即播放</string>
-    <string name="conments_nums">%1$s条评论</string>
-    <string name="view_nums">%1$s次浏览</string>
+    <string name="conments_nums">%1$d条评论</string>
+    <string name="view_nums">%1$d次浏览</string>
 
 </resources>

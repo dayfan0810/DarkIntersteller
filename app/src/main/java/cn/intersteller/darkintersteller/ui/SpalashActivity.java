@@ -20,7 +20,7 @@ public class SpalashActivity extends Activity {
                 // 关闭启动画面
                 finish();
             }
-        }, 1500);
+        }, 600);
 
     }
 }
