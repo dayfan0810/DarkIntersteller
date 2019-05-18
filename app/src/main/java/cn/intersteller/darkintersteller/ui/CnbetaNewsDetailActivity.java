@@ -50,7 +50,7 @@ public class CnbetaNewsDetailActivity extends Activity {
 //        wvContent.removeJavascriptInterface("accessibilityTraversal");
 //        wvContent.removeJavascriptInterface("accessibility");
 
-        String colorString = Integer.toHexString(-15436881);
+        String colorString = Integer.toHexString(-15436882);
         Log.i("dengtitleColor", "colorString.substring(2, colorString.length() = " + colorString.substring(2, colorString.length()));
         //
         Toast.makeText(this, "使用jsoup来填充此处正文内容，就不开发了", Toast.LENGTH_LONG).show();
