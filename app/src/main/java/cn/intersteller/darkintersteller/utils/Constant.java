@@ -14,6 +14,8 @@ public class Constant {
     public static final String NETEASE_TOP_MV = NETEASEBASE + "top/mv?limit=99";
     //banner
     public static final String NETEASE_BANNER = NETEASEBASE+"banner";
+    //推荐 mv
+    public static final String NETEASE_PERSONALIZED = NETEASEBASE+"/personalized/mv";
     //邮箱登录:/login?email=xxx@163.com&password=yyy
     public static final String NETEASE_LOGIN = NETEASEBASE+"login?email=xxx@163.com&password=yyy";
 

@@ -1,5 +1,7 @@
 package cn.intersteller.darkintersteller.utils;
 
+import android.database.Observable;
+
 import java.util.HashMap;
 
 import okhttp3.Headers;
@@ -13,6 +15,7 @@ public class HttpUtil {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(address).build();
         client.newCall(request).enqueue(callback);
+
     }
 
     public static Request makeRequest(int page) {
