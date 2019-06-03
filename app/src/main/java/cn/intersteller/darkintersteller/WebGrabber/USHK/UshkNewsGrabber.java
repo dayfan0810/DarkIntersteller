@@ -57,9 +57,6 @@ public class UshkNewsGrabber {
 
 
     public ArrayList getUSHKNewsBeanDerectely() {
-
-        Log.w("deng4", "Test");
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -85,8 +82,7 @@ public class UshkNewsGrabber {
                 }
             }
         }).start();
-
-        return null;
+        return mUSHKNewsBeans;
     }
 
 }

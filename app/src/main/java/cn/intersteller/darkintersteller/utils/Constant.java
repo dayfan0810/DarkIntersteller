@@ -42,5 +42,13 @@ public class Constant {
     public static final String CNBEA_BASE_URL = "https://www.cnbeta.com";
     public static final String CNBETA_NEWS_LIST_URL = CNBEA_BASE_URL + "/home/more";
 
+    /*
+    jin10
+     */
+    public static final String JIN10_BASE_URL = "https://www.jin10.com/";
 
+    /*
+    美港电讯
+     */
+    public static final String USHKNEWS_BASE_URL = "http://www.ushknews.com/";
 }

@@ -14,7 +14,7 @@
             android:layout_width="2.0dip"
             android:layout_height="13.0dip"
             android:layout_gravity="center_horizontal"
-            android:background="#5b5b5b" />
+            android:background="#87b5b2" />
 
         <TextView
             android:id="@+id/market_live_time"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="2.0dip"
-            android:textColor="#123123"
+            android:textColor="#87b5b2"
             android:textSize="14.0sp" />
 
         <View
@@ -30,7 +30,7 @@
             android:layout_height="0.0dip"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1.0"
-            android:background="#5b5b5b" />
+            android:background="#87b5b2" />
     </LinearLayout>
 
     <LinearLayout

@@ -53,7 +53,7 @@ public class CnbetaNewsDetailActivity extends Activity {
         String colorString = Integer.toHexString(-15436882);
         Log.i("dengtitleColor", "colorString.substring(2, colorString.length() = " + colorString.substring(2, colorString.length()));
         //
-        Toast.makeText(this, "使用jsoup来填充此处正文内容，就不开发了", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "使用jsoup来填充此处正文内容，就不开发了", Toast.LENGTH_SHORT).show();
         String data = String.format(Locale.CHINA, webTemplate, colorString.substring(2, colorString.length()),
                 true, true, true, "light", mNews.getTitle(), "",
                 mNews.getInputtime(), mNews.getHometext(), "使用jsoup来填充此处正文内容，时间不够就不开发了");

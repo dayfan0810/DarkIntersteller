@@ -42,4 +42,6 @@ public class MyApplication extends Application {
         OkGo.getInstance().init(this)//
                 .setOkHttpClient(builder.build()).setCacheMode(CacheMode.NO_CACHE).addCommonHeaders(headers); // 设置全局公共头
     }
+
+
 }

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.WebGrabber.CNBETA.CnbetaNewsGrabber;
 import cn.intersteller.darkintersteller.adapter.CnbetaNewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.CnbetaNewsBean;
 import cn.intersteller.darkintersteller.ui.CnbetaNewsDetailActivity;
@@ -33,7 +32,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
-import static cn.intersteller.darkintersteller.utils.HttpUtil.makeRequest;
+import static cn.intersteller.darkintersteller.utils.HttpUtil.makeCnbetaRequest;
 
 
 public class CnBetaFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -42,7 +41,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     private RecyclerView mRecyclerView;
     CnbetaNewsRecyclerViewAdapter newsAdapter;
     private int firstPage = 1;
-    private int count = 0;
+    private int page_count = 0;
     List<CnbetaNewsBean> mCnbetaNewsBeanList;
 
     @Override
@@ -78,8 +77,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && mLastVisibleItemPosition + 1 == newsAdapter.getItemCount()) {
                     //发送网络请求获取更多数据
-                    Log.i("deng2222", "!isLoadingData = ");
-
                     sendMoreRequest();
 //                    if (!recyclerView.canScrollVertically(1)) {
 //                    }
@@ -89,8 +86,8 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
         private void sendMoreRequest() {
             OkHttpClient client = new OkHttpClient();
-            count++;
-            final Call call = client.newCall(makeRequest(firstPage + count));
+            page_count++;
+            final Call call = client.newCall(makeCnbetaRequest(firstPage + page_count));
             call.enqueue(new Callback() {
 
                 @Override
@@ -107,7 +104,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                     try {
                         JSONObject jsonObject = new JSONObject(responseText);
                         String state = jsonObject.optString("state");
-                        Log.i("deng111", "state =  " + state);
 
                         if (!state.equals("success")) {
                             return;
@@ -140,13 +136,10 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getContext(), "加载第" + (count) + "页", Toast.LENGTH_SHORT).show();
-                                Log.i("deng2222", "count =  " + count);
+                                Toast.makeText(getContext(), "加载第" + (page_count) + "页", Toast.LENGTH_SHORT).show();
 //                                LinearLayoutManager manager = new LinearLayoutManager(getContext());
 //                                mRecyclerView.setLayoutManager(manager);
-                                Log.i("deng2222", "mNewsBeanList.size =  " + mCnbetaNewsBeanList.size());
                                 int positionStart = newsAdapter.getItemCount();
-                                Log.i("deng2222", "positionStart =  " + positionStart);
 
 //                                newsAdapter.addAll(mCnbetaNewsBeanList);
 //                                newsAdapter.notifyItemRangeInserted(positionStart, mCnbetaNewsBeanList.size());
@@ -207,7 +200,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
     private void requestNews() {
         OkHttpClient client = new OkHttpClient();
-        final Call call = client.newCall(makeRequest(firstPage));
+        final Call call = client.newCall(makeCnbetaRequest(firstPage));
         call.enqueue(new Callback() {
             //            List<CnbetaNewsBean> mCnbetaNewsBeanList = new ArrayList<>();
             @Override
@@ -231,19 +224,15 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 String responseText = response.body().string();
-                Log.i("deng111", "responseText =  " + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
                     String state = jsonObject.optString("state");
-                    Log.i("deng111", "state =  " + state);
-
                     if (!state.equals("success")) {
                         return;
                     }
                     //使用打断点找到text.右键赋值value
                     JSONObject jsonObject_result = jsonObject.getJSONObject("result");
                     JSONArray list = jsonObject_result.getJSONArray("list");
-                    Log.i("deng333", "list111 =  " + list);
                     for (int i = 0; i < list.length(); i++) {
                         JSONObject dataItem = (JSONObject) list.get(i);
                         String title = dataItem.optString("title");
@@ -270,21 +259,17 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                         public void run() {
                             LinearLayoutManager manager = new LinearLayoutManager(getContext());
                             mRecyclerView.setLayoutManager(manager);
-                            Log.i("deng111", "mNewsBeanList.size =  " + mCnbetaNewsBeanList.size());
 
                             newsAdapter = new CnbetaNewsRecyclerViewAdapter(getContext(), mCnbetaNewsBeanList, mRecyclerView, manager);
                             newsAdapter.setmOnItemClickListener(new CnbetaNewsRecyclerViewAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, int position) {
-                                    Log.i("deng111", "onItemClick ");
                                     if (mCnbetaNewsBeanList.size() <= 0) {
-                                        Log.i("deng111", "onItemClick no data, return");
                                         return;
                                     }
                                     CnbetaNewsBean item = newsAdapter.getItem(position);
-                                    CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
-                                    ArrayList cnbetaNewsBeanByCallable = mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
-
+//                                    CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
+//                                    ArrayList cnbetaNewsBeanByCallable = mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
                                     Intent intent = new Intent(getActivity(), CnbetaNewsDetailActivity.class);
                                     intent.putExtra("newsItem", item);
                                     startActivity(intent);
@@ -293,9 +278,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 
                                 @Override
                                 public void onItemLongClick(View view, int position) {
-                                    Log.i("deng", "onItemLongClick ");
-
-
                                 }
                             });
                             mRecyclerView.setAdapter(newsAdapter);
@@ -315,7 +297,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     @Override
     public void onStop() {
         super.onStop();
-        count = 0;
+        page_count = 0;
     }
 
     @Override

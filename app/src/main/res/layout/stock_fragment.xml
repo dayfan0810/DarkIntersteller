@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/stock_fragment_swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/stock_fragment_banner"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="130dp"-->
+            <!--android:background="@color/cardview_dark_background"-->
+            <!--app:indicator_drawable_selected="@mipmap/red"-->
+            <!--app:indicator_drawable_unselected="@mipmap/grey"-->
+            <!--app:indicator_height="9dp"-->
+            <!--app:indicator_margin="3dp"-->
+            <!--app:indicator_width="9dp"-->
+            <!--app:is_auto_play="true" />-->
+
+            <android.support.v7.widget.RecyclerView
+                android:scrollbars="vertical"
+                android:id="@+id/stock_fragment_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="2dp" />
+
+
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>
