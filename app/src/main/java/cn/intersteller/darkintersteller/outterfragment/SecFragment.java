@@ -48,6 +48,7 @@ public class SecFragment extends Fragment {
         innerFragmentPagerAdapter = new InnerFragmentPagerAdapter(getChildFragmentManager(), fragments, mTitleList);
         innerFragmentPagerAdapter.notifyDataSetChanged();
         mSecond_viewPager.setAdapter(innerFragmentPagerAdapter);
+        mSecond_viewPager.setOffscreenPageLimit(3);
         msecond_tablayout.setTabMode(TabLayout.MODE_FIXED);
         msecond_tablayout.setupWithViewPager(mSecond_viewPager);
 

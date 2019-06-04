@@ -46,7 +46,7 @@
             android:lineSpacingMultiplier="1.2"
             android:paddingTop="13.0dip"
             android:textColor="#000000"
-            android:textSize="14.0sp" />
+            android:textSize="16.0sp" />
 
         <View
             android:layout_width="fill_parent"
