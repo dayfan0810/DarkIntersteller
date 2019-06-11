@@ -1,6 +1,8 @@
 package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -270,8 +272,11 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                                     CnbetaNewsBean item = newsAdapter.getItem(position);
 //                                    CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
 //                                    ArrayList cnbetaNewsBeanByCallable = mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
-                                    Intent intent = new Intent(getActivity(), CnbetaNewsDetailActivity.class);
-                                    intent.putExtra("newsItem", item);
+//                                    Intent intent = new Intent(getActivity(), CnbetaNewsDetailActivity.class);
+//                                    intent.putExtra("newsItem", item);
+                                    Uri uri = Uri.parse(item.getUrl_show());
+                                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                                    intent.setComponent(new ComponentName("com.android.chrome","org.chromium.chrome.browser.ChromeTabbedActivity"));
                                     startActivity(intent);
 
                                 }
