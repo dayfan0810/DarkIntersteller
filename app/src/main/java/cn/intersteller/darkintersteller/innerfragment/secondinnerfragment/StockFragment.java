@@ -105,12 +105,12 @@ public class StockFragment extends Fragment implements View.OnClickListener, Swi
                 });
                 newsAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(newsAdapter);
-                mSwipeRefreshLayout.setRefreshing(false);
+//                mSwipeRefreshLayout.setRefreshing(false);
 
             }
         });
 //        ushkNewsBeanByCallable.clear();
-//        mSwipeRefreshLayout.setRefreshing(false);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
 

@@ -274,10 +274,19 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
 //                                    ArrayList cnbetaNewsBeanByCallable = mCnbetaNewsGrabber.getCnbetaNewsBeanByCallable();
 //                                    Intent intent = new Intent(getActivity(), CnbetaNewsDetailActivity.class);
 //                                    intent.putExtra("newsItem", item);
-                                    Uri uri = Uri.parse(item.getUrl_show());
-                                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                                    intent.setComponent(new ComponentName("com.android.chrome","org.chromium.chrome.browser.ChromeTabbedActivity"));
-                                    startActivity(intent);
+                                    Log.i("deng", "item.getUrl_show() = " + item.getUrl_show());
+                                    if (!item.getUrl_show().startsWith("http")) {
+
+                                        Uri uri1 = Uri.parse(item.getUrl_show().substring(5));
+                                        Intent intent1 = new Intent(Intent.ACTION_VIEW, uri1);
+                                        intent1.setComponent(new ComponentName("com.android.chrome", "org.chromium.chrome.browser.ChromeTabbedActivity"));
+                                        startActivity(intent1);
+                                    }else {
+                                        Uri uri2 = Uri.parse(item.getUrl_show());
+                                        Intent intent2 = new Intent(Intent.ACTION_VIEW, uri2);
+                                        intent2.setComponent(new ComponentName("com.android.chrome", "org.chromium.chrome.browser.ChromeTabbedActivity"));
+                                        startActivity(intent2);
+                                    }
 
                                 }
 

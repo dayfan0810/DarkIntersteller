@@ -12,7 +12,14 @@ public class SpalashActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 利用消息处理器实现延迟跳转到登录窗口
-        new Handler().postDelayed(new Runnable() {
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().post(new Runnable() {
             @Override
             public void run() {
                 // 启动登录窗口
@@ -20,7 +27,6 @@ public class SpalashActivity extends Activity {
                 // 关闭启动画面
                 finish();
             }
-        }, 600);
-
+        });
     }
 }

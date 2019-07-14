@@ -57,8 +57,8 @@ public class CnbetaNewsDetailActivity extends Activity {
         String data = String.format(Locale.CHINA, webTemplate, colorString.substring(2, colorString.length()),
                 true, true, true, "light", mNews.getTitle(), "",
                 mNews.getInputtime(), mNews.getHometext(), "使用jsoup来填充此处正文内容，时间不够就不开发了");
-        wvContent.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
-//        wvContent.loadUrl(newsUrl);
+//        wvContent.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
+        wvContent.loadUrl(newsUrl);
     }
 
     private void initWebViewSettings() {
