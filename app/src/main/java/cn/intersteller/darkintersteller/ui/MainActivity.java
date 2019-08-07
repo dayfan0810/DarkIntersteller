@@ -1,5 +1,6 @@
 package cn.intersteller.darkintersteller.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +26,7 @@ import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
 import cn.intersteller.darkintersteller.outterfragment.SecFragment;
 import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
+import cn.intersteller.darkintersteller.test.ImmersionTestActivity;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -64,8 +66,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), ImmersionTestActivity.class);
+                startActivity(intent);
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
         addFragmet();

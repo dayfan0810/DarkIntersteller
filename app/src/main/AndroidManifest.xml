@@ -35,6 +35,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".ui.CnbetaNewsDetailActivity"/>
+        <activity android:name=".test.ImmersionTestActivity"/>
 
     </application>
 
