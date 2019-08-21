@@ -6,5 +6,5 @@ public interface IUser {
 
 	String getPasswd();
 
-	int checkUserValidity(String name, String passwd);
+//	int checkUserValidity(String name, String passwd);
 }

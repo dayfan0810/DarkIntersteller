@@ -20,11 +20,11 @@ public class UserModel implements IUser {
 		return passwd;
 	}
 
-	@Override
-	public int checkUserValidity(String name, String passwd){
-		if (name==null||passwd==null||!name.equals(getName())||!passwd.equals(getPasswd())){
-			return -1;
-		}
-		return 0;
-	}
+//	@Override
+//	public int checkUserValidity(String name, String passwd){
+//		if (name==null||passwd==null||!name.equals(getName())||!passwd.equals(getPasswd())){
+//			return -1;
+//		}
+//		return 0;
+//	}
 }

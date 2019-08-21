@@ -18,21 +18,21 @@
             android:name="cn.intersteller.darkintersteller.ui.SpalashActivity"
 
             android:theme="@style/ColorTranslucentTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".ui.MainActivity" />
         <activity android:name="cn.intersteller.darkintersteller.ui.NewsDetailActivity" />
         <activity android:name="cn.intersteller.darkintersteller.ui.MvDetailActivity" />
         <activity android:name=".login.LoginActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.CnbetaNewsDetailActivity"/>
         <activity android:name=".test.ImmersionTestActivity"/>

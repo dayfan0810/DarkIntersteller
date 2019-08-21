@@ -1,5 +1,6 @@
 package cn.intersteller.darkintersteller.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,8 @@ import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.login.presenter.ILoginPresenter;
 import cn.intersteller.darkintersteller.login.presenter.LoginPresenterCompl;
 import cn.intersteller.darkintersteller.login.view.ILoginView;
+import cn.intersteller.darkintersteller.ui.MainActivity;
+import cn.intersteller.darkintersteller.ui.SpalashActivity;
 
 
 public class LoginActivity extends AppCompatActivity implements ILoginView, View.OnClickListener {
@@ -19,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     private EditText editUser;
     private EditText editPass;
     private Button btnLogin;
+    private Button skip_login_login;
     ILoginPresenter loginPresenter;
     private ProgressBar progressBar;
 
@@ -32,9 +36,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         editPass = (EditText) this.findViewById(R.id.et_login_password);
         btnLogin = (Button) this.findViewById(R.id.btn_login_login);
         progressBar = (ProgressBar) this.findViewById(R.id.progress_login);
+        skip_login_login = (Button) this.findViewById(R.id.skip_login_login);
 
         //set listener
         btnLogin.setOnClickListener(this);
+        skip_login_login.setOnClickListener(this);
 
         //init
         loginPresenter = new LoginPresenterCompl(this);
@@ -48,6 +54,9 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                 loginPresenter.setProgressBarVisiblity(View.VISIBLE);
                 btnLogin.setEnabled(false);
                 loginPresenter.doLogin(editUser.getText().toString(), editPass.getText().toString());
+                break;
+            case R.id.skip_login_login:
+                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }
@@ -64,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         btnLogin.setEnabled(true);
         if (result) {
             Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
         } else
             Toast.makeText(this, "Login Fail, code = " + code, Toast.LENGTH_SHORT).show();
     }

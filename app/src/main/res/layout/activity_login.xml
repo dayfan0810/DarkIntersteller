@@ -104,6 +104,20 @@
         android:textColor="@color/white"
         android:textSize="16sp" />
 
+    <Button
+        android:id="@+id/skip_login_login"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/text_color_grey"
+        android:gravity="center"
+        android:text="跳过登录"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
+
     <ProgressBar
         android:id="@+id/progress_login"
         android:layout_width="match_parent"
