@@ -71,6 +71,9 @@ public class StockFragment extends Fragment implements View.OnClickListener, Swi
         //1.USHKNEWS
 //        ArrayList ushkNewsBeanByCallable = mUshkNewsGrabber.getUSHKNewsBeanDerectely();
         ArrayList ushkNewsBeanByCallable = mUshkNewsGrabber.getUSHKNewsBeanByCallable();
+        if (ushkNewsBeanByCallable == null) {
+            return;
+        }
         for (int i = 0; i < ushkNewsBeanByCallable.size(); i++) {
             USHKNewsBean uSHKNewsBean = (USHKNewsBean) ushkNewsBeanByCallable.get(i);
             String text = uSHKNewsBean.getText();
