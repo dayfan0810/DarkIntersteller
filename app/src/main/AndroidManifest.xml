@@ -24,6 +24,15 @@
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
+        <activity-alias
+            android:name="RichangDakaiActivity"
+            android:targetActivity=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
         <activity android:name=".ui.MainActivity" />
         <activity android:name="cn.intersteller.darkintersteller.ui.NewsDetailActivity" />
         <activity android:name="cn.intersteller.darkintersteller.ui.MvDetailActivity" />
