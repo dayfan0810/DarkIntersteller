@@ -2,25 +2,27 @@ package cn.intersteller.darkintersteller.login.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.youth.banner.BannerConfig;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
-import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.RecommendFragment;
 import cn.intersteller.darkintersteller.login.model.IUser;
 import cn.intersteller.darkintersteller.login.view.ILoginView;
 import cn.intersteller.darkintersteller.utils.Constant;
-import cn.intersteller.darkintersteller.utils.HttpUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 
 
@@ -32,7 +34,12 @@ public class LoginPresenterCompl implements ILoginPresenter {
     public LoginPresenterCompl(ILoginView iLoginView) {
         this.iLoginView = iLoginView;
 //		initUser();
-        handler = new Handler(Looper.getMainLooper());
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
     }
 
     @Override
@@ -52,7 +59,9 @@ public class LoginPresenterCompl implements ILoginPresenter {
 //					iLoginView.onLoginResult(result, code);
 //			}
 //		}, 5000);
+
         StringBuilder userAndPasswordUrl = getUserAndPasswordUrl(name, passwd);
+//        Log.i("dengsb", "userAndPasswordUrl = " + userAndPasswordUrl.toString());
         asyncValidate(userAndPasswordUrl.toString());
     }
 
@@ -76,42 +85,52 @@ public class LoginPresenterCompl implements ILoginPresenter {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                HttpUtil.sendOkHttpRequest(account, new Callback() {
-
-
+                ConcurrentHashMap<String, List<Cookie>> cookieStore = new ConcurrentHashMap<>();
+                OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
                     @Override
-                    public void onFailure(Call call, IOException e) {
+                    public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+                        System.out.println("deng1 cookies url: " + cookies.toString());
+//                        for (Cookie cookie : cookies)
+//                        {
+//                            System.out.println("cookies: " + cookie.toString());
+//                        }
+                        cookieStore.put(url.host(), cookies);
 
                     }
 
                     @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        final String responseText = response.body().string();
-                        Log.i("dengsb", responseText);
+                    public List<Cookie> loadForRequest(HttpUrl url) {
+                        List<Cookie> cookies = cookieStore.get(url.host());
+                        return cookies != null ? cookies : new ArrayList<Cookie>();
+                    }
+                }).build();
+                Request request = new Request.Builder().url(account).build();
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.i("deng-impl", "onFailure");
+                    }
 
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                        final String responseText = response.body().string();
                         try {
                             boolean isLoginSuccess = true;
                             JSONObject jsonObject = new JSONObject(responseText);
                             String resultCode = (String) jsonObject.optString("code");
+                            Log.i("deng-impl", "resultCode = " + resultCode);
                             if (!resultCode.equals("200")) {
                                 isLoginSuccess = false;
                                 return;
                             }
-                            final Boolean result = isLoginSuccess;
+                            final Boolean result = true;
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    iLoginView.onLoginResult(result, 0);
+                                    iLoginView.onLoginResult(result, Integer.parseInt(resultCode));
                                 }
                             });
-
-//                            final JSONArray bannersData = jsonObject.getJSONArray("banners");
-//                            for (int i = 0; i < bannersData.length(); i++) {
-//                                JSONObject dataItem = (JSONObject) bannersData.get(i);
-//                                String cover = dataItem.optString("imageUrl");
-//                                String typeTitle = dataItem.optString("typeTitle");
-//                            }
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
