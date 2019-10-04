@@ -66,12 +66,14 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
 
     public void requestHotMusic() {
         //一次性获取前100名
+        Log.i("deng", "Constant.NETEASE_TOP_MV = " + Constant.NETEASE_TOP_MV);
         HttpUtil.sendOkHttpRequest(Constant.NETEASE_TOP_MV, new Callback() {
 
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
+                Log.i("deng-onResponse", "responseText = " + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
                     String resultCode = (String) jsonObject.optString("code");
@@ -103,6 +105,9 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
                         dataBean.setPlayCount(playCount);
                         dataBean.setLastRank(lastRank);
                         mHotMusicBeanList.add(dataBean);
+                    }
+                    if (getActivity() == null){
+                        return;
                     }
                     getActivity().runOnUiThread(new Runnable() {
 
@@ -150,10 +155,15 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
 
             @Override
             public void onFailure(Call call, IOException e) {
+                if (getActivity() == null) {
+                    Log.i("deng-HotMVFragment", "onFailure1");
+                    return;
+                }
+                Log.i("deng-HotMVFragment", "onFailure2");
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(), "获取MV信息失败", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "获取MV信息失败", Toast.LENGTH_SHORT).show();
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });

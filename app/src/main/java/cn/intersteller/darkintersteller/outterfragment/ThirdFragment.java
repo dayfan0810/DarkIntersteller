@@ -64,7 +64,7 @@ public class ThirdFragment extends Fragment {
         innerFragmentPagerAdapter.notifyDataSetChanged();
         mFrirendsTabLayout = v.findViewById(R.id.friends_tab);
         mFiendsViewPager.setAdapter(innerFragmentPagerAdapter);
-        mFiendsViewPager.setOffscreenPageLimit(2);
+//        mFiendsViewPager.setOffscreenPageLimit(2);
         mFrirendsTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mFrirendsTabLayout.setupWithViewPager(mFiendsViewPager);
         mFrirendsTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

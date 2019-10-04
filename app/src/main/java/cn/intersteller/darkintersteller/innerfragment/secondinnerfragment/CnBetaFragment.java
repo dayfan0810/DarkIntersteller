@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +26,6 @@ import java.util.List;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.CnbetaNewsRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.CnbetaNewsBean;
-import cn.intersteller.darkintersteller.ui.CnbetaNewsDetailActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -45,6 +42,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     private int firstPage = 1;
     private int page_count = 0;
     List<CnbetaNewsBean> mCnbetaNewsBeanList;
+    private boolean hasStarted = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,9 +59,31 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
         mRecyclerView = view.findViewById(R.id.cnbeta_fragment_recyclerView);
         mRecyclerView.addOnScrollListener(monScrollListener);
         mRecyclerView.setHasFixedSize(true);
-
-        onRefresh();
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        Log.i("dengCB", "setUserVisibleHint " + isVisibleToUser);
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            hasStarted = true;
+            onRefresh();
+        } else {
+            if (hasStarted) {
+                hasStarted = false;
+            }
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        if (mCnbetaNewsBeanList != null) {
+            mCnbetaNewsBeanList.clear();
+            requestNews();
+        }else {
+            requestNews();
+        }
     }
 
     private int mLastVisibleItemPosition = -1;
@@ -188,18 +208,6 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     }
 
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onRefresh() {
-        mCnbetaNewsBeanList.clear();
-        requestNews();
-    }
-
-
     private void requestNews() {
         OkHttpClient client = new OkHttpClient();
         final Call call = client.newCall(makeCnbetaRequest(firstPage));
@@ -281,7 +289,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                                         Intent intent1 = new Intent(Intent.ACTION_VIEW, uri1);
                                         intent1.setComponent(new ComponentName("com.android.chrome", "org.chromium.chrome.browser.ChromeTabbedActivity"));
                                         startActivity(intent1);
-                                    }else {
+                                    } else {
                                         Uri uri2 = Uri.parse(item.getUrl_show());
                                         Intent intent2 = new Intent(Intent.ACTION_VIEW, uri2);
                                         intent2.setComponent(new ComponentName("com.android.chrome", "org.chromium.chrome.browser.ChromeTabbedActivity"));

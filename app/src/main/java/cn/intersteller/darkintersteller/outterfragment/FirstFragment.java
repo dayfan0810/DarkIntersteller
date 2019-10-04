@@ -56,10 +56,10 @@ public class FirstFragment extends Fragment {
         MyAdapter myAdapter = new MyAdapter(getChildFragmentManager());
         myAdapter.notifyDataSetChanged();
         mDisco_viewPager.setAdapter(myAdapter);
-        mDisco_viewPager.setOffscreenPageLimit(2);
+//        mDisco_viewPager.setOffscreenPageLimit(2);
         mDisco_tab.setTabMode(TabLayout.MODE_FIXED);
         mDisco_tab.setupWithViewPager(mDisco_viewPager);
-        Log.i(TAG,"onCreateView执行");
+        Log.i("deng"+TAG,"onCreateView执行");
         return v;
     }
 

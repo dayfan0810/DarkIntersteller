@@ -10,7 +10,7 @@ public class Constant {
     static boolean isWifi = Toolkit.isWifi(MyApplication.getInstance());
     //网易云音乐接口
 //    public static final String NETEASEBASE = "http://musicapi.leanapp.cn/";
-    public static final String NETEASEBASE = isWifi ? "http://10.1.1.182:3000/" : "http://15527907583.xicp.net:33910/";
+    public static final String NETEASEBASE = isWifi ? "http://10.1.1.180:3000/" : "http://15527907583.xicp.net:33910/";
     //MV详情,根据Item的Id
     public static final String NETEASE_MV_ID = "mv?mvid=";
     //mv 排行

@@ -25,13 +25,14 @@
             <!--app:indicator_margin="3dp"-->
             <!--app:indicator_width="9dp"-->
             <!--app:is_auto_play="true" />-->
+<!--            <include layout="@layout/base_loading" />-->
 
             <android.support.v7.widget.RecyclerView
-                android:scrollbars="vertical"
                 android:id="@+id/cnbeta_fragment_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:dividerHeight="2dp" />
+                android:dividerHeight="2dp"
+                android:scrollbars="vertical" />
 
 
         </RelativeLayout>

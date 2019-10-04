@@ -3,8 +3,6 @@ package cn.intersteller.darkintersteller.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,16 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import cn.intersteller.darkintersteller.MyApplication;
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.WebGrabber.CNBETA.CnbetaNewsGrabber;
-import cn.intersteller.darkintersteller.WebGrabber.USHK.UshkNewsGrabber;
 import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
-import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
-import cn.intersteller.darkintersteller.outterfragment.SecFragment;
-import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
 import cn.intersteller.darkintersteller.test.ImmersionTestActivity;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
@@ -39,15 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ViewPager mVpMianActivity;
     Toolbar toolbar;
 
-    FloatingActionButton mFab;
     private FloatingActionButton fab;
 
     private boolean pendingIntroAnimation;
-    private List<Fragment> mFragmntList = new ArrayList<>(3);
 
     private OutterFragmentAdapter outterFragmentAdapter;
-    private UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
-    private CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
+//    private UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
+//    private CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +52,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mVpMianActivity = findViewById(R.id.vp_mian_activity);
         toolbar = findViewById(R.id.toolbar);
         fab = findViewById(R.id.fab);
+//        addFragmet();
+        initWidgets();
+        mVpMianActivity.setCurrentItem(1);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ImmersionTestActivity.class);
                 startActivity(intent);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                SnackbarsetOffscreenPageLimit.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }
         });
-        addFragmet();
-        initWidgets();
-        mVpMianActivity.setCurrentItem(1);
         mBarDisco.setOnClickListener(this);
         mBarMusic.setOnClickListener(this);
         mBarFriends.setOnClickListener(this);
@@ -89,18 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-//        startIntroAnimation();
-    }
-
-    private void addFragmet() {
-        mFragmntList.add(FirstFragment.newInstance());
-        mFragmntList.add(SecFragment.newInstance());
-        mFragmntList.add(ThirdFragment.newInstance());
 
     }
+
+//    private void addFragmet() {
+//        mFragmntList.add(FirstFragment.newInstance());
+//        mFragmntList.add(SecFragment.newInstance());
+//        mFragmntList.add(ThirdFragment.newInstance());
+//    }
 
     private void initWidgets() {
-        outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), mFragmntList);
+        outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), MyApplication.getInstance().mFragmntList);
         mVpMianActivity.setAdapter(outterFragmentAdapter);
         mVpMianActivity.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
