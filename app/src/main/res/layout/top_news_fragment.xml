@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/top_news_swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,7 +27,7 @@
                 app:indicator_width="9dp"
                 app:is_auto_play="true" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:background="@color/app_common_color"
                 android:layout_below="@id/top_news_banner"
                 android:id="@+id/top_news_recyclerView"
@@ -37,6 +37,6 @@
 
 
         </RelativeLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

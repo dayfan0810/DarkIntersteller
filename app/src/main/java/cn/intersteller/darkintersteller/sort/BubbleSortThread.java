@@ -2,7 +2,7 @@ package cn.intersteller.darkintersteller.sort;
 
 
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 
 import cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas;

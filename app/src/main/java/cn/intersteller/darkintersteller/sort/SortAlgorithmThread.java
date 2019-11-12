@@ -1,7 +1,7 @@
 package cn.intersteller.darkintersteller.sort;
 
 
-import android.support.annotation.UiThread;
+import androidx.annotation.UiThread;
 
 import cn.intersteller.darkintersteller.custview.BubbleSortViewByCanvas;
 

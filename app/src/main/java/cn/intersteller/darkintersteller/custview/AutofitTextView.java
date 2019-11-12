@@ -3,12 +3,12 @@ package cn.intersteller.darkintersteller.custview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 
-public class AutofitTextView extends android.support.v7.widget.AppCompatTextView {
+public class AutofitTextView extends androidx.appcompat.widget.AppCompatTextView {
     private float mDefaultTextSize;
     private Paint mTextPaint;
 

@@ -2,14 +2,15 @@ package cn.intersteller.darkintersteller.innerfragment.firstinnerfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,10 +115,10 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
                                 public void onItemClick(View view, int position) {
                                     MyPlayListBean.PlaylistBean playlistBean = myPlayListRecyclerViewAdapter.getItem(position);
 //                                    String name = playlistBean.getName();
-//                                    String coverImgUrl = playlistBean.getCoverImgUrl();
+//              　                      String coverImgUrl = playlistBean.getCoverImgUrl();
 //                                    int cloudTrackCount = playlistBean.getCloudTrackCount();
                                     Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                                    intent.putExtra("newsItem", playlistBean);
+//                                    intent.putExtra("newsItem", playlistBean);
 
                                 }
 

@@ -2,23 +2,17 @@ package cn.intersteller.darkintersteller.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.Locale;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.WebGrabber.CNBETA.CnbetaNewsGrabber;
 import cn.intersteller.darkintersteller.bean.CnbetaNewsBean;
-import cn.intersteller.darkintersteller.utils.ImageLoaderUtils;
 
 public class CnbetaNewsDetailActivity extends Activity {
 

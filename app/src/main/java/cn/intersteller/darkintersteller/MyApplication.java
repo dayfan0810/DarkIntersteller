@@ -1,7 +1,7 @@
 package cn.intersteller.darkintersteller;
 
 import android.app.Application;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;

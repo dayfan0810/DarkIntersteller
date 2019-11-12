@@ -6,7 +6,7 @@
     android:background="#fff2f4f5"
     android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         android:id="@+id/friends_tab"
         android:layout_width="match_parent"
@@ -15,13 +15,13 @@
         app:tabIndicatorColor="#FFFFFF"
         app:tabSelectedTextColor="#FFFFFF"
         app:tabTextColor="#787e82">
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/firends_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
