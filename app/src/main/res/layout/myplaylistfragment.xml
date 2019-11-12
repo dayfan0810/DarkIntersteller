@@ -6,22 +6,21 @@
     android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/cloudpan_fragment_swiperefresh"
+        android:id="@+id/myplaylist_fragment_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/list_fragment_empty">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/cloudpan_fragment_recyclerview"
+            android:id="@+id/myplaylist_fragment_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
-
     <ImageView
-        android:id="@+id/list_fragment_empty"
+        android:id="@+id/myplaylist_fragment_empty"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

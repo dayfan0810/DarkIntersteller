@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.cookie.CookieJarImpl;
-import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.model.HttpHeaders;
 
@@ -35,6 +33,7 @@ public class MyApplication extends Application {
         if (instance == null) {
             instance = this;
             initOKHttpClient();
+//            EventBus.getDefault().register(this);
         }
         addFragmet();
     }
@@ -47,8 +46,10 @@ public class MyApplication extends Application {
     }
 
     public void initOKHttpClient() {
+//        HttpHelper.init(new OkHttpProcessor(this));
+
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.cookieJar(new CookieJarImpl(new MemoryCookieStore()));
+//        builder.cookieJar(new CookieJarImpl(new MemoryCookieStore()));
         HttpsUtils.SSLParams sslParams1 = HttpsUtils.getSslSocketFactory();
         builder.sslSocketFactory(sslParams1.sSLSocketFactory, sslParams1.trustManager);
         HttpHeaders headers = new HttpHeaders();

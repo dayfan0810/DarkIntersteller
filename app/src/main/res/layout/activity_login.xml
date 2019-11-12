@@ -49,11 +49,11 @@
                 android:background="@android:color/transparent"
                 android:drawableStart="@drawable/ic_login_username_default"
                 android:drawablePadding="10dp"
-                android:hint="请输入网易用户名"
                 android:inputType="textVisiblePassword"
                 android:singleLine="true"
                 android:textColor="#222222"
                 android:textColorHint="#B3B3B3"
+                android:text="mr_day@163.com"
                 android:textSize="16sp" />
 
             <ImageButton
@@ -73,6 +73,7 @@
             android:background="#e6e6e6" />
 
         <EditText
+            android:text="razrjay1234"
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -105,6 +106,7 @@
         android:textSize="16sp" />
 
     <Button
+
         android:id="@+id/skip_login_login"
         android:layout_width="match_parent"
         android:layout_height="35dp"

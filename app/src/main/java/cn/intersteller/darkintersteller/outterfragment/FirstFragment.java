@@ -19,6 +19,7 @@ import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.AnchorFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.CloudPanFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.HotMVFragment;
+import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.MyPlaylistFragment;
 import cn.intersteller.darkintersteller.innerfragment.firstinnerfragment.RecommendFragment;
 
 public class FirstFragment extends Fragment {
@@ -35,6 +36,7 @@ public class FirstFragment extends Fragment {
     private CloudPanFragment cloudPanFragment;
     private AnchorFragment anchorFragment;
     private HotMVFragment hotMusicFragment;
+    private MyPlaylistFragment myPlaylistFragment;
     private View v;
     private static FirstFragment firstFragment;
 
@@ -56,7 +58,7 @@ public class FirstFragment extends Fragment {
         MyAdapter myAdapter = new MyAdapter(getChildFragmentManager());
         myAdapter.notifyDataSetChanged();
         mDisco_viewPager.setAdapter(myAdapter);
-//        mDisco_viewPager.setOffscreenPageLimit(2);
+        mDisco_viewPager.setOffscreenPageLimit(2);
         mDisco_tab.setTabMode(TabLayout.MODE_FIXED);
         mDisco_tab.setupWithViewPager(mDisco_viewPager);
         Log.i("deng"+TAG,"onCreateView执行");
@@ -64,10 +66,17 @@ public class FirstFragment extends Fragment {
     }
 
     private void addView() {
-        mTitleList.add("CLOUD PAN");
+        mTitleList.add("我的歌单");
+        mTitleList.add("云盘");
         mTitleList.add("MV排行");
         mTitleList.add("个性推荐");
         mTitleList.add("主播电台");
+
+        if (myPlaylistFragment == null) {
+            myPlaylistFragment = new MyPlaylistFragment();
+            fragments.add(myPlaylistFragment);
+        }
+
         if (cloudPanFragment == null) {
             cloudPanFragment = new CloudPanFragment();
             fragments.add(cloudPanFragment);

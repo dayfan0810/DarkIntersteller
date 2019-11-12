@@ -18,6 +18,7 @@ public class UshkNewsGrabber {
     private final String mHomePage_jin10 = "https://www.jin10.com/";
 
     public ArrayList getUSHKNewsBeanByCallable() {
+        Log.i("deng-UshkNewsGrabber", "getUSHKNewsBeanByCallable");
         ExecutorService exs = Executors.newCachedThreadPool();
         Future<ArrayList> submit = exs.submit(new UshkNewsGrabberCallable());
         ArrayList arrayList = null;

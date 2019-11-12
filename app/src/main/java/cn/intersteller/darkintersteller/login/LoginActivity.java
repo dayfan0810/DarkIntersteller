@@ -1,21 +1,20 @@
 package cn.intersteller.darkintersteller.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import cn.intersteller.darkintersteller.MainActivity;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.login.presenter.ILoginPresenter;
 import cn.intersteller.darkintersteller.login.presenter.LoginPresenterCompl;
 import cn.intersteller.darkintersteller.login.view.ILoginView;
-import cn.intersteller.darkintersteller.ui.MainActivity;
+import cn.intersteller.darkintersteller.utils.SharedPreferenceUtils;
 
 
 public class LoginActivity extends AppCompatActivity implements ILoginView, View.OnClickListener {
@@ -55,8 +54,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                 loginPresenter.setProgressBarVisiblity(View.VISIBLE);
                 btnLogin.setEnabled(false);
                 loginPresenter.doLogin(editUser.getText().toString(), editPass.getText().toString());
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                if (imm != null) {
+//                    imm.toggleSoftInput(0, 0);
+//                }
                 break;
             case R.id.skip_login_login:
                 startActivity(new Intent(this, MainActivity.class));
@@ -71,12 +72,15 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     }
 
     @Override
-    public void onLoginResult(Boolean result, int code) {
+    public void onLoginResult(Boolean result, int code, long userid) {
         loginPresenter.setProgressBarVisiblity(View.GONE);
         btnLogin.setEnabled(true);
         if (code == 200) {
             Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, MainActivity.class));
+            //保存用户ID到本地,给后面会使用
+            SharedPreferenceUtils.removeByKey(this, "login_user_id");
+            SharedPreferenceUtils.savePref("login_user_id", userid);
             finish();
         } else
             Toast.makeText(this, "登录失败，code = " + code, Toast.LENGTH_LONG).show();

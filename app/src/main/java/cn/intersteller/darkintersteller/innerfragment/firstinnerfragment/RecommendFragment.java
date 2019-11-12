@@ -119,7 +119,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
 
     private void requestRecomendBnner() {
         //一次性获取前100名
-        HttpUtil.sendOkHttpRequest(Constant.NETEASE_BANNER, new Callback() {
+        HttpUtil.getInstance().sendOkHttpRequest(Constant.NETEASE_BANNER, new Callback() {
 
             ArrayList<String> mTypeTitles;
             ArrayList<String> imgs;

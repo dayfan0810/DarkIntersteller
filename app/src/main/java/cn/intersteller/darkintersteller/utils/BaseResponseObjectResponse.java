@@ -7,11 +7,6 @@ import com.google.gson.reflect.TypeToken;
 
 import okhttp3.Response;
 
-/**
- * cnBetaReader
- * <p/>
- * Created by 远望の无限(ywwxhz) on 2014/11/2 18:01.
- */
 public abstract class BaseResponseObjectResponse<T> extends BaseGsonCallback<ResponseObject<T>> {
 
     protected BaseResponseObjectResponse(TypeToken<ResponseObject<T>> type) {

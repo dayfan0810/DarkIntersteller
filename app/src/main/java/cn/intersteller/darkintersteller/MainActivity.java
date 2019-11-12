@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.ui;
+package cn.intersteller.darkintersteller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import cn.intersteller.darkintersteller.MyApplication;
-import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.test.ImmersionTestActivity;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
@@ -54,15 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab = findViewById(R.id.fab);
 //        addFragmet();
         initWidgets();
-        mVpMianActivity.setCurrentItem(1);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ImmersionTestActivity.class);
-                startActivity(intent);
+        mVpMianActivity.setCurrentItem(0);
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), ImmersionTestActivity.class);
+            startActivity(intent);
 //                SnackbarsetOffscreenPageLimit.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-            }
         });
         mBarDisco.setOnClickListener(this);
         mBarMusic.setOnClickListener(this);
@@ -146,8 +141,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mVpMianActivity.setCurrentItem(2);
                 break;
             case R.id.bar_search:
+//                try {
+//                    DealThread t1 = new DealThread(this);
+//                    t1.setFlag("a");
+//
+//                    Thread thread1 = new Thread(t1);
+//                    thread1.start();
+//
+//                    Thread.sleep(100);
+//
+//                    t1.setFlag("b");
+//                    Thread thread2 = new Thread(t1);
+//                    thread2.start();
+//
+//                } catch (InterruptedException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+
+                //测试volatile可见性
+//                try {
+//                    VolatileVisibleTest volatileVisibleTest = new VolatileVisibleTest();
+//                    volatileVisibleTest.testVolatileVisibleTest();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+
+
                 break;
             case R.id.fab:
+
                 break;
         }
     }
@@ -194,4 +218,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
         Log.i("deng", "onDestroy");
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("deng", "onStop");
+    }
+
+
 }

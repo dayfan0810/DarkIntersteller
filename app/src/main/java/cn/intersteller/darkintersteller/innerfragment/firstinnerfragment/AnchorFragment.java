@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 
 import cn.intersteller.darkintersteller.R;
 
-/**
- * Created by Limuyang on 2016/7/7.
- */
 public class AnchorFragment extends Fragment {
     private View v;
 

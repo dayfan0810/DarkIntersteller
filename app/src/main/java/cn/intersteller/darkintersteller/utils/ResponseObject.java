@@ -1,8 +1,6 @@
 package cn.intersteller.darkintersteller.utils;
 
-/**
- * Created by ywwxhz on 2014/11/2.
- */
+
 public class ResponseObject<T> {
     private T result;
     private String state;

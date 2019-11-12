@@ -1,21 +1,67 @@
 package cn.intersteller.darkintersteller.utils;
 
-import java.util.HashMap;
+import android.util.Log;
 
+import java.util.HashMap;
+import java.util.List;
+
+import cn.intersteller.darkintersteller.net.PersistentCookieStore;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class HttpUtil {
+    private OkHttpClient mOkHttpClient;
 
-    public static void sendOkHttpRequest(String address, okhttp3.Callback callback) {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(address).build();
-        client.newCall(request).enqueue(callback);
+    private HttpUtil() {
+
+        final PersistentCookieStore cookieStore = new PersistentCookieStore();
+
+        //创建cookieJar 用来保存登录的状态
+        CookieJar cookieJar = new CookieJar() {
+            @Override
+            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+                if (cookies != null && cookies.size() > 0) {
+                    for (Cookie item : cookies) {
+                        cookieStore.add(url, item);
+                    }
+                }
+            }
+
+            @Override
+            public List<Cookie> loadForRequest(HttpUrl url) {
+                Log.i("deng2", "hahahahaah222222 url.host() " + url.host());
+                List<Cookie> cookies = cookieStore.get(url);
+                return cookies;
+            }
+        };
+        //通过newBuilder设置cookjar并构建OkHttpClient对象
+        mOkHttpClient = new OkHttpClient()
+                .newBuilder()
+                .cookieJar(cookieJar)
+                .build();
     }
 
+    public void sendOkHttpRequest(String address, okhttp3.Callback callback) {
+        Request request = new Request.Builder().url(address).build();
+        mOkHttpClient.newCall(request).enqueue(callback);
+    }
 
+    static volatile HttpUtil defaultInstance;
+
+    public static HttpUtil getInstance() {
+        if (defaultInstance == null) {
+            synchronized (HttpUtil.class) {
+                if (defaultInstance == null) {
+                    defaultInstance = new HttpUtil();
+                }
+            }
+        }
+        return defaultInstance;
+    }
 
 
     public static Request makeCnbetaRequest(int page) {

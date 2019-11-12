@@ -5,24 +5,18 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import cn.intersteller.darkintersteller.login.model.IUser;
 import cn.intersteller.darkintersteller.login.view.ILoginView;
 import cn.intersteller.darkintersteller.utils.Constant;
+import cn.intersteller.darkintersteller.utils.HttpUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 
@@ -61,7 +55,7 @@ public class LoginPresenterCompl implements ILoginPresenter {
 //		}, 5000);
 
         StringBuilder userAndPasswordUrl = getUserAndPasswordUrl(name, passwd);
-//        Log.i("dengsb", "userAndPasswordUrl = " + userAndPasswordUrl.toString());
+        Log.i("dengsb", "userAndPasswordUrl = " + userAndPasswordUrl.toString());
         asyncValidate(userAndPasswordUrl.toString());
     }
 
@@ -77,79 +71,138 @@ public class LoginPresenterCompl implements ILoginPresenter {
     account 本来想的是可以是 telphone或者username
     但目前只实现了telphone
    */
-    private void asyncValidate(final String account) {
-        /*
-         发送请求属于耗时操作，所以开辟子线程执行
-         上面的参数都加上了final，否则无法传递到子线程中
-        */
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ConcurrentHashMap<String, List<Cookie>> cookieStore = new ConcurrentHashMap<>();
-                OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
-                    @Override
-                    public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                        System.out.println("deng1 cookies url: " + cookies.toString());
-//                        for (Cookie cookie : cookies)
-//                        {
-//                            System.out.println("cookies: " + cookie.toString());
+//    private void asyncValidate(final String account) {
+//        /*
+//         发送请求属于耗时操作，所以开辟子线程执行
+//         上面的参数都加上了final，否则无法传递到子线程中
+//        */
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                CookieJar cookieJar = new CookieJar() {
+//                    private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+//
+//                    @Override
+//                    public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+//                        Log.i("deng2", "hahahahaha11111 cookies url: " + cookies.toString());
+//                        for (Cookie cookie : cookies) {
+//                            System.out.println("deng2 cookie Name:" + cookie.name());
+//                            System.out.println("deng2 cookie Path:" + cookie.path());
 //                        }
-                        cookieStore.put(url.host(), cookies);
+//                        cookieStore.put(url.host(), cookies);
+////                        android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
+////                        cookieManager.setCookie(account, cookies.toString());
+//
+//                    }
+//
+//                    @Override
+//                    public List<Cookie> loadForRequest(HttpUrl url) {
+//                        Log.i("deng2", "hahahahaah222222 url.host() " + url.host());
+//                        List<Cookie> cookies = cookieStore.get(url.host());
+//                        if (cookies == null) {
+//                            System.out.println("deng2 没加载到cookie");
+//                        }
+//                        return cookies != null ? cookies : new ArrayList<Cookie>();
+//                    }
+//                };
+//
+//                OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                        .cookieJar(cookieJar)
+//                        .build();
+//
+//                RequestBody formBody = new FormBody.Builder()
+//                        .add("username", "mr_day@163.com")
+//                        .add("password", "razrjay1234")
+//                        .build();
+//                final Request request = new Request.Builder()
+//                        .url(account)
+//                        .post(formBody)
+//                        .build();
+//
+//
+////                Request request = new Request.Builder().url(account).build();
+//                okHttpClient.newCall(request).enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        Log.i("deng-impl", "onFailure");
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//
+//                        final String responseText = response.body().string();
+//                        try {
+//                            boolean isLoginSuccess = true;
+//                            JSONObject jsonObject = new JSONObject(responseText);
+//                            String resultCode = (String) jsonObject.optString("code");
+//                            Log.i("deng-impl", "resultCode = " + resultCode);
+//                            if (!resultCode.equals("200")) {
+//                                isLoginSuccess = false;
+//                                return;
+//                            }
+//                            final Boolean result = true;
+//                            handler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    iLoginView.onLoginResult(result, Integer.parseInt(resultCode));
+//                                }
+//                            });
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        } finally {
+//                        }
+//                    }
+//                });
+//            }
+//        }).start();
+//    }
 
-                    }
 
-                    @Override
-                    public List<Cookie> loadForRequest(HttpUrl url) {
-                        List<Cookie> cookies = cookieStore.get(url.host());
-                        return cookies != null ? cookies : new ArrayList<Cookie>();
-                    }
-                }).build();
-                Request request = new Request.Builder().url(account).build();
-                okHttpClient.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.i("deng-impl", "onFailure");
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-
-                        final String responseText = response.body().string();
-                        try {
-                            boolean isLoginSuccess = true;
-                            JSONObject jsonObject = new JSONObject(responseText);
-                            String resultCode = (String) jsonObject.optString("code");
-                            Log.i("deng-impl", "resultCode = " + resultCode);
-                            if (!resultCode.equals("200")) {
-                                isLoginSuccess = false;
-                                return;
-                            }
-                            final Boolean result = true;
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    iLoginView.onLoginResult(result, Integer.parseInt(resultCode));
-                                }
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } finally {
+    private void asyncValidate(final String account) {
+        //account:http://39.108.131.225:3000/login?email=mr_day@163.com&password=razrjay1234
+        new Thread(() -> {
+            HttpUtil.getInstance().sendOkHttpRequest(account, new Callback() {
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    final String responseText = response.body().string();
+                    try {
+                        boolean isLoginSuccess = true;
+                        JSONObject jsonObject = new JSONObject(responseText);
+                        String resultCode = (String) jsonObject.optString("code");
+                        Log.i("deng-impl", "resultCode = " + resultCode);
+                        if (!resultCode.equals("200")) {
+                            isLoginSuccess = false;
+                            return;
                         }
+                        JSONObject account1 = jsonObject.getJSONObject("account");
+                        long id = account1.optLong("id");
+
+
+                        final Boolean result = true;
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                iLoginView.onLoginResult(result, Integer.parseInt(resultCode), id);
+                            }
+                        });
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
                     }
-                });
-            }
+                }
+
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    Log.i("deng-impl", "登陆失败");
+                }
+            });
         }).start();
     }
-
 
     @Override
     public void setProgressBarVisiblity(int visiblity) {
         iLoginView.onSetProgressBarVisibility(visiblity);
     }
-
-
-//	private void initUser(){
-//		user = new UserModel("mvp","mvp");
-//	}
 }

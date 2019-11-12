@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
+import cn.intersteller.darkintersteller.MainActivity;
+
 public class SpalashActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

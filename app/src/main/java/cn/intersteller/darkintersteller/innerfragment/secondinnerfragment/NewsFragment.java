@@ -69,7 +69,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
     }
 
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -83,7 +82,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
 
 
     public void requestNews() {
-        HttpUtil.sendOkHttpRequest(Constant.URL_TOPNEWS, new Callback() {
+        HttpUtil.getInstance().sendOkHttpRequest(Constant.URL_TOPNEWS, new Callback() {
 
             private NewsRecyclerViewAdapter newsAdapter;
 

@@ -4,11 +4,7 @@ import com.lzy.okgo.callback.AbsCallback;
 
 import okhttp3.Response;
 
-/**
- * cnBetaReader
- * <p/>
- * Created by 远望の无限(ywwxhz) on 2016/4/23 21:48.
- */
+
 public abstract class BaseCallback<T> extends AbsCallback<T> {
 
     @Override

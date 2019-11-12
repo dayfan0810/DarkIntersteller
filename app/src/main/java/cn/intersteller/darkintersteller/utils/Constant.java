@@ -3,6 +3,10 @@ package cn.intersteller.darkintersteller.utils;
 import cn.intersteller.darkintersteller.MyApplication;
 
 public class Constant {
+    //sharedPreference
+    public static final String LOGIN_USER_ID = "login_user_id";
+
+
     //新闻头条
     //http://v.juhe.cn/toutiao/index?type=top&key=APPKEY
     public static final String URL_TOPNEWS = "http://v.juhe.cn/toutiao/index?type=top&key=9c98897f8c0ef2f97ce13ef48f0c6cc1";
@@ -10,7 +14,8 @@ public class Constant {
     static boolean isWifi = Toolkit.isWifi(MyApplication.getInstance());
     //网易云音乐接口
 //    public static final String NETEASEBASE = "http://musicapi.leanapp.cn/";
-    public static final String NETEASEBASE = isWifi ? "http://10.1.1.180:3000/" : "http://15527907583.xicp.net:33910/";
+    public static final String NETEASEBASE = isWifi ? "http://39.108.131.225:3000/" : "http://39.108.131.225:3000/";
+
     //MV详情,根据Item的Id
     public static final String NETEASE_MV_ID = "mv?mvid=";
     //mv 排行
@@ -22,7 +27,9 @@ public class Constant {
     //邮箱登录:/login?email=xxx@163.com&password=yyy
     public static final String NETEASE_LOGIN = NETEASEBASE + "login?email=xxx@163.com&password=yyy";
     //云盘
-    public static final String NETEASE_CLOUD_PAN = NETEASEBASE + "user/cloud";
+    public static final String NETEASE_CLOUD_PAN = NETEASEBASE + "user/cloud?limit=100";
+    //我的歌单
+    public static final String NETEASE_MYPLAYLIST = NETEASEBASE + "user/playlist?uid=";
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
