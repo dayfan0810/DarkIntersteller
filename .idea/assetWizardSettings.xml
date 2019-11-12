@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="iv_cloud_pan_singlesong_menu" />
-                            <entry key="sourceFile" value="E:\照片\Menu (2).svg" />
+                            <entry key="outputName" value="avatars" />
+                            <entry key="sourceFile" value="E:\Avatar.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -23,7 +23,7 @@ import java.util.List;
 import cn.intersteller.darkintersteller.R;
 import cn.intersteller.darkintersteller.adapter.MyPlayListRecyclerViewAdapter;
 import cn.intersteller.darkintersteller.bean.MyPlayListBean;
-import cn.intersteller.darkintersteller.ui.NewsDetailActivity;
+import cn.intersteller.darkintersteller.ui.MyPlayListDetailActivity;
 import cn.intersteller.darkintersteller.utils.Constant;
 import cn.intersteller.darkintersteller.utils.HttpUtil;
 import cn.intersteller.darkintersteller.utils.SharedPreferenceUtils;
@@ -117,9 +117,9 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
 //                                    String name = playlistBean.getName();
 //              　                      String coverImgUrl = playlistBean.getCoverImgUrl();
 //                                    int cloudTrackCount = playlistBean.getCloudTrackCount();
-                                    Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                                    Intent intent = new Intent(getActivity(), MyPlayListDetailActivity.class);
 //                                    intent.putExtra("newsItem", playlistBean);
-
+                                    startActivity(intent);
                                 }
 
                                 @Override

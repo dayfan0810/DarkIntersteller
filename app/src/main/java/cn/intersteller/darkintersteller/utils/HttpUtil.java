@@ -14,7 +14,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class HttpUtil {
+    static volatile HttpUtil defaultInstance;
     private OkHttpClient mOkHttpClient;
+
 
     private HttpUtil() {
 
@@ -49,8 +51,6 @@ public class HttpUtil {
         Request request = new Request.Builder().url(address).build();
         mOkHttpClient.newCall(request).enqueue(callback);
     }
-
-    static volatile HttpUtil defaultInstance;
 
     public static HttpUtil getInstance() {
         if (defaultInstance == null) {
