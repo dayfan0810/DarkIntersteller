@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -117,9 +119,12 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
 //                                    String name = playlistBean.getName();
 //              　                      String coverImgUrl = playlistBean.getCoverImgUrl();
 //                                    int cloudTrackCount = playlistBean.getCloudTrackCount();
+                                    View imageView = view.findViewById(R.id.tv_item_my_playlist_coverImgUrl);
                                     Intent intent = new Intent(getActivity(), MyPlayListDetailActivity.class);
 //                                    intent.putExtra("newsItem", playlistBean);
-                                    startActivity(intent);
+                                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                                            imageView, "iv_header_image");//与xml文件对应
+                                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
                                 }
 
                                 @Override

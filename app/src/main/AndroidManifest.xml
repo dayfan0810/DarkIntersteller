@@ -35,10 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name="cn.intersteller.darkintersteller.ui.NewsDetailActivity" />
         <activity android:name="cn.intersteller.darkintersteller.ui.MvDetailActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -48,6 +48,7 @@
         <activity android:name=".ui.CnbetaNewsDetailActivity"/>
         <activity android:name=".ui.MyPlayListDetailActivity"/>
         <activity android:name=".test.ImmersionTestActivity"/>
+        <activity android:name=".ui.NetSearchWordsActivity"/>
 
     </application>
 

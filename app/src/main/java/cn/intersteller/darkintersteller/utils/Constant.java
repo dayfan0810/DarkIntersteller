@@ -11,7 +11,7 @@ public class Constant {
     //http://v.juhe.cn/toutiao/index?type=top&key=APPKEY
     public static final String URL_TOPNEWS = "http://v.juhe.cn/toutiao/index?type=top&key=9c98897f8c0ef2f97ce13ef48f0c6cc1";
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    static boolean isWifi = Toolkit.isWifi(MyApplication.getInstance());
+    static boolean isWifi = NetworkUtils.isConnectWifi(MyApplication.getInstance());
     //网易云音乐接口
 //    public static final String NETEASEBASE = "http://musicapi.leanapp.cn/";
     public static final String NETEASEBASE = isWifi ? "http://39.108.131.225:3000/" : "http://39.108.131.225:3000/";

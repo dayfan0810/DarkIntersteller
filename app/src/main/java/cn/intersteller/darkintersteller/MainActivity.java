@@ -2,10 +2,6 @@ package cn.intersteller.darkintersteller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -14,8 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.test.ImmersionTestActivity;
+import cn.intersteller.darkintersteller.ui.NetSearchWordsActivity;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -46,13 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBarMusic = findViewById(R.id.bar_music);
         mBarFriends = findViewById(R.id.bar_friends);
         mBarSearch = findViewById(R.id.bar_search);
-        mSearchLayout = findViewById(R.id.search_layout);
+//        mSearchLayout = findViewById(R.id.search_layout);
         mVpMianActivity = findViewById(R.id.vp_mian_activity);
         toolbar = findViewById(R.id.toolbar);
         fab = findViewById(R.id.fab);
 //        addFragmet();
         initWidgets();
-        mVpMianActivity.setCurrentItem(0);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), ImmersionTestActivity.class);
             startActivity(intent);
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //        ArrayList ushkNewsBeanByCallable = mUshkNewsGrabber.getUSHKNewsBeanByCallable();
         //        Log.i("deng4","ushkNewsBeanByCallable = "+ushkNewsBeanByCallable.size());
 
+        setCurrentItem(0);
     }
 
     @Override
@@ -76,11 +79,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-//    private void addFragmet() {
-//        mFragmntList.add(FirstFragment.newInstance());
-//        mFragmntList.add(SecFragment.newInstance());
-//        mFragmntList.add(ThirdFragment.newInstance());
-//    }
+    private void setCurrentItem(int position) {
+        boolean isOne = false;
+        boolean isTwo = false;
+        boolean isThree = false;
+        switch (position) {
+            case 0:
+                isOne = true;
+                break;
+            case 1:
+                isTwo = true;
+                break;
+            case 2:
+                isThree = true;
+                break;
+            default:
+                isTwo = true;
+                break;
+        }
+        mVpMianActivity.setCurrentItem(position);
+        mBarDisco.setSelected(isOne);
+        mBarMusic.setSelected(isTwo);
+        mBarFriends.setSelected(isThree);
+    }
 
     private void initWidgets() {
         outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), MyApplication.getInstance().mFragmntList);
@@ -88,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mVpMianActivity.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                //oncreate时不会走这个方法, 导致三个顶部图标都是灰色,没有被选取
                 switch (position) {
                     case 0:
                         mBarDisco.setSelected(true);
@@ -167,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    e.printStackTrace();
 //                }
 
+                final Intent intent = new Intent(MainActivity.this, NetSearchWordsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                MainActivity.this.startActivity(intent);
 
 
                 break;

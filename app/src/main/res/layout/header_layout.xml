@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:background="@color/blue"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fl_head_content"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:paddingTop="20dp">
 
-      <ImageView
-          android:id="@+id/iv_header_image"
-          android:layout_width="90dp"
-          android:layout_height="90dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="?android:actionBarSize"
-          android:scaleType="centerCrop"
-          android:src="@drawable/nonettmp" />
+    <ImageView
+        android:id="@+id/iv_header_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="?android:actionBarSize"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nonettmp" />
 
-      <TextView
-          android:id="@+id/tv_playlist_name"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="140dp"
-          android:layout_marginTop="?android:actionBarSize"
-          android:maxLines="2"
-          android:text="无与伦比演唱会2004"
-          android:textAppearance="@android:style/TextAppearance.Large"
-          android:textColor="@color/white"
-          android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tv_playlist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="?android:actionBarSize"
+        android:maxLines="2"
+        android:text="无与伦比演唱会2004"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
-      <ImageView
-          android:id="@+id/ivPlaylistCreator"
-          android:layout_width="30dp"
-          android:layout_height="30dp"
-          android:layout_marginStart="140dp"
-          android:layout_marginTop="100dp"
-          android:src="@drawable/avatars" />
-
-
-      <TextView
-          android:id="@+id/tv_creator_name"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="180dp"
-          android:layout_marginTop="107dp"
-          android:text="creator_name"
-          android:textAppearance="@android:style/TextAppearance.Small"
-          android:textColor="@color/white" />
+    <ImageView
+        android:id="@+id/ivPlaylistCreator"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/avatars" />
 
 
-      <ImageView
-          android:id="@+id/iv_arrow_action"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="107dp"
-          android:layout_toEndOf="@+id/tv_creator_name"
-          android:tint="@color/white"
-          app:srcCompat="@drawable/ic_arrow" />
+    <TextView
+        android:id="@+id/tv_creator_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="107dp"
+        android:text="creator_name"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/white" />
 
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_below="@id/iv_header_image"
-          android:orientation="horizontal"
-          android:paddingTop="5dp"
-          android:weightSum="4">
+    <ImageView
+        android:id="@+id/iv_arrow_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="107dp"
+        android:layout_toEndOf="@+id/tv_creator_name"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_arrow" />
 
 
-         <LinearLayout
-             android:id="@+id/playlist_ll_head_1"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/iv_header_image"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:weightSum="4">
+
+
+        <LinearLayout
+            android:id="@+id/playlist_ll_head_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -88,14 +88,14 @@
                 android:layout_gravity="center"
                 android:text="评论"
                 android:textColor="@color/white" />
-         </LinearLayout>
+        </LinearLayout>
 
-         <LinearLayout
-             android:id="@+id/playlist_ll_head_2"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/playlist_ll_head_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -113,14 +113,14 @@
                 android:layout_gravity="center"
                 android:text="分享"
                 android:textColor="@color/white" />
-         </LinearLayout>
+        </LinearLayout>
 
-         <LinearLayout
-             android:id="@+id/playlist_ll_head_3"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/playlist_ll_head_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -138,15 +138,15 @@
                 android:layout_gravity="center"
                 android:text="下载"
                 android:textColor="@color/white" />
-         </LinearLayout>
+        </LinearLayout>
 
 
-         <LinearLayout
-             android:id="@+id/playlist_ll_head_4"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/playlist_ll_head_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
 
             <ImageView
@@ -165,10 +165,10 @@
                 android:layout_gravity="center"
                 android:text="多选"
                 android:textColor="@color/white" />
-         </LinearLayout>
+        </LinearLayout>
 
 
-      </LinearLayout>
+    </LinearLayout>
 
 
-   </RelativeLayout>
+</RelativeLayout>

@@ -1,15 +1,16 @@
 package cn.intersteller.darkintersteller.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class MyPlayListRecyclerViewAdapter extends RecyclerView.Adapter<MyPlayLi
         holder.tv_item_my_playlist_name.setText(playlistBean.getName());
         holder.tv_item_my_playlist_trackCount.setText(playlistBean.getTrackCount() + "首");
         ImageLoaderUtils.display(mContext, ((ItemViewHolder) holder).tv_item_my_playlist_coverImgUrl, playlistBean.getCoverImgUrl());
-        Log.i("dengplaylist", "coverImgUrl = " + playlistBean.getCoverImgUrl());
+//        Log.i("dengplaylist", "coverImgUrl = " + playlistBean.getCoverImgUrl());
 
         if (mOnItemClickListener != null) {
             ((ItemViewHolder) holder).itemView.setOnClickListener(view -> {

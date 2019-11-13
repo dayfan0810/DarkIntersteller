@@ -3,62 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="36dp"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimary"
     app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/ll_title_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackgroundBorderless">
 
+        <ImageView
+            android:id="@+id/iv_title_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/actionbar_settings" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/llllll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:layout_marginLeft="60dp"
+        app:theme="@style/AppTheme">
+
 
         <ImageView
             android:id="@+id/bar_disco"
-            android:layout_width="36dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toLeftOf="@+id/bar_music"
-            android:background="@drawable/actionbar_discover"
-            android:clickable="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/actionbar_discover" />
 
         <ImageView
             android:id="@+id/bar_music"
-            android:layout_width="36dp"
-            android:layout_marginLeft="25dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:background="@drawable/actionbar_stock"
-            android:clickable="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bar_disco"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingLeft="20dp"
+            android:src="@drawable/actionbar_stock" />
 
         <ImageView
             android:id="@+id/bar_friends"
-            android:layout_width="36dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/bar_music"
-            android:background="@drawable/actionbar_math"
-            android:clickable="true" />
 
-        <LinearLayout
-            android:id="@+id/search_layout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bar_music"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingLeft="20dp"
+            android:src="@drawable/actionbar_math" />
 
-            <ImageView
-                android:id="@+id/bar_search"
-                android:layout_width="36dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/actionbar_search" />
-        </LinearLayout>
+
+        <ImageView
+            android:paddingRight="10dp"
+            android:id="@+id/bar_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="20dp"
+            android:src="@drawable/actionbar_search" />
+
+
     </RelativeLayout>
+
 
 </androidx.appcompat.widget.Toolbar>

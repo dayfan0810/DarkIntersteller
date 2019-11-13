@@ -1,12 +1,12 @@
 package cn.intersteller.darkintersteller.ui;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageView;
+
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import cn.intersteller.darkintersteller.R;
 
@@ -20,8 +20,8 @@ public class BaseActivity extends AppCompatActivity {
     ImageView mBarDisco;
     ImageView mBarMusic;
     ImageView mBarFriends;
-    ImageView mBarSearch;
-    LinearLayout mSearchLayout;
+//    FrameLayout mBarSearch;
+//    LinearLayout mSearchLayout;
     Toolbar mToolbar;
     Toolbar toolbar;
     private MenuItem inboxMenuItem;
@@ -50,7 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         mBarDisco = (ImageView) findViewById(R.id.bar_disco);
         mBarMusic = (ImageView) findViewById(R.id.bar_music);
         mBarFriends = (ImageView) findViewById(R.id.bar_friends);
-        mBarSearch = (ImageView) findViewById(R.id.bar_search);
+//        mBarSearch = (FrameLayout) findViewById(R.id.bar_search);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
     }
@@ -75,9 +75,9 @@ public class BaseActivity extends AppCompatActivity {
         return mBarFriends;
     }
 
-    public LinearLayout get_search_layout() {
-        return mSearchLayout;
-    }
+//    public LinearLayout get_search_layout() {
+//        return mSearchLayout;
+//    }
 
 
 }
