@@ -15,12 +15,11 @@
         app:theme="@style/AppTheme">
 
         <ImageView
-            android:paddingLeft="10dp"
-            android:id="@+id/iv_title_menu"
+            android:id="@+id/bar_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/actionbar_settings" />
+            android:src="@drawable/actionbar_search" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -58,13 +57,13 @@
 
 
         <ImageView
-            android:id="@+id/bar_search"
+            android:id="@+id/iv_title_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:src="@drawable/actionbar_search" />
+            android:src="@drawable/actionbar_settings" />
 
 
     </LinearLayout>
