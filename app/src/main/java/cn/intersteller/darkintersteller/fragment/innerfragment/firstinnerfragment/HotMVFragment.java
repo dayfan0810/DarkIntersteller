@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
     private View view;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private List<HotMVBean.DataBean> mHotMusicBeanList = new ArrayList<>();
+    private final List<HotMVBean.DataBean> mHotMusicBeanList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -65,19 +66,19 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
         requestHotMusic();
     }
 
-    public void requestHotMusic() {
+    private void requestHotMusic() {
         //一次性获取前100名
 //        Log.i("deng", "Constant.NETEASE_TOP_MV = " + Constant.NETEASE_TOP_MV);
         HttpUtil.getHttpUtilInstance().sendOkHttpRequest(Constant.NETEASE_TOP_MV, new Callback() {
 
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 final String responseText = response.body().string();
                 Log.i("deng-onResponse", "responseText = " + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    String resultCode = (String) jsonObject.optString("code");
+                    String resultCode = jsonObject.optString("code");
                     if (!resultCode.equals("200")) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -155,7 +156,7 @@ public class HotMVFragment extends Fragment implements View.OnClickListener, Swi
             }
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 if (getActivity() == null) {
                     Log.i("deng-HotMVFragment", "onFailure1");
                     return;

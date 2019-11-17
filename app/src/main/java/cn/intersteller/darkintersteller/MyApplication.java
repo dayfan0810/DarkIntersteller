@@ -12,6 +12,7 @@ import com.lzy.okgo.model.HttpHeaders;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.intersteller.darkintersteller.fragment.outterfragment.FirstFragment;
 import cn.intersteller.darkintersteller.fragment.outterfragment.SecFragment;
 import cn.intersteller.darkintersteller.fragment.outterfragment.ThirdFragment;
 import okhttp3.OkHttpClient;
@@ -39,7 +40,7 @@ public class MyApplication extends Application {
     }
 
     private void addFragmet() {
-        mFragmntList.add(cn.intersteller.darkintersteller.outterfragment.FirstFragment.newInstance());
+        mFragmntList.add(FirstFragment.newInstance());
         mFragmntList.add(SecFragment.newInstance());
         mFragmntList.add(ThirdFragment.newInstance());
 

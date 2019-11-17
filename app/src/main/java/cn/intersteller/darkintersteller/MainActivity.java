@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView mBarDisco;
     private ImageView mBarMusic;
     private ImageView mBarFriends;
-    private ImageView mBarSearch;
     LinearLayout mSearchLayout;
     private ViewPager mVpMianActivity;
     private Toolbar toolbar;
@@ -35,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean pendingIntroAnimation;
 
-    private OutterFragmentAdapter outterFragmentAdapter;
-//    private UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
+    //    private UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
 //    private CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
 
     @Override
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBarDisco = findViewById(R.id.bar_disco);
         mBarMusic = findViewById(R.id.bar_music);
         mBarFriends = findViewById(R.id.bar_friends);
-        mBarSearch = findViewById(R.id.bar_search);
+        ImageView mBarSearch = findViewById(R.id.bar_search);
 //        mSearchLayout = findViewById(R.id.search_layout);
         mVpMianActivity = findViewById(R.id.vp_mian_activity);
         toolbar = findViewById(R.id.toolbar);
@@ -104,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initWidgets() {
-        outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), MyApplication.mFragmntList);
+        OutterFragmentAdapter outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), MyApplication.mFragmntList);
         mVpMianActivity.setAdapter(outterFragmentAdapter);
         mVpMianActivity.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -39,10 +39,11 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     private Button bt_bubble_get_arr2;
     private Button bt_bubble_get_arr3;
     //柱状图维护数据
-    int screenWidth = 0, screenHeight = 0;          //单位：px，屏幕的宽、高
+    private int screenWidth = 0;
+    private int screenHeight = 0;          //单位：px，屏幕的宽、高
     int columnWidth = 30;             //单位：px，柱状View的宽度,计算一次用全局变量存储下次就不需要再计算了
-    List<View> mViews = new ArrayList<View>();
-    int[] mArray = new int[SIEZ_ARRAY];
+    List<View> mViews = new ArrayList<>();
+    private final int[] mArray = new int[SIEZ_ARRAY];
     private DragFlowLayout mDragflowLayout;
     private LinearLayout ll_sort_result;
     private BubbleSortViewByAddView anim_sort;
@@ -63,14 +64,14 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bubblesort_beauty, container, false);
-        mDragflowLayout = (DragFlowLayout) v.findViewById(R.id.sort);
-        ll_sort_result = (LinearLayout) v.findViewById(R.id.ll_sort_result);
-        scroll_view = (ScrollView) v.findViewById(R.id.scroll_view);
-        anim_sort = (BubbleSortViewByAddView) v.findViewById(R.id.anim_sort);
-        down_divider = (View) v.findViewById(R.id.down_divider);
-        bt_bubble_get_arr1 = (Button) v.findViewById(R.id.bt_bubble_get_arr1);
-        bt_bubble_get_arr2 = (Button) v.findViewById(R.id.bt_bubble_get_arr2);
-        bt_bubble_get_arr3 = (Button) v.findViewById(R.id.bt_bubble_get_arr3);
+        mDragflowLayout = v.findViewById(R.id.sort);
+        ll_sort_result = v.findViewById(R.id.ll_sort_result);
+        scroll_view = v.findViewById(R.id.scroll_view);
+        anim_sort = v.findViewById(R.id.anim_sort);
+        down_divider = v.findViewById(R.id.down_divider);
+        bt_bubble_get_arr1 = v.findViewById(R.id.bt_bubble_get_arr1);
+        bt_bubble_get_arr2 = v.findViewById(R.id.bt_bubble_get_arr2);
+        bt_bubble_get_arr3 = v.findViewById(R.id.bt_bubble_get_arr3);
         bt_bubble_get_arr1.setOnClickListener(this);
         bt_bubble_get_arr2.setOnClickListener(this);
         bt_bubble_get_arr3.setOnClickListener(this);
@@ -106,7 +107,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             public void onBindData(View itemView, int dragState, ArrayBean data) {
                 itemView.setTag(data);
 
-                TextView tv = (TextView) itemView.findViewById(R.id.tv_text);
+                TextView tv = itemView.findViewById(R.id.tv_text);
                 tv.setText(data.text);
                 //iv_close是关闭按钮。只有再非拖拽空闲的情况吓才显示
                 itemView.findViewById(R.id.iv_close).setVisibility(
@@ -186,10 +187,10 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
     }
 
     private static class ArrayBean implements IDraggable {
-        String text;
-        boolean draggable = true;
+        final String text;
+        final boolean draggable = true;
 
-        public ArrayBean(String text) {
+        ArrayBean(String text) {
             this.text = text;
         }
 

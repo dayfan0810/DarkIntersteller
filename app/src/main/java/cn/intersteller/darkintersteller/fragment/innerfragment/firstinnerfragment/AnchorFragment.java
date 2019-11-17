@@ -16,7 +16,6 @@ public class AnchorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.anchorfragment, container, false);
-        return v;
+        return inflater.inflate(R.layout.anchorfragment, container, false);
     }
 }

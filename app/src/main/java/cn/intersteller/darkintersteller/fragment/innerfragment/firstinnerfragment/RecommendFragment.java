@@ -18,6 +18,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,7 +127,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
             ArrayList<String> imgs;
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 if (getActivity() == null) return;
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -138,12 +139,12 @@ public class RecommendFragment extends Fragment implements View.OnClickListener,
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
                 final String responseText = response.body().string();
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    String resultCode = (String) jsonObject.optString("code");
+                    String resultCode = jsonObject.optString("code");
                     if (!resultCode.equals("200")) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override

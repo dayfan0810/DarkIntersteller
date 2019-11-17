@@ -19,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.youth.banner.Banner;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +46,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private Banner mBanner;
-    private List<NewsBean> mNewsBeanList = new ArrayList<>();
+    private final List<NewsBean> mNewsBeanList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,18 +83,18 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
     }
 
 
-    public void requestNews() {
+    private void requestNews() {
         HttpUtil.getHttpUtilInstance().sendOkHttpRequest(Constant.URL_TOPNEWS, new Callback() {
 
             private NewsRecyclerViewAdapter newsAdapter;
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 final String responseText = response.body().string();
 
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    String resultCode = (String) jsonObject.optString("reason");
+                    String resultCode = jsonObject.optString("reason");
                     if (!resultCode.equals("成功的返回")) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -169,7 +170,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Swip
             }
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
