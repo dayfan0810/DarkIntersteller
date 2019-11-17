@@ -17,4 +17,5 @@
     <string name="play_immediately">立即播放</string>
     <string name="conments_nums">%1$d条评论</string>
     <string name="view_nums">%1$d次浏览</string>
+    <string name="search_tips">歌曲名、歌手名</string>
 </resources>

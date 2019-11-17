@@ -2,9 +2,6 @@ package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.heaven7.android.dragflowlayout.DragAdapter;
 import com.heaven7.android.dragflowlayout.DragFlowLayout;
@@ -84,7 +85,7 @@ public class BubbleSortBeautyFragment extends Fragment implements View.OnClickLi
             public boolean performClick(DragFlowLayout dragFlowLayout, View child,
                                         MotionEvent event, int dragState) {
                 //检查是否点击了关闭按钮(iv_close控件)。点击了就删除
-                //ViewUtils.isViewUnderInScreen 判断点击事件是否是你需要的.
+                //ViewStatusUtils.isViewUnderInScreen 判断点击事件是否是你需要的.
                 //dragState 是拖拽状态。
                 boolean performed = dragState != DragFlowLayout.DRAG_STATE_IDLE;
                 if (performed) {

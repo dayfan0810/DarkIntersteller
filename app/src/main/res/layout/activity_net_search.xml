@@ -17,13 +17,25 @@
     <FrameLayout
         android:id="@+id/search_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/blue"
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fadeScrollbars="true" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            android:fadeScrollbars="true" />
+
+        <include
+            android:id="@+id/ll_loading"
+            layout="@layout/include_loading_hard"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/ll_load_fail"
+            layout="@layout/include_load_fail"
+            android:visibility="gone" />
+    </FrameLayout>
+
 
 </LinearLayout>

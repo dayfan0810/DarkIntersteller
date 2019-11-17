@@ -48,7 +48,7 @@
         <activity android:name=".ui.CnbetaNewsDetailActivity"/>
         <activity android:name=".ui.MyPlayListDetailActivity"/>
         <activity android:name=".test.ImmersionTestActivity"/>
-        <activity android:name=".ui.NetSearchWordsActivity"/>
+        <activity android:name=".ui.NetSearchActivity" />
 
     </application>
 

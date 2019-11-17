@@ -1,14 +1,15 @@
 package cn.intersteller.darkintersteller.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -124,13 +125,10 @@ public class HotMVRecyclerViewAdapter extends RecyclerView.Adapter<HotMVRecycler
 
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
-
-
         private final ImageView item_mv_list_iv_cover;
         private final TextView item_mv_list_tv_title;
         private final TextView item_mv_list_tv_num;
         private final TextView item_mv_list_tv_playCount;
-
         public ItemViewHolder(View itemView) {
             super(itemView);
             item_mv_list_iv_cover = itemView.findViewById(R.id.item_mv_list_iv_cover);
@@ -138,6 +136,5 @@ public class HotMVRecyclerViewAdapter extends RecyclerView.Adapter<HotMVRecycler
             item_mv_list_tv_num = itemView.findViewById(R.id.item_mv_list_tv_num);
             item_mv_list_tv_playCount = itemView.findViewById(R.id.item_mv_list_tv_playCount);
         }
-
     }
 }

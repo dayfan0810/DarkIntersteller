@@ -7,66 +7,67 @@
     android:background="@color/colorPrimary"
     app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    <FrameLayout
-        android:id="@+id/ll_title_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackgroundBorderless">
-
-        <ImageView
-            android:id="@+id/iv_title_menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:src="@drawable/actionbar_settings" />
-    </FrameLayout>
-
-    <RelativeLayout
-        android:id="@+id/llllll"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
+        android:orientation="horizontal"
+        android:weightSum="10"
         app:theme="@style/AppTheme">
 
-
         <ImageView
-            android:id="@+id/bar_disco"
-            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:id="@+id/iv_title_menu"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/actionbar_discover" />
+            android:layout_weight="1"
+            android:src="@drawable/actionbar_settings" />
 
-        <ImageView
-            android:id="@+id/bar_music"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/bar_disco"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:paddingLeft="20dp"
-            android:src="@drawable/actionbar_stock" />
+            android:layout_weight="8"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/bar_disco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/actionbar_discover" />
+
+            <ImageView
+                android:id="@+id/bar_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/bar_disco"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingLeft="20dp"
+                android:src="@drawable/actionbar_stock" />
+
+            <ImageView
+                android:id="@+id/bar_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/bar_music"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingLeft="20dp"
+                android:src="@drawable/actionbar_math" />
+
+        </LinearLayout>
+
 
         <ImageView
-            android:id="@+id/bar_friends"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/bar_music"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:paddingLeft="20dp"
-            android:src="@drawable/actionbar_math" />
-
-
-        <ImageView
-            android:paddingRight="10dp"
             android:id="@+id/bar_search"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:paddingLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:src="@drawable/actionbar_search" />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </androidx.appcompat.widget.Toolbar>

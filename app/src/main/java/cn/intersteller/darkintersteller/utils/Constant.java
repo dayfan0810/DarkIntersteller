@@ -31,6 +31,11 @@ public class Constant {
     //我的歌单
     public static final String NETEASE_MYPLAYLIST = NETEASEBASE + "user/playlist?uid=";
 
+    //搜索建议http://39.108.131.225:3000/search/suggest?keywords=林俊杰
+    public static final String NETEASE_SEARCH_SUGGEST = NETEASEBASE + "search/suggest?keywords=";
+    //搜索视频  http://39.108.131.225:3000/search?keywords=林俊杰&type=1014
+    public static final String NETEASE_SEARCH_VIDEO = NETEASEBASE + "search?keywords=";
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //哔哩哔哩

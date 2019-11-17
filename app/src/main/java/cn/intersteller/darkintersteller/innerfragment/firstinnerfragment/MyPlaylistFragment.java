@@ -64,7 +64,7 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
 
     public void requestCloudPanMusic() {
         long pref = SharedPreferenceUtils.getPrefLong(LOGIN_USER_ID, (long) 0);
-        HttpUtil.getInstance().sendOkHttpRequest(Constant.NETEASE_MYPLAYLIST + pref, new Callback() {
+        HttpUtil.getHttpUtilInstance().sendOkHttpRequest(Constant.NETEASE_MYPLAYLIST + pref, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();

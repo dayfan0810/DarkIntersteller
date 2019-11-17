@@ -162,7 +162,7 @@ public class LoginPresenterCompl implements ILoginPresenter {
     private void asyncValidate(final String account) {
         //account:http://39.108.131.225:3000/login?email=mr_day@163.com&password=razrjay1234
         new Thread(() -> {
-            HttpUtil.getInstance().sendOkHttpRequest(account, new Callback() {
+            HttpUtil.getHttpUtilInstance().sendOkHttpRequest(account, new Callback() {
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     final String responseText = response.body().string();

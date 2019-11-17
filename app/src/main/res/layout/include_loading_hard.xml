@@ -4,13 +4,14 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/ll_search_result_loading_hard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp">
 
         <ImageView
-            android:id="@+id/anim_image"
+            android:id="@+id/iv_search_result_loading_hard"
             android:layout_width="25dp"
             android:layout_height="20dp"
             android:layout_centerInParent="true"
@@ -19,7 +20,7 @@
             android:src="@drawable/ic_loading" />
 
         <TextView
-            android:id="@+id/anim_text"
+            android:id="@+id/tv_search_result_loading_hard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

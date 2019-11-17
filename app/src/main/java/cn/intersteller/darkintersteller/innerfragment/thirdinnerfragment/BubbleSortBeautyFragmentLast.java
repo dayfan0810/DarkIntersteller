@@ -2,8 +2,6 @@ package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.util.Random;
 
@@ -48,9 +49,9 @@ public class BubbleSortBeautyFragmentLast extends Fragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bubblesort_beauty_last, container, false);
-        anim_sort = (BubbleSortViewByCanvas) v.findViewById(R.id.sortView);
-        bt_bubble_get_arr = (Button) v.findViewById(R.id.bt_bubble_get_arr);
-        bt_bubble_start_sort = (Button) v.findViewById(R.id.bt_bubble_start_sort);
+        anim_sort = v.findViewById(R.id.sortView);
+        bt_bubble_get_arr = v.findViewById(R.id.bt_bubble_get_arr);
+        bt_bubble_start_sort = v.findViewById(R.id.bt_bubble_start_sort);
         bt_bubble_get_arr.setOnClickListener(this);
         bt_bubble_start_sort.setOnClickListener(this);
         return v;

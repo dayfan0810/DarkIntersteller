@@ -18,18 +18,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cn.intersteller.darkintersteller.adapter.OutterFragmentAdapter;
 import cn.intersteller.darkintersteller.test.ImmersionTestActivity;
-import cn.intersteller.darkintersteller.ui.NetSearchWordsActivity;
+import cn.intersteller.darkintersteller.ui.NetSearchActivity;
 import cn.intersteller.darkintersteller.utils.ScreenUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private long time = 0;
-    ImageView mBarDisco;
-    ImageView mBarMusic;
-    ImageView mBarFriends;
-    ImageView mBarSearch;
+    private ImageView mBarDisco;
+    private ImageView mBarMusic;
+    private ImageView mBarFriends;
+    private ImageView mBarSearch;
     LinearLayout mSearchLayout;
-    ViewPager mVpMianActivity;
-    Toolbar toolbar;
+    private ViewPager mVpMianActivity;
+    private Toolbar toolbar;
 
     private FloatingActionButton fab;
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initWidgets() {
-        outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), MyApplication.getInstance().mFragmntList);
+        outterFragmentAdapter = new OutterFragmentAdapter(getSupportFragmentManager(), MyApplication.mFragmntList);
         mVpMianActivity.setAdapter(outterFragmentAdapter);
         mVpMianActivity.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -145,24 +145,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bar_disco:
-                mBarDisco.setSelected(true);
-                mBarMusic.setSelected(false);
-                mBarFriends.setSelected(false);
-                mVpMianActivity.setCurrentItem(0);
+                if (mVpMianActivity.getCurrentItem() != 0) {
+                    mVpMianActivity.setCurrentItem(0);
+                    mBarDisco.setSelected(true);
+                    mBarMusic.setSelected(false);
+                    mBarFriends.setSelected(false);
+                }
                 break;
             case R.id.bar_music:
-                mBarDisco.setSelected(false);
-                mBarMusic.setSelected(true);
-                mBarFriends.setSelected(false);
-                mVpMianActivity.setCurrentItem(1);
+                if (mVpMianActivity.getCurrentItem() != 1) {
+                    mVpMianActivity.setCurrentItem(1);
+                    mBarMusic.setSelected(true);
+                    mBarDisco.setSelected(false);
+                    mBarFriends.setSelected(false);
+                }
                 break;
             case R.id.bar_friends:
-                mBarDisco.setSelected(false);
-                mBarMusic.setSelected(false);
-                mBarFriends.setSelected(true);
-                mVpMianActivity.setCurrentItem(2);
+                if (mVpMianActivity.getCurrentItem() != 2) {
+                    mVpMianActivity.setCurrentItem(2);
+                    mBarFriends.setSelected(true);
+                    mBarDisco.setSelected(false);
+                    mBarMusic.setSelected(false);
+                }
                 break;
             case R.id.bar_search:
+                final Intent intent = new Intent(MainActivity.this, NetSearchActivity.class);
+                MainActivity.this.startActivity(intent);
 //                try {
 //                    DealThread t1 = new DealThread(this);
 //                    t1.setFlag("a");
@@ -188,11 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
-
-                final Intent intent = new Intent(MainActivity.this, NetSearchWordsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                MainActivity.this.startActivity(intent);
-
 
                 break;
             case R.id.fab:
@@ -227,10 +230,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
                 time = System.currentTimeMillis();
             } else {
-                super.finish();
-//                Intent intent = new Intent(Intent.ACTION_MAIN);
-//                intent.addCategory(Intent.CATEGORY_HOME);
-//                startActivity(intent);
+//                super.finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
             }
             return true;
         } else {

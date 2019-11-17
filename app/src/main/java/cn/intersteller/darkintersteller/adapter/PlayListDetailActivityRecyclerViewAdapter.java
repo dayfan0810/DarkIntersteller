@@ -1,7 +1,6 @@
 package cn.intersteller.darkintersteller.adapter;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,6 @@ public class PlayListDetailActivityRecyclerViewAdapter extends RecyclerView.Adap
            MyViewHolder myViewHolder = (MyViewHolder) holder;
            myViewHolder.mTextView.setText(mData.get(position - 1));
        }else{
-           Log.i("zhouwei","初始化。。。。。");
            mHeaderView = ((HeaderViewHolder)holder).headerImage;
        }
     }
