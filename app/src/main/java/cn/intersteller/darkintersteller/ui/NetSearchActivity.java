@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.innerfragment.SearchSuggestFragment;
+import cn.intersteller.darkintersteller.fragment.search.SearchSuggestFragment;
 
 
 public class NetSearchActivity extends AppCompatActivity {

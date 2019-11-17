@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.innerfragment.firstinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.firstinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;

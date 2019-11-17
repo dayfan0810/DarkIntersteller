@@ -7,7 +7,7 @@
 
     <com.google.android.material.tabs.TabLayout
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-        android:id="@+id/disco_tab"
+        android:id="@+id/tablayout_fragment_search_result"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/colorPrimaryDarkJianBian"
@@ -17,10 +17,10 @@
 
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/disco_viewPager"
+        android:id="@+id/viewpager_fragment_search_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/disco_tab">
+        android:layout_below="@id/tablayout_fragment_search_result">
 
     </androidx.viewpager.widget.ViewPager>
 
