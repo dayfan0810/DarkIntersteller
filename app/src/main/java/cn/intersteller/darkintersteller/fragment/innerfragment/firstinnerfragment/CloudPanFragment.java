@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.innerfragment.firstinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.firstinnerfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +37,8 @@ public class CloudPanFragment extends Fragment implements SwipeRefreshLayout.OnR
     private View mCloudpanfragment_layout;
     private RecyclerView mCloudpan_fragment_recyclerview;
     private SwipeRefreshLayout mCloudpan_fragment_swiperefresh;
-    List<CloudPanBean.DataBean> mCloudPanBeans = new ArrayList<>();
-    List<CloudPanBean.DataBean.SimpleSongBean> mSimpleSongBeans = new ArrayList<>();
+    private final List<CloudPanBean.DataBean> mCloudPanBeans = new ArrayList<>();
+    private final List<CloudPanBean.DataBean.SimpleSongBean> mSimpleSongBeans = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,16 +62,16 @@ public class CloudPanFragment extends Fragment implements SwipeRefreshLayout.OnR
         requestCloudPanMusic();
     }
 
-    public void requestCloudPanMusic() {
+    private void requestCloudPanMusic() {
         HttpUtil.getHttpUtilInstance().sendOkHttpRequest(Constant.NETEASE_CLOUD_PAN, new Callback() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 final String responseText = response.body().string();
 
                 Log.i("deng-pan", "responseText = " + responseText);
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    String resultCode = (String) jsonObject.optString("code");
+                    String resultCode = jsonObject.optString("code");
                     if (resultCode.equals("301")) {
                         getActivity().runOnUiThread(() -> {
                             Toast.makeText(getActivity(), "还没登陆，请先登录", Toast.LENGTH_LONG).show();
@@ -156,7 +157,7 @@ public class CloudPanFragment extends Fragment implements SwipeRefreshLayout.OnR
             }
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
             }
         });

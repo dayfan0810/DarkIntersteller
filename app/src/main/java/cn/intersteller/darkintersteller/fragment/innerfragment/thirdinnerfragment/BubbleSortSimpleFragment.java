@@ -1,11 +1,8 @@
-package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +13,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +35,17 @@ public class BubbleSortSimpleFragment extends Fragment implements View.OnClickLi
     private Button bt_bubble_get_arr2;
     private Button bt_bubble_get_arr3;
     //柱状图维护数据
-    int screenWidth = 0, screenHeight = 0;          //单位：px，屏幕的宽、高
-    int columnWidth = 30;             //单位：px，柱状View的宽度,计算一次用全局变量存储下次就不需要再计算了
-    List<View> mViews = new ArrayList<View>();
-    int[] mArray = new int[SIEZ_ARRAY];
+    private int screenWidth = 0;
+    private int screenHeight = 0;          //单位：px，屏幕的宽、高
+    private final int columnWidth = 30;             //单位：px，柱状View的宽度,计算一次用全局变量存储下次就不需要再计算了
+    private final List<View> mViews = new ArrayList<>();
+    private final int[] mArray = new int[SIEZ_ARRAY];
     private LinearLayout ll_bubble_sort;
     //下面两个值是为界面便于根据数组大小动态设置每个柱状View宽度定义的
     public static final int paddingLR = 6;     //单位：dp 这个是柱状View外层LinearLayout的左右padding大小
-    public static final int intervalColumn = 1;//单位：dp 这个是每个柱状View相互间的间隔
+    private static final int intervalColumn = 1;//单位：dp 这个是每个柱状View相互间的间隔
 
-    double columnPixPerNum = 0.0;                //单位：px/1  这个是高度上单位数字所表示的像素。
+    private double columnPixPerNum = 0.0;                //单位：px/1  这个是高度上单位数字所表示的像素。
 
 
     @Override
@@ -59,10 +61,10 @@ public class BubbleSortSimpleFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bubblesortfragment, container, false);
-        ll_bubble_sort = (LinearLayout) v.findViewById(R.id.ll_bubble_sort);
-        bt_bubble_get_arr1 = (Button) v.findViewById(R.id.bt_bubble_get_arr1);
-        bt_bubble_get_arr2 = (Button) v.findViewById(R.id.bt_bubble_get_arr2);
-        bt_bubble_get_arr3 = (Button) v.findViewById(R.id.bt_bubble_get_arr3);
+        ll_bubble_sort = v.findViewById(R.id.ll_bubble_sort);
+        bt_bubble_get_arr1 = v.findViewById(R.id.bt_bubble_get_arr1);
+        bt_bubble_get_arr2 = v.findViewById(R.id.bt_bubble_get_arr2);
+        bt_bubble_get_arr3 = v.findViewById(R.id.bt_bubble_get_arr3);
         bt_bubble_get_arr1.setOnClickListener(this);
         bt_bubble_get_arr2.setOnClickListener(this);
         bt_bubble_get_arr3.setOnClickListener(this);
@@ -82,7 +84,7 @@ public class BubbleSortSimpleFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    public void addCharView() {
+    private void addCharView() {
         if (mViews.size() <= 0) {
             for (int i = 0; i < mArray.length; i++) {
                 View rightView = new View(getContext());//条状图
@@ -122,11 +124,11 @@ public class BubbleSortSimpleFragment extends Fragment implements View.OnClickLi
     }
 
     //获得数组中最大数字，仅仅用于@pixPerNum方法中
-    private int Max(int array[]) {
+    private int Max(int[] array) {
         int max = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (max < array[i]) {
-                max = array[i];
+        for (int value : array) {
+            if (max < value) {
+                max = value;
             }
         }
         return max;

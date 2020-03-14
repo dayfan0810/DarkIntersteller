@@ -1,6 +1,7 @@
 package cn.intersteller.darkintersteller;
 
 import android.app.Application;
+
 import androidx.fragment.app.Fragment;
 
 import com.lzy.okgo.OkGo;
@@ -11,9 +12,9 @@ import com.lzy.okgo.model.HttpHeaders;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.intersteller.darkintersteller.outterfragment.FirstFragment;
-import cn.intersteller.darkintersteller.outterfragment.SecFragment;
-import cn.intersteller.darkintersteller.outterfragment.ThirdFragment;
+import cn.intersteller.darkintersteller.fragment.outterfragment.FirstFragment;
+import cn.intersteller.darkintersteller.fragment.outterfragment.SecFragment;
+import cn.intersteller.darkintersteller.fragment.outterfragment.ThirdFragment;
 import okhttp3.OkHttpClient;
 
 public class MyApplication extends Application {

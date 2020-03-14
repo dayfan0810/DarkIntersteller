@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.innerfragment.firstinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.firstinnerfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
     private View myplaylistfragment;
     private RecyclerView myplaylist_fragment_recyclerview;
     private SwipeRefreshLayout myplaylist_fragment_swiperefresh;
-    List<MyPlayListBean.PlaylistBean> mPlaylistBeans = new ArrayList<>();
+    private final List<MyPlayListBean.PlaylistBean> mPlaylistBeans = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,16 +63,16 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
         requestCloudPanMusic();
     }
 
-    public void requestCloudPanMusic() {
+    private void requestCloudPanMusic() {
         long pref = SharedPreferenceUtils.getPrefLong(LOGIN_USER_ID, (long) 0);
         HttpUtil.getHttpUtilInstance().sendOkHttpRequest(Constant.NETEASE_MYPLAYLIST + pref, new Callback() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 final String responseText = response.body().string();
 
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);
-                    String resultCode = (String) jsonObject.optString("code");
+                    String resultCode = jsonObject.optString("code");
                     if (resultCode.equals("301")) {
                         getActivity().runOnUiThread(() -> {
                             Toast.makeText(getActivity(), "还没登陆，请先登录", Toast.LENGTH_LONG).show();
@@ -143,7 +144,7 @@ public class MyPlaylistFragment extends Fragment implements SwipeRefreshLayout.O
             }
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
             }
         });

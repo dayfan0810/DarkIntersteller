@@ -1,20 +1,22 @@
-package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.secondinnerfragment;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,10 +40,10 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     private View view;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    CnbetaNewsRecyclerViewAdapter newsAdapter;
-    private int firstPage = 1;
+    private CnbetaNewsRecyclerViewAdapter newsAdapter;
+    private final int firstPage = 1;
     private int page_count = 0;
-    List<CnbetaNewsBean> mCnbetaNewsBeanList;
+    private List<CnbetaNewsBean> mCnbetaNewsBeanList;
     private boolean hasStarted = false;
 
     @Override
@@ -87,7 +89,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
     }
 
     private int mLastVisibleItemPosition = -1;
-    private RecyclerView.OnScrollListener monScrollListener = new RecyclerView.OnScrollListener() {
+    private final RecyclerView.OnScrollListener monScrollListener = new RecyclerView.OnScrollListener() {
 
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -113,7 +115,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
             call.enqueue(new Callback() {
 
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     Looper.prepare();
                     Toast.makeText(getContext(), "获取Cnbeta新闻信息失败", Toast.LENGTH_SHORT).show();
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -121,7 +123,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     String responseText = response.body().string();
                     try {
                         JSONObject jsonObject = new JSONObject(responseText);
@@ -214,7 +216,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
         call.enqueue(new Callback() {
             //            List<CnbetaNewsBean> mCnbetaNewsBeanList = new ArrayList<>();
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 Looper.prepare();
                 Toast.makeText(getContext(), "获取Cnbeta新闻信息失败", Toast.LENGTH_SHORT).show();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -232,7 +234,7 @@ public class CnBetaFragment extends Fragment implements View.OnClickListener, Sw
             }
 
             @Override
-            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
                 String responseText = response.body().string();
                 try {
                     JSONObject jsonObject = new JSONObject(responseText);

@@ -1,4 +1,4 @@
-package cn.intersteller.darkintersteller.innerfragment.thirdinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.thirdinnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,8 +28,9 @@ public class BubbleSortBeautyFragmentLast extends Fragment implements View.OnCli
     private Button bt_bubble_get_arr;
     private Button bt_bubble_start_sort;
     //柱状图维护数据
-    int screenWidth = 0, screenHeight = 0;          //单位：px，屏幕的宽、高
-    int[] mArray = new int[SIEZ_ARRAY];
+    private int screenWidth = 0;
+    private int screenHeight = 0;          //单位：px，屏幕的宽、高
+    private final int[] mArray = new int[SIEZ_ARRAY];
     private BubbleSortViewByCanvas anim_sort;
     private BubbleSortThread bubbleSortThread;
 

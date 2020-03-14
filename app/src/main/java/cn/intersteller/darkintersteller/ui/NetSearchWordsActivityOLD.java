@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 import cn.intersteller.darkintersteller.R;
-import cn.intersteller.darkintersteller.innerfragment.SearchSuggestFragment;
+import cn.intersteller.darkintersteller.fragment.search.SearchSuggestFragment;
 import cn.intersteller.darkintersteller.utils.Constant;
 import cn.intersteller.darkintersteller.utils.HttpUtil;
 import okhttp3.Call;

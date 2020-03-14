@@ -1,16 +1,17 @@
-package cn.intersteller.darkintersteller.innerfragment.secondinnerfragment;
+package cn.intersteller.darkintersteller.fragment.innerfragment.secondinnerfragment;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,14 @@ import cn.intersteller.darkintersteller.adapter.Jin10RecyclerViewAdapter;
 
 
 public class StockFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
-    private UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
+    private final UshkNewsGrabber mUshkNewsGrabber = new UshkNewsGrabber();
     //    private CnbetaNewsGrabber mCnbetaNewsGrabber = new CnbetaNewsGrabber();
     private Jin10RecyclerViewAdapter newsAdapter;
 
     private View view;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private List<USHKNewsBean> mNewsBeanList = new ArrayList<>();
+    private final List<USHKNewsBean> mNewsBeanList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class StockFragment extends Fragment implements View.OnClickListener, Swi
     }
 
 
-    public void requestNews() {
+    private void requestNews() {
         //美港电讯用的是jsoup
         //1.USHKNEWS
 //        ArrayList ushkNewsBeanByCallable = mUshkNewsGrabber.getUSHKNewsBeanDerectely();
